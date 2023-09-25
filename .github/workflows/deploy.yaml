@@ -11,17 +11,17 @@ jobs:
 
     steps:
       - name: Checkout del repositorio
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configurar entorno PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2.6"
+          php-version: "8.1"
 
       # esto se hace una sola vez por eso esta comentado
 
-      - name: Install dependencies
-        run: composer install --no-dev --prefer-dist --no-scripts --no-progress --no-suggest
+      # - name: Install dependencies
+      #   run: composer install --no-dev --prefer-dist --no-scripts --no-progress --no-suggest
 
       # - name: Configure env
       # env:
