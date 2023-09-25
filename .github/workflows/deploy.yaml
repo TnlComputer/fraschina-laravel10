@@ -20,8 +20,8 @@ jobs:
 
       # esto se hace una sola vez por eso esta comentado
 
-      # - name: Install dependencies
-      #   run: composer install --no-dev --prefer-dist --no-scripts --no-progress --no-suggest
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-scripts --no-progress --no-suggest
 
       # - name: Configure env
       # env:
