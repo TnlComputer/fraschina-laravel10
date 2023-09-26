@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,22 @@ return new class extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable();
+            $table->string('nomApe')->nullable();
+            $table->string('empresa_intitucion')->nullable();
+            $table->string('profesion_especialidad_oficio')->nullable();
+            $table->string('cod_prof', 4)->nullable();
+            $table->string('tel_particular', 100)->nullable();
+            $table->string('tel_laboral', 100)->nullable();
+            $table->string('interno', 20)->nullable();
+            $table->string('celular', 100)->nullable();
+            $table->string('mail', 100)->nullable();
+            $table->string('direccion')->nullable();
+            $table->longText('observaciones')->nullable();
+            $table->string('buscador1', 800)->nullable();
+            $table->string('buscador2', 800)->nullable();
+            $table->string('buscador3', 800)->nullable();
             $table->timestamps();
         });
     }

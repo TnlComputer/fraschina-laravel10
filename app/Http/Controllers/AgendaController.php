@@ -12,7 +12,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $agendas = Agenda::orderBy('razonsocial', 'ASC')->paginate(15);
+        $agendas = Agenda::orderBy('nomApe', 'ASC', 'empresa_institucion', 'ASC')->paginate(15);
         return view('agenda', compact('agendas'));
 
     }
