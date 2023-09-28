@@ -21,6 +21,8 @@
               <th>Celular</th>
               <th>Email</th>
               <th>Dirección</th>
+              <th>Observaciones</th>
+
 
             </tr>
 
@@ -35,8 +37,8 @@
               <td>{{ $agenda->celular }}</td>
               <td>{{ $agenda->mail }}</td>
               <td>{{ $agenda->direccion }}</td>
+              <td>{{ $agenda->observaciones }}</td>
 
-              <td>{{ $agenda->celular }}</td>
 
             </tr>
 

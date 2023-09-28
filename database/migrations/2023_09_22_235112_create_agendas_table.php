@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('nombre')->nullable();
             $table->string('apellido')->nullable();
             $table->string('nomApe')->nullable();
-            $table->string('empresa_intitucion')->nullable();
+            $table->string('empresa_institucion')->nullable();
             $table->string('profesion_especialidad_oficio')->nullable();
             $table->string('cod_prof', 4)->nullable();
             $table->string('tel_particular', 100)->nullable();
