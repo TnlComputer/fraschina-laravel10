@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }}
+      {{ __('Representacion') }} Edit
     </h2>
   </x-slot>
 
@@ -11,7 +11,7 @@
         <div class="p-6 text-gray-500  text-md">
           <table>
             <tr>
-              <th>Razón social</th>
+              {{-- <th>Razón social</th>
               <th>Dirección</th>
               <th>Cod.Post</th>
               <th>Telefono</th>
@@ -22,40 +22,46 @@
               <th>Email</th>
               <th>Marcas</th>
               <th>Información</th>
-              <th>Comentarios</th>
+              <th>Comentarios</th> --}}
+              <th>Apellido y Nombre</th>
+              <th>Area</th>
+              <th>Cargo</th>
+              <th>Cateogria</th>
+              <th>Tel Directo</th>
+              <th>Interno</th>
+              <th>Celular</th>
+              <th>Tel.Partticular</th>
+              <th>Profesión</th>
+              <th>Información</th>
+              <th>Email</th>
+              <th>Fuera</th>
+
+
             </tr>
 
 
-            @forelse($representaciones as $representacion)
+            @forelse($representaciones_personal as $representacion)
+
             <tr class="p-6 text-gray-900  text-xs">
-              <td>
-                <l><a href="{{ route('Representacion.show', $representacion->id) }}">{{ $representacion->id }}</a> | <a href="{{ route('Representacion.edit', $representacion->id) }}">Edit</a>| <form method="POST" action="{{ route('Representacion.destroy', $representacion->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Delete">
-                  </form>
-
-
-              </td>
-              <td>{{ $representacion->razonsocial }}</td>
-              <td>{{ $representacion->dire_calle }} {{ $representacion->dire_nro }}
-                {{ $representacion->piso }} {{ $representacion->dpto }}</td>
-              <td>{{ $representacion->codpost }}</td>
-              <td>{{ $representacion->telefono }}</td>
-              <td>{{ $representacion->barrio }}</td>
-              <td>{{ $representacion->localidad }}</td>
-              <td>{{ $representacion->zona }}</td>
-              <td>{{ $representacion->cuit }}</td>
-              <td>{{ $representacion->email }}</td>
+              <td>{{ $representacion->apellido }} {{ $representacion->nombre }}</td>
+              <td>{{ $representacion->area_id }}</td>
+              <td>{{ $representacion->cargo_id }}</td>
+              <td>{{ $representacion->categoriacargo_id }}</td>
+              <td>{{ $representacion->teldirecto }}</td>
+              <td>{{ $representacion->interno }}</td>
+              <td>{{ $representacion->telcelular }}</td>
+              <td>{{ $representacion->telparticular }}</td>
+              <td>{{ $representacion->profesion_id }}</td>
               <td>{{ $representacion->infoenparticular }}</td>
-              <td>{{ $representacion->info }}</td>
-              <td>{{ $representacion->comentarios }}</td>
+              <td>{{ $representacion->email }}</td>
+              <td>{{ $representacion->fuera }}</td>
             </tr>
 
             @empty
             <p>No hay registros para mostrar...</p>
             @endforelse
-            {{ $representaciones->links() }}
+            {{ $representaciones_personal->links() }}
+
           </table>
 
           {{-- <table>

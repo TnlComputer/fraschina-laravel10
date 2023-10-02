@@ -17,7 +17,7 @@ class RepresentacionController extends Controller
     {
         // $user = Auth::user();
 
-        $representaciones = Representacion::orderBy('razonsocial', 'ASC')->paginate(1);
+        $representaciones = Representacion::orderBy('id', 'ASC')->paginate(10);
         // var_dump($representaciones->id);
         // $id = $representaciones->id;
         // $representaciones_personal = DB::table('representacion_personal as rp')
@@ -50,7 +50,15 @@ class RepresentacionController extends Controller
      */
     public function show(Representacion $representacion)
     {
-        //
+        $representaciones_personal = DB::table('representacion_personal as rp')
+            // ->join('representacions as r', 'rp.representacion_id', '=', 'r.id')
+            // ->select('rp.nombre', 'rp.apellido', 'rp.area_id', 'rp.categoriacargo_id')
+            ->where('rp.representacion_id', '=', $representacion->id)
+            ->paginate(10);
+
+
+        return view('representaciones.show', compact('representaciones_personal'));
+
     }
 
     /**

@@ -23,7 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/representaciones', [RepresentacionController::class, 'index'])->name('representacion');
+    Route::get('/representaciones', [RepresentacionController::class, 'index'])->name('representacion.index');
+    Route::get('/representaciones/{representacion}', [RepresentacionController::class, 'show'])->name('representacion.show');
     Route::get('/distribuciones', [DistribucionController::class, 'index'])->name('distribucion');
     Route::get('/agros', [AgroController::class, 'index'])->name('agro');
     Route::get('/molinos', [MolinosController::class, 'index'])->name('molinos');
