@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Representacion;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Representacion_Personal;
 
 class RepresentacionController extends Controller
 {
@@ -15,8 +17,15 @@ class RepresentacionController extends Controller
     {
         // $user = Auth::user();
 
-        $representaciones = Representacion::orderBy('razonsocial', 'ASC')->paginate(15);
-        // return view('representacion', compact('representaciones', 'user'));
+        $representaciones = Representacion::orderBy('razonsocial', 'ASC')->paginate(1);
+        // var_dump($representaciones->id);
+        // $id = $representaciones->id;
+        // $representaciones_personal = DB::table('representacion_personal as rp')
+        //     ->join('representacions as r', 'rp.representacion_id', '=', 'r.id')
+        //     ->select('rp.nombre', 'rp.apellido', 'rp.aread_id', 'rp.ncategoriacargo_id')
+        //     ->where('rp.id', '=', $id)
+        //     ->orderBy('cargo_id', 'ASC')->paginate(10);
+        // return view('representacion', compact('representaciones', 'representaciones_personal'));
         return view('representacion', compact('representaciones'));
     }
 

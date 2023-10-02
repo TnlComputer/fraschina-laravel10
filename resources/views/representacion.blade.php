@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }} Page
+      {{ __('Representacion') }}
     </h2>
   </x-slot>
 
@@ -41,10 +41,6 @@
               <td>{{ $representacion->infoenparticular }}</td>
               <td>{{ $representacion->info }}</td>
               <td>{{ $representacion->comentarios }}</td>
-
-
-
-
             </tr>
 
             @empty
@@ -52,6 +48,50 @@
             @endforelse
             {{ $representaciones->links() }}
           </table>
+
+          <table>
+            <tr>
+              <th>Apellido y Nombre</th>
+              {{-- <th>Dirección</th>
+              <th>Cod.Post</th>
+              <th>Telefono</th>
+              <th>Barrio</th>
+              <th>Localidad</th>
+              <th>Zona</th>
+              <th>Cuit</th>
+              <th>Email</th>
+              <th>Marcas</th>
+              <th>Información</th>
+              <th>Comentarios</th> --}}
+            </tr>
+
+
+            {{-- @forelse($representaciones_personal as $representacion_personal)
+            <tr>
+              <td>{{ $representacion_presonal->apellido }} {{ $representacion_presonal->nombre }}</td> --}}
+
+
+            {{-- <td>{{ $representacion->dire_calle }} {{ $representacion->dire_nro }}
+            {{ $representacion->piso }} {{ $representacion->dpto }}</td>
+            <td>{{ $representacion->codpost }}</td>
+            <td>{{ $representacion->telefono }}</td>
+            <td>{{ $representacion->barrio }}</td>
+            <td>{{ $representacion->localidad }}</td>
+            <td>{{ $representacion->zona }}</td>
+            <td>{{ $representacion->cuit }}</td>
+            <td>{{ $representacion->email }}</td>
+            <td>{{ $representacion->infoenparticular }}</td>
+            <td>{{ $representacion->info }}</td>
+            <td>{{ $representacion->comentarios }}</td> --}}
+            </tr>
+
+            {{-- @empty
+            <p>No tiene registros para mostrar...</p>
+            @endforelse
+            {{ $representaciones_personal->links() }}
+          </table> --}}
+
+
         </div>
       </div>
     </div>
