@@ -11,6 +11,7 @@
         <div class="p-6 text-gray-500  text-md">
           <table>
             <tr>
+              <th>Acciones</th>
               <th>Razón social</th>
               <th>Dirección</th>
               <th>Cod.Post</th>

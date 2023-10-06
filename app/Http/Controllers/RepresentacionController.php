@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuxAreas;
+use App\Models\AuxZonas;
+use App\Models\AuxBarrios;
 use Illuminate\Http\Request;
+use App\Models\AuxLocalidades;
 use App\Models\Representacion;
+
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\select;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Representacion_Personal;
 
@@ -50,14 +56,33 @@ class RepresentacionController extends Controller
      */
     public function show(Representacion $representacion)
     {
+        // $represento = Representacion::find($representacion->id);
+
+        // $representaciones_personal = DB::table('representacion_personal as rp')
+        //     ->where('rp.representacion_id', '=', $representacion->id)
+        //     ->paginate(10);
+
+        $represento = DB::table('representacions as r')
+            ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
+            ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
+            ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
+            ->join('AuxZonas as auxZon', 'r.zona', '=', 'auxZon.id')
+            ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.infoenparticular', 'r.info', 'r.comentarios')
+            ->where('r.id', '=', $representacion->id)
+            ->first();
+
         $representaciones_personal = DB::table('representacion_personal as rp')
-            // ->join('representacions as r', 'rp.representacion_id', '=', 'r.id')
-            // ->select('rp.nombre', 'rp.apellido', 'rp.area_id', 'rp.categoriacargo_id')
+            ->join('AuxAreas as auxA', 'rp.area_id', '=', 'auxA.id')
+            ->join('AuxCargos as auxCar', 'rp.cargo_id', '=', 'auxCar.id')
+            ->join('AuxProfesiones as prof', 'rp.profesion_id', '=', 'prof.id')
+            ->select('auxA.area', 'auxCar.cargo', 'prof.nombre as profesion', 'rp.nombre', 'rp.apellido', 'rp.teldirecto', 'rp.interno', 'rp.telcelular', 'rp.telparticular', 'rp.email', 'rp.infoenparticular', 'rp.fuera')
             ->where('rp.representacion_id', '=', $representacion->id)
             ->paginate(10);
 
 
-        return view('representaciones.show', compact('representaciones_personal'));
+        return view('representaciones.show', ['represento' => $represento, 'representaciones_personal' => $representaciones_personal]);
+
+        // return view('representaciones.show', compact('representaciones_personal'));
 
     }
 

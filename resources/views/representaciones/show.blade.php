@@ -1,114 +1,104 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }} Edit
+    <h2 class="font-semibold text-xl text-gray-900 leading-tight">
+      {{ __('Representación') }}
     </h2>
   </x-slot>
 
-  <div class="py-12">
+  <div class="py-6">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-500  text-md">
+        <div class="p-6 text-gray-900  text-sm text-left">
           <table>
             <tr>
-              {{-- <th>Razón social</th>
+              <th>Razón social</th>
               <th>Dirección</th>
               <th>Cod.Post</th>
-              <th>Telefono</th>
+              <th>Teléfono</th>
               <th>Barrio</th>
               <th>Localidad</th>
+              <th>Municipio</th>
               <th>Zona</th>
               <th>Cuit</th>
               <th>Email</th>
-              <th>Marcas</th>
-              <th>Información</th>
-              <th>Comentarios</th> --}}
-              <th>Apellido y Nombre</th>
-              <th>Area</th>
-              <th>Cargo</th>
-              <th>Cateogria</th>
-              <th>Tel Directo</th>
-              <th>Interno</th>
-              <th>Celular</th>
-              <th>Tel.Partticular</th>
-              <th>Profesión</th>
-              <th>Información</th>
-              <th>Email</th>
-              <th>Fuera</th>
-
-
             </tr>
-
-
-            @forelse($representaciones_personal as $representacion)
-
-            <tr class="p-6 text-gray-900  text-xs">
-              <td>{{ $representacion->apellido }} {{ $representacion->nombre }}</td>
-              <td>{{ $representacion->area_id }}</td>
-              <td>{{ $representacion->cargo_id }}</td>
-              <td>{{ $representacion->categoriacargo_id }}</td>
-              <td>{{ $representacion->teldirecto }}</td>
-              <td>{{ $representacion->interno }}</td>
-              <td>{{ $representacion->telcelular }}</td>
-              <td>{{ $representacion->telparticular }}</td>
-              <td>{{ $representacion->profesion_id }}</td>
-              <td>{{ $representacion->infoenparticular }}</td>
-              <td>{{ $representacion->email }}</td>
-              <td>{{ $representacion->fuera }}</td>
+            <tr class="p-6 text-gray-900 text-md text-xs">
+              <td class="w-1/12">{{ $represento->razonsocial }}</td>
+              <td class="w-1/12">{{ $represento->dire_calle }} {{ $represento->dire_nro }}
+                {{ $represento->piso }} {{ $represento->dpto }}</td>
+              <td class="w-1/12">{{ $represento->codpost }}</td>
+              <td class="w-2/12">{{ $represento->telefono }}</td>
+              <td class="w-1/12">{{ $represento->barrio }}</td>
+              <td class="w-1/12">{{ $represento->localidad }}</td>
+              <td class="w-1/12">{{ $represento->municipio }}</td>
+              <td class="w-1/12">{{ $represento->zona }}</td>
+              <td class="w-1/12">{{ $represento->cuit }}</td>
+              <td class="w-1/12">{{ $represento->correo }}</td>
             </tr>
-
-            @empty
-            <p>No hay registros para mostrar...</p>
-            @endforelse
-            {{ $representaciones_personal->links() }}
-
           </table>
-
-          {{-- <table>
-            <tr>
-              <th>Apellido y Nombre</th>
-              <th>Dirección</th>
-              <th>Cod.Post</th>
-              <th>Telefono</th>
-              <th>Barrio</th>
-              <th>Localidad</th>
-              <th>Zona</th>
-              <th>Cuit</th>
-              <th>Email</th>
-              <th>Marcas</th>
-              <th>Información</th>
-              <th>Comentarios</th>
-          </tr> --}}
+          <div class="py-4 text-gray-900 text-sm">
+            <table>
+              <tr>
+                <th class="w-1/12">Marcas</th>
+                <th class="w-6/12">Información</th>
+                <th class="w-5/12">Comentarios</th>
+              </tr>
+              <tr class="text-gray-800 text-md text-sm align-top">
+                <td class="w-1/12">{{ $represento->infoenparticular }}</td>
+                <td class="w-6/12">{{ $represento->info }}</td>
+                <td class="w-5/12">{{ $represento->comentarios }}</td>
 
 
-          {{-- @forelse($representaciones_personal as $representacion_personal)
-            <tr>
-              <td>{{ $representacion_presonal->apellido }} {{ $representacion_presonal->nombre }}</td> --}}
+              </tr>
+            </table>
+          </div>
 
+          <div>
+            <div class="text-gray-900  text-sm text-left">
+              <table>
+                <tr>
+                  <td></td>
+                  <th class="w-1/12">Apellido y Nombre</th>
+                  <th class="w-1/12">Area</th>
+                  <th class="w-1/12">Cargo</th>
+                  <th class="w-1/12">Cateogria</th>
+                  <th class="w-1/12">Tel Directo</th>
+                  <th class="w-1/12">Interno</th>
+                  <th class="w-1/12">Celular</th>
+                  <th class="w-1/12">Tel.Partticular</th>
+                  <th class="w-1/12">Profesión</th>
+                  <th class="w-1/12">Información</th>
+                  <th class="w-1/12">Email</th>
 
-          {{-- <td>{{ $representacion->dire_calle }} {{ $representacion->dire_nro }}
-          {{ $representacion->piso }} {{ $representacion->dpto }}</td>
-          <td>{{ $representacion->codpost }}</td>
-          <td>{{ $representacion->telefono }}</td>
-          <td>{{ $representacion->barrio }}</td>
-          <td>{{ $representacion->localidad }}</td>
-          <td>{{ $representacion->zona }}</td>
-          <td>{{ $representacion->cuit }}</td>
-          <td>{{ $representacion->email }}</td>
-          <td>{{ $representacion->infoenparticular }}</td>
-          <td>{{ $representacion->info }}</td>
-          <td>{{ $representacion->comentarios }}</td> --}}
-          </tr>
-
-          {{-- @empty
-            <p>No tiene registros para mostrar...</p>
-            @endforelse
-            {{ $representaciones_personal->links() }}
-          </table> --}}
-
-
+                  {{-- <th>Fuera</th> --}}
+                </tr>
+                @forelse($representaciones_personal as $rp)
+                <tr class="text-gray-900 text-xs">
+                  <td class=" w-0">
+                    @if($rp->fuera === 1)
+                    <i class="far fa-thumbs-down" style="color: #ff0000;"></i>
+                    @endif
+                  </td>
+                  <td class="w-1/12">{{ $rp->apellido }} {{ $rp->nombre }}</td>
+                  <td class="w-1/12">{{ $rp->area }}</td>
+                  <td class="w-1/12">{{ $rp->cargo }}</td>
+                  <td class="w-1/12">{{ $rp->profesion }}</td>
+                  <td class="w-1/12">{{ $rp->teldirecto }}</td>
+                  <td class="w-1/12">{{ $rp->interno }}</td>
+                  <td class="w-1/12">{{ $rp->telcelular }}</td>
+                  <td class="w-1/12">{{ $rp->telparticular }}</td>
+                  <td class="w-1/12">{{ $rp->profesion }}</td>
+                  <td class="w-1/12">{{ $rp->infoenparticular }}</td>
+                  <td class="w-1/12">{{ $rp->email }}</td>
+                  {{-- <td>{{ $rp->fuera }}</td> --}}
+                </tr>
+                @empty
+                <p>No hay registros para mostrar...</p>
+                @endforelse
+                {{ $representaciones_personal->links() }}
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 </x-app-layout>
