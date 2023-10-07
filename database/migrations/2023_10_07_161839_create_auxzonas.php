@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,6 +14,7 @@ return new class extends Migration {
         Schema::create('auxzonas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->nullable();
+            $table->string('representaciones')->nullable();
             $table->string('distribuciones')->nullable();
             $table->string('molinos')->nullable();
             $table->string('proveedores')->nullable();

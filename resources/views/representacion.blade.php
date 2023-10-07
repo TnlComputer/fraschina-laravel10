@@ -31,7 +31,8 @@
             <tr class="p-6 text-gray-900  text-xs">
               <td>
                 <a href="{{ route('representacion.show', $representacion->id) }}">Ver</a>
-                {{-- | <a href="{{ route('representacion.edit', $representacion->id) }}">Edit</a>| <form method="POST" action="{{ route('representacion.destroy', $representacion->id) }}">
+                {{-- | <a href="{{ route('representacion.edit', $representacion->id) }}">Edit</a>| <form method="POST"
+                  action="{{ route('representacion.destroy', $representacion->id) }}">
                   @csrf
                   @method('DELETE')
                   <input type="submit" value="Delete">
