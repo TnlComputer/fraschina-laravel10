@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('auxprofesiones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
+            $table->string('nombreprofesion')->nullable();
             $table->string('representaciones')->nullable();
             $table->string('distribuciones')->nullable();
             $table->string('molinos')->nullable();

@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }}
+      {{ __('Representaciones') }}
     </h2>
   </x-slot>
 
@@ -39,8 +39,8 @@
                 {{ $representacion->piso }} {{ $representacion->dpto }}</td>
               <td>{{ $representacion->codpost }}</td>
               <td>{{ $representacion->telefono }}</td>
-              <td>{{ $representacion->barrio }}</td>
-              <td>{{ $representacion->localidad }}</td>
+              <td>{{ $representacion->barrio_id }}</td>
+              <td>{{ $representacion->localidad_id }}</td>
               <td>{{ $representacion->zona }}</td>
               <td>{{ $representacion->cuit }}</td>
               <td>{{ $representacion->email }}</td>

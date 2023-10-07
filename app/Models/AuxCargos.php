@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AuxCargos extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
 }
