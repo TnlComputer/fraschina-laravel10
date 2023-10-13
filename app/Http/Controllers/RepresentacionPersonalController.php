@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Representacion_Personal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Representacion_Personal;
 
 class RepresentacionPersonalController extends Controller
 {
@@ -44,7 +45,9 @@ class RepresentacionPersonalController extends Controller
      */
     public function edit(Representacion_Personal $representacion_Personal)
     {
-        //
+      $repPersonal = DB::table('representacion_personal as rp')
+      ->where('representacion_Personal.id', '=', $representacion_Personal->id);
+      return view('representacion.personal.edit', compact('repPersonal', $repPersonal));
     }
 
     /**
@@ -52,7 +55,9 @@ class RepresentacionPersonalController extends Controller
      */
     public function update(Request $request, Representacion_Personal $representacion_Personal)
     {
-        //
+        //       $note->update($request->all());
+        // return redirect()->route('note.index')->with('success', 'Note updated');
+
     }
 
     /**
@@ -60,6 +65,8 @@ class RepresentacionPersonalController extends Controller
      */
     public function destroy(Representacion_Personal $representacion_Personal)
     {
-        //
+        //         $note->delete();
+        // return redirect()->route('note.index')->with('danger', 'Note deleted');
+
     }
 }

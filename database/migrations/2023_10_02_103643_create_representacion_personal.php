@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('profesion_id')->nullable();
             $table->string('telparticular')->nullable();
             $table->string('email')->nullable();
-            $table->longText('infoenparticular')->nullable();
+            $table->longText('marcas')->nullable();
             $table->boolean('fuera')->nullable();
             $table->timestamps();
         });

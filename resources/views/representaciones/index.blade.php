@@ -28,11 +28,13 @@
             @forelse($representaciones as $representacion)
             <tr class="p-6 text-gray-900  text-xs">
               <td>
-                <l><a href="{{ route('Representacion.show', $representacion->id) }}">{{ $representacion->id }}</a> | <a href="{{ route('Representacion.edit', $representacion->id) }}">Edit</a>| <form method="POST" action="{{ route('Representacion.destroy', $representacion->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Delete">
-                  </form>
+                <a href="{{ route('Representacion.show', $representacion->id) }}">{{ $representacion->id }}</a> | <a href="{{ route('Representacion.edit', $representacion->id) }}">Edit</a>|
+                <form method="POST" action="{{ route('Representacion.destroy', $representacion->id) }}">
+                  @csrf
+                  @method('DELETE')
+                  <input type="submit" value="<i class=' fas fa-pencil-alt fa-xs' style='color: #0080ff;'></i>">
+                </form>
+
               </td>
               <td>{{ $representacion->razonsocial }}</td>
               <td>{{ $representacion->dire_calle }} {{ $representacion->dire_nro }}

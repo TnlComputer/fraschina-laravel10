@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('barrio_id')->nullable();
             $table->unsignedBigInteger('localidad_id')->nullable();
             $table->unsignedBigInteger('municipio_id')->nullable();
-            $table->string('zona', 50)->nullable();
+            $table->unsignedBigInteger('zona_id')->nullable();
             $table->string('telefono', 200)->nullable();
             $table->string('fax', 50)->nullable();
             $table->string('cuit', 50)->nullable();

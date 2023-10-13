@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('clisg_id')->nullable();
             $table->unsignedBigInteger('cliCDant_id')->nullable();
             $table->string('razonsocial', 50)->nullable();
-            $table->string('dire_calle', 50)->nullable();
+            $table->string('nomfantasia', 100)->nullable();
+            $table->unsignedBigInteger('dire_calle')->nullable();
             $table->string('dire_nro', 30)->nullable();
             $table->string('dire_obs', 100)->nullable();
             $table->string('codpost', 30)->nullable();
@@ -25,9 +26,8 @@ return new class extends Migration {
             $table->string('fax', 50)->nullable();
             $table->string('cuit', 50)->nullable();
             $table->string('fac_imp', 2)->nullable();
-            $table->string('nomfantasia', 100)->nullable();
             $table->unsignedBigInteger('municipio_id')->nullable();
-            $table->string('infoenparticular', 200)->nullable();
+            $table->string('marcas', 200)->nullable();
             $table->longText('info')->nullable();
             $table->string('contacto', 50)->nullable();
             $table->string('horario', 50)->nullable();
