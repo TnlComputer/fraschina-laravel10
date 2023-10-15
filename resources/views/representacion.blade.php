@@ -13,7 +13,6 @@
               <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nueva Representación</button>
             </a>
             <form method="post" action="{{  route('representacion.search') }}" class="py-2">
-
               @csrf
               <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
               <button type="submit" class="p-2 bg-gray-700 text-white sm:rounded-lg">Buscar</button>

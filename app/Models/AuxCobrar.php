@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuxCobrar extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
+  use HasFactory;
 
+  protected $guarded = [];
 }

@@ -55,7 +55,17 @@
               </td>
               <td>{{ $distribucion->nomfantasia }}</td>
               <td>{{ $distribucion->razonsocial}}
-              <td>{{ $distribucion->dire_calle }}{{ $distribucion->dire_nro }}{{ $distribucion->piso }}{{ $distribucion->dpto }}{{ $distribucion->codpost }}</td>
+              <td> {{ $distribucion->dire_calle }}
+                {{ $distribucion->dire_nro }}
+                @if($distribucion->piso != '')
+                {{ $distribucion->piso }}
+                @endif
+                @if($distribucion->dpto != '')
+                Piso {{ $distribucion->dpto }}
+                @endif
+                @if($distribucion->codpost != '')
+                - ({{ $distribucion->codpost }})
+                @endif
               <td>{{ $distribucion->barrio }}</td>
               <td>{{ $distribucion->localidad }}</td>
               <td>{{ $distribucion->municipio }}</td>
