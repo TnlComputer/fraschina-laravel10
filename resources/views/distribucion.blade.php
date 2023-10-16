@@ -19,28 +19,31 @@
             </form>
           </div>
           <table>
-            <tr class=" bg-black text-white text-left">
-              <th></th>
-              <th></th>
-              <th class="w-1/12">Nro.GS</th>
-              <th class="w-2/12">Nombre Fantasía</th>
-              <th class="w-2/12">Razón social</th>
-              <th class="w-2/12">Dirección</th>
-              <th class="w-1/12">Barrio</th>
-              <th class="w-1/12">Localidad</th>
-              <th class="w-1/12">Municipio</th>
-              <th class="w-1/12">Zona</th>
-              <th class="w-1/12">Teléfono</th>
-              <th class="w-1/12">Email</th>
-              {{-- <th class="w-1/12">Cuit</th> --}}
-              {{-- <th class="w-1/12">Rubro/Tamaño/Modo</th> --}}
-              {{-- <th class="w-1/12">Marcas</th> --}}
-              {{-- <th class="w-1/12">Contacto Inicial</th> --}}
-            </tr>
+            {{-- <tr class=" bg-black text-white text-left"> --}}
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th>Nro.GS</th>
+                <th>Nombre Fantasía</th>
+                <th>Razón social</th>
+                <th>Dirección</th>
+                <th>Barrio</th>
+                <th>Localidad</th>
+                <th>Municipio</th>
+                <th>Zona</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                {{-- <th class="w-1/12">Cuit</th> --}}
+                {{-- <th class="w-1/12">Rubro/Tamaño/Modo</th> --}}
+                {{-- <th class="w-1/12">Marcas</th> --}}
+                {{-- <th class="w-1/12">Contacto Inicial</th> --}}
+              </tr>
+            </thead>
 
             @forelse($distribuciones as $distribucion)
             <tr>
-            <tr class="p-2 text-gray-900  text-xs align-text-top text-left">
+              {{-- <tr class="p-2 text-gray-900  text-xs align-text-top text-left"> --}}
               <td>
                 <a href="{{ route('distribucion.show', $distribucion->id) }}" class="">
                   <i class="fa-regular fa-eye fa-sm"></i>
@@ -53,9 +56,9 @@
                 {{ $distribucion->clisg_id }}
                 @endif
               </td>
-              <td>{{ $distribucion->nomfantasia }}</td>
-              <td>{{ $distribucion->razonsocial}}
-              <td> {{ $distribucion->dire_calle }}
+              <td data-titulo="Nombre Fantasía">{{ $distribucion->nomfantasia }}</td>
+              <td data-titulo="Razón social">{{ $distribucion->razonsocial}}
+              <td data-titulo="Dirección"> {{ $distribucion->dire_calle }}
                 {{ $distribucion->dire_nro }}
                 @if($distribucion->piso != '')
                 {{ $distribucion->piso }}
@@ -66,16 +69,12 @@
                 @if($distribucion->codpost != '')
                 - ({{ $distribucion->codpost }})
                 @endif
-              <td>{{ $distribucion->barrio }}</td>
-              <td>{{ $distribucion->localidad }}</td>
-              <td>{{ $distribucion->municipio }}</td>
-              <td>{{ $distribucion->zona }}</td>
-              <td>{{ $distribucion->telefono }}</td>
-              <td>{{ $distribucion->correo }}</td>
-              {{-- <td>{{ $distribucion->cuit }}</td> --}}
-              {{-- <td>{{ $distribucion->rubro }} {{ $distribucion->tamanio }}{{ $distribucion->modo}}</td> --}}
-              {{-- <td>{{ $distribucion->contacto }}</td> --}}
-              {{-- <td>{{ $distribucion->marcas }}</td> --}}
+              <td data-titulo="Barrio">{{ $distribucion->barrio }}</td>
+              <td data-titulo="Localidad">{{ $distribucion->localidad }}</td>
+              <td data-titulo="Municipio">{{ $distribucion->municipio }}</td>
+              <td data-titulo="Zona">{{ $distribucion->zona }}</td>
+              <td data-titulo="Teléfono">{{ $distribucion->telefono }}</td>
+              <td data-titulo="Email">{{ $distribucion->correo }}</td>
             </tr>
             @empty
             <p>No hay registros para mostrar...</p>

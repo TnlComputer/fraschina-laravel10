@@ -5,30 +5,29 @@
 
     </h2>
   </x-slot>
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+  <div class="py-2">
+    <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900 text-xs">
-
+        <div class="p-2 text-gray-900 text-xs">
           <table>
-            <tr>
-              <th>Nombre y Apellido</th>
-              <th>Empresa-Institución</th>
-              <th>Profesión-Especialidad-Oficio</th>
-              <th>Telefono Particular</th>
-              <th>Telefono Laboral</th>
-              <th>interno</th>
-              <th>Celular</th>
-              <th>Email</th>
-              <th>Dirección</th>
-              <th>Observaciones</th>
-
-
-            </tr>
+            <thead>
+              <tr>
+                <th>Nombre y Apellido</th>
+                <th>Empresa-Institución</th>
+                <th>Profesión-Especialidad-Oficio</th>
+                <th>Telefono Particular</th>
+                <th>Telefono Laboral</th>
+                <th>interno</th>
+                <th>Celular</th>
+                <th>Email</th>
+                <th>Dirección</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
 
             @forelse($agendas as $agenda)
             <tr>
-              <td>{{ $agenda->nomApe }}</td>
+              <td>{{ $agenda->nombre }} {{ $agenda->apellido }}</td>
               <td>{{ $agenda->empresa_institucion }}</td>
               <td>{{ $agenda->profesion_especialidad_oficio }}</td>
               <td>{{ $agenda->tel_particular }}</td>

@@ -51,10 +51,11 @@ class DistribucionController extends Controller
       ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
       ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
       ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
-
       ->where('nomfantasia', 'like', '%' . $request->name . '%')
       ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
       ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
+      ->orderBy('nomfantasia', 'asc')
+      // ->orderBy('nomfantasia', 'asc', 'razonSocial', 'asc',  'clisg', 'asc')
       ->paginate(15);
 
     return view('distribucion', compact('distribuciones'));
@@ -133,6 +134,7 @@ class DistribucionController extends Controller
         'auxTPag.nombre as tipopago'
       )
       ->where('d.id', '=', $distribucion->id)
+      ->orderBy('nomfantasia', 'asc')
       ->first();
 
     $distribuciones_personal = DB::table('distribucion_personal as dp')
