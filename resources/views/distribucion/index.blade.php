@@ -8,14 +8,14 @@
     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-2 text-gray-900 text-left text-xs">
-          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch gap-36">
+          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
             <a href="{{ route('distribucion.create') }}">
-              <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo Distribución</button>
+              <button class="p-2 bg-gray-700 text-white sm:rounded-lg rounded-lg" type="button">Nuevo Distribución</button>
             </a>
-            <form method="post" action="{{  route('distribucion.search') }}" class="py-2">
+            <form method="post" action="{{  route('distribucion.search') }}" class="px-6">
               @csrf
               <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
-              <button type="submit" class="p-2 bg-gray-700 text-white sm:rounded-lg">Buscar</button>
+              <button type="submit" class="p-2 bg-gray-700 text-white rounded-lg">Buscar</button>
             </form>
           </div>
           <table>
@@ -34,23 +34,23 @@
                 <th>Zona</th>
                 <th>Teléfono</th>
                 <th>Email</th>
-                {{-- <th class="w-1/12">Cuit</th> --}}
-                {{-- <th class="w-1/12">Rubro/Tamaño/Modo</th> --}}
-                {{-- <th class="w-1/12">Marcas</th> --}}
-                {{-- <th class="w-1/12">Contacto Inicial</th> --}}
+                <th></th>
               </tr>
             </thead>
 
             @forelse($distribuciones as $distribucion)
             <tr>
-              {{-- <tr class="p-2 text-gray-900  text-xs align-text-top text-left"> --}}
               <td>
                 <a href="{{ route('distribucion.show', $distribucion->id) }}" class="">
-                  <i class="fa-regular fa-eye fa-sm"></i>
-                  {{-- <i class="fa-regular fa-eye"></i> --}}
+                  <i class="fa-regular fa-eye fa-md"></i>
                 </a>
               </td>
-              <td></td>
+              <td>
+                <a href="{{ route('distribucion.edit', $distribucion->id) }}" class="ocultar ">
+                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                </a>
+              </td>
+
               <td>
                 @if($distribucion->clisg_id != 0)
                 {{ $distribucion->clisg_id }}
@@ -75,6 +75,13 @@
               <td data-titulo="Zona">{{ $distribucion->zona }}</td>
               <td data-titulo="Teléfono">{{ $distribucion->telefono }}</td>
               <td data-titulo="Email">{{ $distribucion->correo }}</td>
+              <td>
+                <form method="POST" action="{{ route('distribucion.destroy', $distribucion->id) }}" class="ocultar">
+                  @csrf
+                  @method(' DELETE')
+                  <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                </form>
+              </td>
             </tr>
             @empty
             <p>No hay registros para mostrar...</p>

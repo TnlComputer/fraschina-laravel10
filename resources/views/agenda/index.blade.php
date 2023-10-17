@@ -7,29 +7,41 @@
   <div class="py-2">
     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <form method="post" action="{{  route('agenda.search') }}" class="py-2">
-          @csrf
-          <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
-          <button type="submit" class="p-2 bg-gray-700 text-white sm:rounded-lg">Buscar</button>
-        </form>
-        <div class=" text-xs">
+        <div class="p-2 text-gray-900 text-left text-xs">
+          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
+            <a class="ocultar" href="{{ route('agenda.create') }}">
+              <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo</button>
+            </a>
+            <form method="post" action="{{  route('agenda.search') }}" class="px-6">
+              @csrf
+              <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
+              <button type="submit" class="p-2 bg-gray-700 text-white rounded-lg">Buscar</button>
+            </form>
+          </div>
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Nombre y Apellido</th>
                 <th>Empresa-Institución</th>
                 <th>Profesión-Especialidad-Oficio</th>
-                <th>Telefono Particular</th>
-                <th>Telefono Laboral</th>
-                <th>interno</th>
+                <th>Tel Particular</th>
+                <th>Tel Laboral</th>
+                <th>int</th>
                 <th>Celular</th>
                 <th>Email</th>
                 <th>Dirección</th>
                 <th>Observaciones</th>
+                <th></th>
               </tr>
             </thead>
             @forelse($agendas as $agenda)
             <tr class=" text-xs">
+              <td>
+                <a href="{{ route('agenda.edit', $agenda->id) }}" class="ocultar ">
+                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                </a>
+              </td>
               <td data-titulo="Nombre Apellido">{{ $agenda->nombre }} {{ $agenda->apellido }}</td>
               <td data-titulo="Empresa/Institución">{{ $agenda->empresa_institucion }}</td>
               <td data-titulo="Prof./Esp./Oficio">{{ $agenda->profesion_especialidad_oficio }}</td>
@@ -40,6 +52,13 @@
               <td data-titulo="Email">{{ $agenda->mail }}</td>
               <td data-titulo="Dirección">{{ $agenda->direccion }}</td>
               <td data-titulo="Observaciones">{{ $agenda->observaciones }}</td>
+              <td>
+                <form method="POST" action="{{ route('agenda.destroy', $agenda->id) }}" class="ocultar">
+                  @csrf
+                  @method(' DELETE')
+                  <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                </form>
+              </td>
             </tr>
             @empty
             <p>No hay registros para mostrar...</p>
@@ -47,6 +66,7 @@
             {{ $agendas->links() }}
           </table>
 
+          {{-- </div> --}}
         </div>
       </div>
     </div>

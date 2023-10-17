@@ -36,7 +36,7 @@ class DistribucionController extends Controller
       ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
       ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
       ->paginate(15);
-    return view('distribucion', compact('distribuciones'));
+    return view('distribucion.index', compact('distribuciones'));
   }
 
   /**
@@ -58,7 +58,7 @@ class DistribucionController extends Controller
       // ->orderBy('nomfantasia', 'asc', 'razonSocial', 'asc',  'clisg', 'asc')
       ->paginate(15);
 
-    return view('distribucion', compact('distribuciones'));
+    return view('distribucion.index', compact('distribuciones'));
   }
 
   /**

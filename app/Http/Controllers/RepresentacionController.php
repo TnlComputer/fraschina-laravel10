@@ -31,7 +31,7 @@ class RepresentacionController extends Controller
       ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
       ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
       ->paginate(15);
-    return view('representacion', compact('representaciones'));
+    return view('representacion.index', compact('representaciones'));
   }
 
   /**
@@ -48,7 +48,7 @@ class RepresentacionController extends Controller
       ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
       ->paginate(15);
 
-    return view('representacion', compact('representaciones'));
+    return view('representacion.index', compact('representaciones'));
   }
 
   /**
@@ -81,11 +81,6 @@ class RepresentacionController extends Controller
       ->where('r.id', '=', $representacion->id)
       ->first();
 
-    // $comentarios =  DB::table('representacion_comentarios as rc')
-    //     ->select('rc.comentario', 'rc.fecha')
-    //     ->where('rc.representacion_id', '=', $representacion->id)
-    //     ->get();
-
     $representaciones_personal = DB::table('representacion_personal as rp')
       ->join('AuxProfesiones as auxProf', 'rp.profesion_id', '=', 'auxProf.id')
       ->join('AuxAreas as auxA', 'rp.area_id', '=', 'auxA.id')
@@ -100,9 +95,7 @@ class RepresentacionController extends Controller
       ->where('rpr.representacion_id', '=', $representacion->id)
       ->get();
 
-
-    // return view('representaciones.show', ['represento' => $represento, 'representaciones_personal' => $representaciones_personal, 'productos'=>$productos, 'comentarios'=>$comentarios]);
-    return view('representaciones.show', ['represento' => $represento, 'representaciones_personal' => $representaciones_personal, 'productos' => $productos]);
+    return view('representacion.show', ['represento' => $represento, 'representaciones_personal' => $representaciones_personal, 'productos' => $productos]);
   }
 
   /**

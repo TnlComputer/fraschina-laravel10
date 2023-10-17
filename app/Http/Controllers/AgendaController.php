@@ -14,7 +14,7 @@ class AgendaController extends Controller
   public function index()
   {
     $agendas = Agenda::paginate(15);
-    return view('agenda', compact('agendas'));
+    return view('agenda.index', compact('agendas'));
   }
 
 
@@ -45,7 +45,7 @@ class AgendaController extends Controller
       ->orWhere('profesion_especialidad_oficio', 'like', '%' . $request->name . '%')
       ->paginate(15);
 
-    return view('agenda', compact('agendas'));
+    return view('agenda.index', compact('agendas'));
   }
 
   /**

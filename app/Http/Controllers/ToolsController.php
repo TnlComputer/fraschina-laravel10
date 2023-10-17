@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transporte;
+use App\Models\Tools;
 use Illuminate\Http\Request;
 
-class TransporteController extends Controller
+class ToolsController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    $transportes = Transporte::orderBy('razonsocial', 'ASC')->paginate(15);
-    return view('transporte.index', compact('transportes'));
+    //
+    $tools = Tools::all();
+    return view('Tools');
   }
 
   /**
@@ -35,7 +36,7 @@ class TransporteController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(Transporte $transporte)
+  public function show(Tools $tools)
   {
     //
   }
@@ -43,7 +44,7 @@ class TransporteController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Transporte $transporte)
+  public function edit(Tools $tools)
   {
     //
   }
@@ -51,7 +52,7 @@ class TransporteController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Transporte $transporte)
+  public function update(Request $request, Tools $tools)
   {
     //
   }
@@ -59,7 +60,7 @@ class TransporteController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Transporte $transporte)
+  public function destroy(Tools $tools)
   {
     //
   }

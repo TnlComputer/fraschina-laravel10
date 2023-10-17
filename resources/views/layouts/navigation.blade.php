@@ -17,30 +17,33 @@
           {{-- <x-nav-link :href="route('example')" :active="request()->routeIs('dashboard')">
             {{ __('example') }}
           </x-nav-link> --}}
-          <x-nav-link :href="route('representacion.index')" :active="request()->routeIs('representaciones')">
+          <x-nav-link :href="route('representacion.index')" :active="request()->routeIs('representacion.index')">
             {{ __('Representación') }}
           </x-nav-link>
-
-          <x-nav-link :href="route('distribucion')" :active="request()->routeIs('distribucion')">
+          <x-nav-link :href="route('distribucion.index')" :active="request()->routeIs('distribucion.index')">
             {{ __('Distribución') }}
           </x-nav-link>
-          <x-nav-link :href="route('molinos')" :active="request()->routeIs('molinos')">
-            {{ __('Molinos') }}
+          <x-nav-link :href="route('molino.index')" :active="request()->routeIs('molino.index')">
+            {{ __('Molino') }}
           </x-nav-link>
-          <x-nav-link :href="route('proveedores')" :active="request()->routeIs('proveedores')">
-            {{ __('Proveedores') }}
+          <x-nav-link :href="route('proveedor.index')" :active="request()->routeIs('proveedor.index')">
+            {{ __('Proveedor') }}
           </x-nav-link>
-          <x-nav-link :href="route('agro')" :active="request()->routeIs('agro')">
+          <x-nav-link :href="route('agro.index')" :active="request()->routeIs('agro.index')">
             {{ __('Agro') }}
           </x-nav-link>
-          <x-nav-link :href="route('transporte')" :active="request()->routeIs('transporte')">
+          <x-nav-link :href="route('transporte.index')" :active="request()->routeIs('transporte.index')">
             {{ __('Transporte') }}
           </x-nav-link>
-          <x-nav-link :href="route('expedicion')" :active="request()->routeIs('expedicion')">
+          <x-nav-link :href="route('expedicion.index')" :active="request()->routeIs('expedicion.index')">
             {{ __('Expedición') }}
           </x-nav-link>
-          <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+          <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
             {{ __('Agenda General') }}
+          </x-nav-link>
+
+          <x-nav-link :href="route('tools')" :active="request()->routeIs('tools')">
+            {{ __('tools') }}
           </x-nav-link>
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             {{ __('tools') }}
@@ -101,47 +104,47 @@
       </x-responsive-nav-link>
     </div> --}}
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('representacion.index')" :active="request()->routeIs('representaciones')">
+      <x-responsive-nav-link :href="route('representacion.index')" :active="request()->routeIs('representacion')">
         {{ __('Representación') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('distribucion')" :active="request()->routeIs('distribucion')">
+      <x-responsive-nav-link :href="route('distribucion.index')" :active="request()->routeIs('distribucion.index')">
         {{ __('Distribución') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('molinos')" :active="request()->routeIs('molinos')">
-        {{ __('Molinos') }}
+      <x-responsive-nav-link :href="route('molino.index')" :active="request()->routeIs('molino.index')">
+        {{ __('Molino') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('proveedores')" :active="request()->routeIs('proveedores')">
-        {{ __('Proveedores') }}
+      <x-responsive-nav-link :href="route('proveedor.index')" :active="request()->routeIs('proveedor.index')">
+        {{ __('Proveedor') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('agro')" :active="request()->routeIs('agro')">
+      <x-responsive-nav-link :href="route('agro.index')" :active="request()->routeIs('agro.index')">
         {{ __('Agro') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('transporte')" :active="request()->routeIs('transporte')">
+      <x-responsive-nav-link :href="route('transporte.index')" :active="request()->routeIs('transporte.index')">
         {{ __('Transporte') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('expedicion')" :active="request()->routeIs('expedicion')">
+      <x-responsive-nav-link :href="route('expedicion.index')" :active="request()->routeIs('expedicion.index')">
         {{ __('Expedición') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+      <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
         {{ __('Agenda General') }}
       </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('tools')">
+      <x-responsive-nav-link :href="route('tools')" :active="request()->routeIs('tools')">
         {{ __('tools') }}
       </x-responsive-nav-link>
     </div>
