@@ -8,51 +8,49 @@
     <div class="bg-slate-200 overflow-hidden shadow-sm sm:rounded-lg">
       <div class="p-2 text-white rounded-sm text-sm text-left">
         <table>
-          <tr class=" bg-zinc-600">
-            <th class="w-1/12">Razón social</th>
-            <th class="w-1/12">Dirección</th>
-            <th class="w-1/12">Cod.Post</th>
-            <th class="w-2/12">Teléfono</th>
-            <th class="w-1/12">Barrio</th>
-            <th class="w-1/12">Localidad</th>
-            <th class="w-1/12">Municipio</th>
-            <th class="w-1/12">Zona</th>
-            <th class="w-1/12">Cuit</th>
-            <th class="w-2/12">Email</th>
-            <th class="w-1/12">Marcas</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Razón social</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Barrio</th>
+              <th>Localidad</th>
+              <th>Municipio</th>
+              <th>Zona</th>
+              <th>Cuit</th>
+              <th>Email</th>
+              <th>Marcas</th>
+            </tr>
+          </thead>
           <tr class="p-6 text-gray-900 text-md text-xs">
-            <td class="w-1/12">{{ $represento->razonsocial }}</td>
-            <td class="w-2/12">{{ $represento->dire_calle }} {{ $represento->dire_nro }}
-              {{ $represento->piso }} {{ $represento->dpto }}</td>
-            <td class="w-1/12">{{ $represento->codpost }}</td>
-            <td class="w-1/12">{{ $represento->telefono }}</td>
-            <td class="w-1/12">{{ $represento->barrio }}</td>
-            <td class="w-1/12">{{ $represento->localidad }}</td>
-            <td class="w-1/12">{{ $represento->municipio }}</td>
-            <td class="w-1/12">{{ $represento->zona }}</td>
-            <td class="w-1/12">{{ $represento->cuit }}</td>
-            <td class="w-1/12">{{ $represento->correo }}</td>
-            <td class="w-1/12">{{ $represento->marcas }}</td>
+            <td data-titulo="Razón social">{{ $represento->razonsocial }}</td>
+
+            <td data-titulo="Dirección">{{ $represento->dire_calle }}
+              {{ $represento->dire_nro }}
+              @if($represento->piso != '')
+              {{ $represento->piso }}
+              @endif
+              @if($represento->dpto != '')
+              Piso {{ $represento->dpto }}
+              @endif
+              @if($represento->codpost != '')
+              - ({{ $represento->codpost }})
+              @endif
+            </td>
+            <td data-titulo="Teléfono">{{ $represento->telefono }}</td>
+            <td data-titulo="Barrio">{{ $represento->barrio }}</td>
+            <td data-titulo="Localidad">{{ $represento->localidad }}</td>
+            <td data-titulo="Municipio">{{ $represento->municipio }}</td>
+            <td data-titulo="Zona">{{ $represento->zona }}</td>
+            <td data-titulo="Cuit">{{ $represento->cuit }}</td>
+            <td class="" data-titulo="Email">{{ $represento->correo }}</td>
+            <td data-titulo="Marcas">{{ $represento->marcas }}</td>
           </tr>
         </table>
-
         <article class="py-2 text-gray-900 text-sm">
           <label class=" text-lg">Información</label>
           <p class="p-2 bg-slate-300">{{ $represento->info }}</p>
         </article>
-        {{-- <span class=" text-gray-900 text-sm">
-          <label class="">Comentarios</label>
-          <p class="">
-            @forelse($comentarios as $coment)
-            {{ $coment->fecha }}
-        {{ $coment->comentario }}
-        <br>
-        @empty
-        <p>Sin comentarios</p>
-        @endforelse
-        </p>
-        </span> --}}
       </div>
     </div>
   </div>
@@ -60,88 +58,78 @@
 
   <div class=" mx-auto sm:px-6 lg:px-8">
     <div class=" bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
-      {{-- <div class="p-4 text-gray-900  text-sm text-left"> --}}
-      <div class=" w-2/12 p-2 text-gray-900  text-sm float-left">
+      <div class="ocultar w-2/12 p-2 text-gray-900  text-sm float-left">
         <a href="{{ route('representacion_producto.create') }}" class=" align-middle text-left">
           <button class="p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo Contacto</button></a>
-
       </div>
       <div class=" w-10/12 p-2 text-gray-900  text-sm float">
         <h3 class="text-2xl text-center">Contactos</h3>
       </div>
-      <div class="p-2 text-gray-900  text-sm text-left ">
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <td></td>
+              <td></td>
+              <th>Nombre y Apellido</th>
+              <th>Tel Directo</th>
+              <th>Int</th>
+              <th>Celular</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Profesión</th>
+              <th>Area</th>
+              <th>Cargo</th>
+              <th>Información</th>
+              <td></td>
+            </tr>
+          </thead>
+          @forelse($representaciones_personal as $rp)
+          <tr class=" text-gray-900 text-xs align-text-top ">
+            <td class="ocultar">
 
+              <a href="{{ route('representacion_personal.edit', $rp->id) }}">
+                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
+              </a>
+            </td>
+            <td>
+              @if($rp->fuera === 1)
+              <i class="fas fa-circle fa-xs" style="color: #ff0000;"></i>
+              @else
+              <i class="fas fa-circle fa-xs" style="color: #00ff33;"></i>
+              @endif
+            </td>
+            <td data-titulo="Nombre y Apellido"> {{ $rp->nombre }} {{ $rp->apellido }}</td>
+            <td data-titulo="Directo">{{ $rp->teldirecto }}</td>
+            <td data-titulo="Interno">{{ $rp->interno }}</td>
+            <td data-titulo="Celular">{{ $rp->telcelular }}</td>
+            <td data-titulo="Particular">{{ $rp->telparticular }}</td>
+            <td data-titulo="Email">{{ $rp->email }}</td>
+            <td data-titulo="Profesión">{{ $rp->profesion }}</td>
+            <td data-titulo="Area">{{ $rp->area }}</td>
+            <td data-titulo="Cargo">{{ $rp->cargo }}</td>
+            <td data-titulo="Obsercaciones">{{ $rp->observaciones }}</td>
 
-
-        {{-- <div class="p-2 text-gray-950">
-            <a href="{{ route('representacion_personal.create') }}">
-        <button class="btn btn-group-lg btn-success" type="button">+ Nuevo</button></a>
-
-      </div> --}}
-      <table>
-        <tr class=" bg-slate-600 text-white  align-text-top">
-
-          <td></td>
-          <td></td>
-          <th class="w-2/12">Nombre y Apellido</th>
-          <td></td>
-          <th class="w-1/12">Tel Directo</th>
-          <th class="w-1/12">Int</th>
-          <th class="w-1/12">Celular</th>
-          <th class="w-1/12">Teléfono</th>
-          <th class="w-1/12">Email</th>
-          <th class="w-1/12">Profesión</th>
-          <th class="w-1/12">Area</th>
-          <th class="w-1/12">Cargo</th>
-          <th class="w-1/12">Información</th>
-          <td></td>
-        </tr>
-        @forelse($representaciones_personal as $rp)
-        <tr class="text-gray-900 text-xs align-text-top ">
-          <td>
-            <a href="{{ route('representacion_personal.edit', $rp->id) }}">
-              <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
-            </a>
-          </td>
-          <td></td>
-          <td class="w-1/12 text-left"> {{ $rp->nombre }} {{ $rp->apellido }}</td>
-          <td>
-            @if($rp->fuera === 1)
-            <i class="fas fa-circle fa-xs" style="color: #ff0000;"></i>
-            @else
-            <i class="fas fa-circle fa-xs" style="color: #00ff33;"></i>
-            @endif
-          </td>
-          <td class="w-1/12">{{ $rp->teldirecto }}</td>
-          <td class="w-1/12">{{ $rp->interno }}</td>
-          <td class="w-1/12">{{ $rp->telcelular }}</td>
-          <td class="w-1/12">{{ $rp->telparticular }}</td>
-          <td class="w-1/12">{{ $rp->email }}</td>
-          <td class="w-1/12">{{ $rp->profesion }}</td>
-          <td class="w-1/12">{{ $rp->area }}</td>
-          <td class="w-1/12">{{ $rp->cargo }}</td>
-          <td class="w-2/12">{{ $rp->marcas }}</td>
-
-          <td>
-            <form method="POST" action="{{ route('representacion_personal.destroy', $rp->id) }}">
-              @csrf
-              @method(' DELETE')
-              <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
-            </form>
-          </td>
-        </tr>
-        @empty
-        <p>No hay registros para mostrar...</p>
-        @endforelse
-        {{ $representaciones_personal->links() }}
-      </table>
+            <td class="ocultar">
+              <form method="POST" action="{{ route('representacion_personal.destroy', $rp->id) }}">
+                @csrf
+                @method(' DELETE')
+                <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
+              </form>
+            </td>
+          </tr>
+          @empty
+          <p>No hay registros para mostrar...</p>
+          @endforelse
+          {{ $representaciones_personal->links() }}
+        </table>
+      </div>
     </div>
-  </div>
   </div>
 
   <div class="py-4 mx-auto sm:px-6 lg:px-8">
-    <div class=" bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
-      <div class=" w-2/12 p-2 text-gray-900  text-sm float-left">
+    <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="ocultar w-2/12 p-2 text-gray-900  text-sm float-left">
         <a href="{{ route('representacion_producto.create') }}" class=" align-middle text-left">
           <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo Producto</button>
         </a>
@@ -149,59 +137,61 @@
       <div class=" w-10/12 p-2 text-gray-900  text-sm float">
         <h3 class="text-2xl text-center">Especificaciones</h3>
       </div>
-      <div class="p-2 text-gray-900  text-sm text-center">
+      <div>
         <table>
-          <tr class=" bg-black text-white">
-            <th></th>
-            <th colspan="4">Alveográficas</th>
-            <th colspan="5">Físico Químico</th>
-            <th colspan="5">Farinográfina</th>
-            <th></th>
-          </tr>
-          <tr>
-            <th></th>
-            <th class="w-1/12  text-left ">Producto</th>
-            <th class="w-1/12">PL</th>
-            <th class=" w-1/12">P</th>
-            <th class="w-1/12">L</th>
-            <th class="w-1/12">W</th>
-            <th class="w-1/12">Gluten Humedo</th>
-            <th class="w-1/12">Gluten Seco</th>
-            <th class="w-1/12">Cenizas</th>
-            <th class="w-1/12">FN</th>
-            <th class="w-1/12">Humedad</th>
-            <th class="w-1/12">Estabilidad</th>
-            <th class="w-1/12">Absorción</th>
-            <th class="w-1/12">Puntuaciones</th>
-            <th class="w-1/12 text-left">Particularidades</th>
-            <th></th>
-          </tr>
-
+          <thead>
+            <tr class=" bg-black text-white">
+              <th colspan="2"></th>
+              <th colspan="4">Alveográficas</th>
+              <th colspan="5">Físico Químico</th>
+              <th colspan="5">Farinográfina</th>
+              <th></th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-left ">Producto</th>
+              <th class="">PL</th>
+              <th class="">P</th>
+              <th class="">L</th>
+              <th class="">W</th>
+              <th class="">Gluten Humedo</th>
+              <th class="">Gluten Seco</th>
+              <th class="">Cenizas</th>
+              <th class="">FN</th>
+              <th class="">Humedad</th>
+              <th class="">Estabilidad</th>
+              <th class="">Absorción</th>
+              <th class="">Puntuaciones</th>
+              <th class=" text-left">Particularidades</th>
+              <th></th>
+            </tr>
+          </thead>
           @forelse($productos as $p)
           <tr class="text-gray-900 text-xs  align-text-top">
 
-            <td>
+            <td class="ocultar">
               <a href="{{ route('representacion_producto.edit', $p->id) }}">
                 <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
               </a>
             </td>
+            <td class=" text-left" data-titulo="Producto"> {{ $p->producto }}</td>
+            <td class="" data-titulo="PL"> {{ $p->pl }}</td>
+            <td class="" data-titulo="P">{{ $p->p }}</td>
+            <td class="" data-titulo="L">{{ $p->l }}</td>
+            <td class="" data-titulo="W">{{ $p->w }}</td>
+            <td class="" data-titulo="Gluten Húmedo">{{ $p->glutenhumedo }}</td>
+            <td class="" data-titulo="Gluten Seco">{{ $p->glutenseco }}</td>
+            <td class="" data-titulo="Cenizas">{{ $p->cenizas }}</td>
+            <td class="" data-titulo="FN">{{ $p->fn }}</td>
+            <td class="" data-titulo="Humedad">{{ $p->humedad }}</td>
+            <td class="" data-titulo="Estabilidad">{{ $p->estabilidad }}</td>
+            <td class="" data-titulo="Absorción">{{ $p->absorcion }}</td>
+            <td class="" data-titulo="Puntuaciones">{{ $p->puntuaciones }}</td>
+            <td class="text-left" data-titulo="Particularidades">{{ $p->particularidades }}</td>
+            <td class="ocultar">
 
-
-            <td class=" w-0.5 text-left"> {{ $p->producto }}</td>
-            <td class="w-0.5"> {{ $p->pl }}</td>
-            <td class="w-0.5">{{ $p->p }}</td>
-            <td class="w-0.5">{{ $p->l }}</td>
-            <td class="w-0.5">{{ $p->w }}</td>
-            <td class="w-0.5">{{ $p->glutenhumedo }}</td>
-            <td class="w-0.5">{{ $p->glutenseco }}</td>
-            <td class="w-0.5">{{ $p->cenizas }}</td>
-            <td class="w-0.5">{{ $p->fn }}</td>
-            <td class="w-0.5">{{ $p->humedad }}</td>
-            <td class="w-0.5">{{ $p->estabilidad }}</td>
-            <td class="w-0.5">{{ $p->absorcion }}</td>
-            <td class=" ww-1/12">{{ $p->puntuaciones }}</td>
-            <td class="w-1/12  text-left">{{ $p->particularidades }}</td>
-            <td>
               <form method="POST" action="{{ route('representacion_producto.destroy', $p->id) }}">
                 @csrf
                 @method(' DELETE')

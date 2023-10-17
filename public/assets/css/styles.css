@@ -88,7 +88,7 @@ table {
 
   table td[data-titulo]::before {
     content: attr(data-titulo);
-    min-width: 90px;
+    min-width: 110px;
     color: #222;
   }
 }
@@ -153,26 +153,6 @@ tr:hover {
   .dist__title {
     color: brown;
   }
-
-  /* table thead {
-    display: inline-flex;
-  }
-
-  table tr {
-    display: inline-flex;
-    flex-direction: row;
-    width: 100%;
-  }
-
-  table tr {
-    border: 0;
-    padding: 0;
-    margin-bottom: 0;
-  }
-
-  table td[data-titulo]::before {
-    display: none;
-  } */
 
   .ocultar {
     display: inline-flex;

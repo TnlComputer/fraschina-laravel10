@@ -54,7 +54,7 @@ class DistribucionController extends Controller
       ->where('nomfantasia', 'like', '%' . $request->name . '%')
       ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
       ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
-      ->orderBy('nomfantasia', 'asc')
+      // ->orderBy('nomfantasia', 'asc')
       // ->orderBy('nomfantasia', 'asc', 'razonSocial', 'asc',  'clisg', 'asc')
       ->paginate(15);
 
@@ -88,12 +88,12 @@ class DistribucionController extends Controller
       ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
       ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
       ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
+      ->join('AuxContacto as auxCon', 'd.contacto_id', '=', 'auxCon.id')
       ->join('AuxVeraz as auxVez', 'd.veraz_id', '=', 'auxVez.id')
       ->join('AuxEstado as auxEst', 'd.estado_id', '=', 'auxEst.id')
-      ->join('AuxContacto as auxCon', 'd.contacto_id', '=', 'auxCon.id')
       ->join('AuxCobrar as auxCob', 'd.cobrar_id', '=', 'auxCob.id')
-      ->join('AuxPagos as auxPag', 'd.tcobro_id', '=', 'auxPag.id')
-      ->join('AuxTipoPagos as auxTPag', 'd.cobro_id', '=', 'auxTPag.id')
+      ->join('AuxPagos as auxPag', 'd.cobro_id', '=', 'auxPag.id')
+      ->join('AuxTipoPagos as auxTPag', 'd.tcobro_id', '=', 'auxTPag.id')
       ->select(
         'd.clisg_id',
         'd.razonsocial',
@@ -112,8 +112,6 @@ class DistribucionController extends Controller
         'd.id',
         'd.correo',
         'd.auto',
-        'auxVez.estado as veraz',
-        'auxEst.nomEstado as estado',
         'd.desde',
         'd.hasta',
         'd.productCDA',
@@ -123,25 +121,56 @@ class DistribucionController extends Controller
         'd.desde1',
         'd.hasta1',
         'd.obsrecep',
+        'auxCalle.calle as dire_calle',
         'auxB.nombrebarrio as barrio',
+        'auxLoc.localidad as localidad',
         'auxMun.ciudadmunicipio as municipio',
         'auxZon.nombre as zona',
-        'auxLoc.localidad as localidad',
-        'auxCalle.calle as dire_calle',
         'auxCon.contacto as contacto',
+        'auxVez.estado as veraz',
+        'auxEst.nomEstado as estado',
         'auxCob.accion as cobrar',
         'auxPag.nombre as condpago',
         'auxTPag.nombre as tipopago'
+        // 'd.dire_calle_id as dire_calle',
+        // 'd.barrio_id as barrio',
+        // 'd.localidad_id as localidad',
+        // 'd.municipio_id as municipio',
+        // 'd.zona_id as zona',
+        // 'd.contacto_id as contacto',
+        // 'd.veraz_id as veraz',
+        // 'd.estado_id as estado',
+        // 'd.cobrar_id as cobrar',
+        // 'd.cobro_id as condpago',
+        // 'd.tcobro_id as tipopago',
       )
       ->where('d.id', '=', $distribucion->id)
       ->orderBy('nomfantasia', 'asc')
       ->first();
 
     $distribuciones_personal = DB::table('distribucion_personal as dp')
-      ->join('AuxProfesiones as auxProf', 'dp.profesion_id', '=', 'auxProf.id')
       ->join('AuxAreas as auxA', 'dp.area_id', '=', 'auxA.id')
       ->join('AuxCargos as auxCar', 'dp.cargo_id', '=', 'auxCar.id')
-      ->select('dp.nombre', 'dp.apellido', 'dp.teldirecto', 'dp.interno', 'dp.telcelular', 'dp.telparticular', 'dp.email', 'dp.marcas', 'dp.fuera', 'auxA.area as area', 'auxCar.cargo as cargo', 'auxProf.nombreprofesion as profesion', 'dp.id')
+      ->join('AuxProfesiones as auxProf', 'dp.profesion_id', '=', 'auxProf.id')
+      ->select(
+        'dp.id',
+        'dp.distribucion_id',
+        'dp.nombre',
+        'dp.apellido',
+        'dp.teldirecto',
+        'dp.interno',
+        'dp.telcelular',
+        'dp.telparticular',
+        'dp.email',
+        'dp.observaciones',
+        'dp.fuera',
+        'auxA.area as area',
+        'auxCar.cargo as cargo',
+        'auxProf.nombreprofesion as profesion'
+        // 'dp.area_id as area',
+        // 'dp.cargo_id as cargo',
+        // 'dp.profesion_id as profesion',
+      )
       ->where('dp.distribucion_id', '=', $distribucion->id)
       ->paginate(10);
 

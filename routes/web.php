@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
   // AGENDA GENERAL
   Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+  Route::post('/agenda', [AgendaController::class, 'search'])->name('agenda.search');
 
   // TOOLS
   Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
