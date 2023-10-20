@@ -57,6 +57,7 @@ return new class extends Migration
       $table->unsignedBigInteger('cobro_id')->nullable();
       $table->unsignedBigInteger('tcobro_id')->nullable();
       $table->unsignedBigInteger('cobrar_id')->nullable();
+      $table->string('estado', 1)->nullable();
       $table->timestamps();
     });
   }

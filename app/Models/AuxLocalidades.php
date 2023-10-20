@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuxLocalidades extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
+  use HasFactory;
 
+  protected $table = 'auxlocalidades';
+
+  protected $guarded = [];
 }

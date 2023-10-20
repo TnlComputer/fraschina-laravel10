@@ -132,17 +132,6 @@ class DistribucionController extends Controller
         'auxCob.accion as cobrar',
         'auxPag.nombre as condpago',
         'auxTPag.nombre as tipopago'
-        // 'd.dire_calle_id as dire_calle',
-        // 'd.barrio_id as barrio',
-        // 'd.localidad_id as localidad',
-        // 'd.municipio_id as municipio',
-        // 'd.zona_id as zona',
-        // 'd.contacto_id as contacto',
-        // 'd.veraz_id as veraz',
-        // 'd.estado_id as estado',
-        // 'd.cobrar_id as cobrar',
-        // 'd.cobro_id as condpago',
-        // 'd.tcobro_id as tipopago',
       )
       ->where('d.id', '=', $distribucion->id)
       ->orderBy('nomfantasia', 'asc')
@@ -167,9 +156,6 @@ class DistribucionController extends Controller
         'auxA.area as area',
         'auxCar.cargo as cargo',
         'auxProf.nombreprofesion as profesion'
-        // 'dp.area_id as area',
-        // 'dp.cargo_id as cargo',
-        // 'dp.profesion_id as profesion',
       )
       ->where('dp.distribucion_id', '=', $distribucion->id)
       ->paginate(10);
@@ -180,7 +166,7 @@ class DistribucionController extends Controller
       ->where('dpr.distribucion_id', '=', $distribucion->id)
       ->get();
 
-    return view('distribuciones.show', ['distribucion' => $distribucion, 'distribuciones_personal' => $distribuciones_personal, 'productos' => $productos]);
+    return view('distribucion.show', ['distribucion' => $distribucion, 'distribuciones_personal' => $distribuciones_personal, 'productos' => $productos]);
   }
 
   /**

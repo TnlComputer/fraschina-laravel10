@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Molinos;
+use App\Models\Molino;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MolinosController extends Controller
+class MolinoController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    $molinos = Molinos::orderBy('razonsocial', 'ASC')->paginate(15);
+    $molinos = Molino::orderBy('razonsocial', 'ASC')->paginate(15);
     return view('molino.index', compact('molinos'));
   }
 
@@ -45,7 +45,7 @@ class MolinosController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(Molinos $molinos)
+  public function show(Molino $molino)
   {
     //
   }
@@ -53,7 +53,7 @@ class MolinosController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Molinos $molinos)
+  public function edit(Molino $molino)
   {
     //
   }
@@ -61,7 +61,7 @@ class MolinosController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Molinos $molinos)
+  public function update(Request $request, Molino $molino)
   {
     //
   }
@@ -69,7 +69,7 @@ class MolinosController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Molinos $molinos)
+  public function destroy(Molino $molino)
   {
     //
   }

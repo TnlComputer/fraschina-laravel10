@@ -4,6 +4,8 @@
   --table-td: #246355;
   --table-par: #ddd;
   --color-borde: #0f362d;
+  --color-input: #777;
+  --color-input-hover: #999;
 }
 
 body {
@@ -11,6 +13,11 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: verdana;
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
 }
 
 .dist__article {
@@ -52,6 +59,71 @@ body {
 .dist__info {
   background-color: rgb(205, 226, 247);
   width: 100%;
+}
+
+.representacion__form,
+.personal__form {
+  width: 100%;
+  border-radius: 7px;
+}
+
+.representacion__div,
+.personal__div {
+  background-color: var(--table-titulo);
+  color: white;
+  font-size: 1rem;
+  padding: 4px 4px;
+}
+
+.representacion__label,
+.personal__label {
+  font-size: 1rem;
+  padding-left: 4px;
+}
+
+.representacion__input,
+.representacion__input input[type="email"],
+.representacion__input input[type="text"],
+.personal__input,
+.personal__input input[type="email"],
+.personal__input input[type="text"] {
+  width: 100%;
+  color: black;
+  border: 0;
+  border-bottom: 1px var(--table-td) solid;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.representacion__input:hover,
+.personal__input:hover {
+  color: white;
+  background-color: var(--color-input-hover);
+}
+
+.personal__btn {
+  /* display: block; */
+  width: 100%;
+  padding: 20px;
+  background-color: red;
+}
+
+.btn__aceptar {
+  /* display: inline; */
+  /* width: 100px; */
+  margin: 10px auto;
+  padding: 15px 20px;
+  border: solid 1px #222;
+  border-radius: 7px;
+}
+.btn__cancelar {
+  /* display: inline; */
+  /* width: 100px; */
+  margin: 10px auto;
+  padding: 15px 20px;
+  border: solid 1px #222;
+  border-radius: 7px;
 }
 
 .ocultar {
@@ -141,6 +213,10 @@ tr:hover {
 
   .ocultar {
     display: inline-flex;
+  }
+
+  .representacion__form {
+    width: 768px;
   }
 }
 @media screen and (min-width: 1024px) {

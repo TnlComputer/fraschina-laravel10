@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use function Laravel\Prompts\select;
 use App\Models\AuxAreas;
 use App\Models\AuxZonas;
+use App\Models\AuxCargos;
 use App\Models\AuxBarrios;
+use App\Models\AuxProfesion;
+use Illuminate\Http\Request;
 use App\Models\AuxLocalidades;
+use App\Models\AuxMunicipios;
 use App\Models\AuxProfesiones;
 use App\Models\Representacion;
+use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\select;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Representacion_Personal;
 use App\Models\Representacion_Productos;
 
@@ -30,6 +33,7 @@ class RepresentacionController extends Controller
       ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
       ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
       ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
+      ->where('r.estado', '=', 'A')
       ->paginate(15);
     return view('representacion.index', compact('representaciones'));
   }
@@ -81,7 +85,7 @@ class RepresentacionController extends Controller
       ->where('r.id', '=', $representacion->id)
       ->first();
 
-    $representaciones_personal = DB::table('representacion_personal as rp')
+    $representaciones_personales = DB::table('representacion_personal as rp')
       ->join('AuxProfesiones as auxProf', 'rp.profesion_id', '=', 'auxProf.id')
       ->join('AuxAreas as auxA', 'rp.area_id', '=', 'auxA.id')
       ->join('AuxCargos as auxCar', 'rp.cargo_id', '=', 'auxCar.id')
@@ -95,7 +99,7 @@ class RepresentacionController extends Controller
       ->where('rpr.representacion_id', '=', $representacion->id)
       ->get();
 
-    return view('representacion.show', ['represento' => $represento, 'representaciones_personal' => $representaciones_personal, 'productos' => $productos]);
+    return view('representacion.show', ['represento' => $represento, 'representaciones_personales' => $representaciones_personales, 'productos' => $productos]);
   }
 
   /**
@@ -103,7 +107,20 @@ class RepresentacionController extends Controller
    */
   public function edit(Representacion $representacion)
   {
-    //
+    $represento = Representacion::find($representacion->id);
+    $barrios = AuxBarrios::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $zonas = AuxZonas::all();
+    /**
+     * barrio
+     * localidad
+     * municipio
+     * zona
+     * iva
+     */
+
+    return view('representacion.edit', ['represento' => $represento, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
   }
 
   /**
@@ -111,7 +128,8 @@ class RepresentacionController extends Controller
    */
   public function update(Request $request, Representacion $representacion)
   {
-    //
+    $representacion->update($request->all());
+    return redirect()->route('representacion.index');
   }
 
   /**
@@ -119,6 +137,14 @@ class RepresentacionController extends Controller
    */
   public function destroy(Representacion $representacion)
   {
-    //
+    // $representacion->delete();
+    // return redirect()->route('representacion.index')
+    // ->with('danger', 'Cliente Eliminado');
+
+    $representacion = Representacion::findOrFail($representacion->id);
+    $representacion->estado = 'C';
+    $representacion->update();
+    return redirect()->route('representacion.index')
+      ->with('danger', 'Cliente Eliminado');
   }
 }

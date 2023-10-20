@@ -56,8 +56,6 @@
                   <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
                 </form>
               </td>
-
-
             </tr>
             @empty
             <p>No hay registros para mostrar...</p>

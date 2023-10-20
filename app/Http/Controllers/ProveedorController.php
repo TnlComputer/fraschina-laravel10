@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedores;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
-class ProveedoresController extends Controller
+class ProveedorController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    $proveedores = Proveedores::orderBy('razonsocial', 'ASC')->paginate(15);
+    $proveedores = Proveedor::orderBy('razonsocial', 'ASC')->paginate(15);
     return view('proveedor.index', compact('proveedores'));
   }
 
   public function search()
   {
-    $proveedores = Proveedores::orderBy('razonsocial', 'ASC')->paginate(15);
+    $proveedores = Proveedor::orderBy('razonsocial', 'ASC')->paginate(15);
     return view('proveedor.index', compact('proveedores'));
   }
 
@@ -41,7 +41,7 @@ class ProveedoresController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(Proveedores $proveedores)
+  public function show(Proveedor $proveedor)
   {
     //
   }
@@ -49,7 +49,7 @@ class ProveedoresController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Proveedores $proveedores)
+  public function edit(Proveedor $proveedor)
   {
     //
   }
@@ -57,7 +57,7 @@ class ProveedoresController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Proveedores $proveedores)
+  public function update(Request $request, Proveedor $proveedor)
   {
     //
   }
@@ -65,7 +65,7 @@ class ProveedoresController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Proveedores $proveedores)
+  public function destroy(Proveedor $proveedor)
   {
     //
   }

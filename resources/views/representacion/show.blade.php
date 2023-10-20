@@ -54,8 +54,6 @@
       </div>
     </div>
   </div>
-
-
   <div class=" mx-auto sm:px-6 lg:px-8">
     <div class=" bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
       <div class="ocultar w-2/12 p-2 text-gray-900  text-sm float-left">
@@ -84,10 +82,9 @@
               <td></td>
             </tr>
           </thead>
-          @forelse($representaciones_personal as $rp)
+          @forelse($representaciones_personales as $rp)
           <tr class=" text-gray-900 text-xs align-text-top ">
             <td class="ocultar">
-
               <a href="{{ route('representacion_personal.edit', $rp->id) }}">
                 <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
               </a>
@@ -109,7 +106,6 @@
             <td data-titulo="Area">{{ $rp->area }}</td>
             <td data-titulo="Cargo">{{ $rp->cargo }}</td>
             <td data-titulo="Obsercaciones">{{ $rp->observaciones }}</td>
-
             <td class="ocultar">
               <form method="POST" action="{{ route('representacion_personal.destroy', $rp->id) }}">
                 @csrf
@@ -121,7 +117,7 @@
           @empty
           <p>No hay registros para mostrar...</p>
           @endforelse
-          {{ $representaciones_personal->links() }}
+          {{ $representaciones_personales->links() }}
         </table>
       </div>
     </div>
