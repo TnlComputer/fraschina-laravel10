@@ -72,8 +72,12 @@ class RepresentacionPersonalController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(Representacion_Personal $personal)
   {
-    //
+    $producto =
+      Representacion_Personal::findOrFail($personal->id);
+    $personal->status = 'C';
+    $personal->update();
+    return redirect()->route('representacion.show', ['representacion' => $personal->representacion_id])->with('danger', 'Producto del Cliente Representación Eliminado');
   }
 }

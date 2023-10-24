@@ -23,35 +23,31 @@ class RepresentacionController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
     // $user = Auth::user();
 
-    $representaciones = DB::table('representacions as r')
-      ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
-      ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
-      ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
-      ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
-      ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
-      ->where('r.estado', '=', 'A')
-      ->paginate(15);
-    return view('representacion.index', compact('representaciones'));
-  }
-
-  /**
-   * Search a list of registered
-   */
-  public function search(Request $request)
-  {
-    $representaciones = DB::table('representacions as r')
-      ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
-      ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
-      ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
-      ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
-      ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
-      ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
-      ->paginate(15);
-
+    $name = trim($request->get('name'));
+    if ($name) {
+      $representaciones = DB::table('representacions as r')
+        ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
+        ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
+        ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
+        ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
+        ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
+        ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
+        ->orWhere('marcas', 'like', '%' . $request->name . '%')
+        ->paginate(15);
+    } else {
+      $representaciones = DB::table('representacions as r')
+        ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
+        ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
+        ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
+        ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
+        ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
+        ->where('r.status', '=', 'A')
+        ->paginate(15);
+    }
     return view('representacion.index', compact('representaciones'));
   }
 
@@ -60,6 +56,12 @@ class RepresentacionController extends Controller
    */
   public function create()
   {
+    $barrios = AuxBarrios::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $zonas = AuxZonas::all();
+
+    return view('representacion.create', ['barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
     //
   }
 
@@ -68,7 +70,7 @@ class RepresentacionController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    return ('store true');
   }
 
   /**
@@ -91,12 +93,15 @@ class RepresentacionController extends Controller
       ->join('AuxCargos as auxCar', 'rp.cargo_id', '=', 'auxCar.id')
       ->select('rp.nombre', 'rp.apellido', 'rp.teldirecto', 'rp.interno', 'rp.telcelular', 'rp.telparticular', 'rp.email', 'rp.observaciones', 'rp.fuera', 'auxA.area as area', 'auxCar.cargo as cargo', 'auxProf.nombreprofesion as profesion', 'rp.id')
       ->where('rp.representacion_id', '=', $representacion->id)
+      ->where('rp.status', '=', 'A')
+
       ->paginate(10);
 
     $productos =  DB::table('representacion_productos as rpr')
       ->join('AuxProductosRepresentacion as auxProd', 'rpr.producto_id', '=', 'auxProd.id')
       ->select('auxProd.nombre as producto', 'rpr.pl', 'rpr.p', 'rpr.l', 'rpr.w', 'rpr.glutenhumedo', 'rpr.glutenseco', 'rpr.cenizas', 'rpr.fn', 'rpr.humedad', 'rpr.estabilidad', 'rpr.absorcion', 'rpr.puntuaciones', 'rpr.particularidades', 'rpr.id')
       ->where('rpr.representacion_id', '=', $representacion->id)
+      ->where('rpr.status', '=', 'A')
       ->get();
 
     return view('representacion.show', ['represento' => $represento, 'representaciones_personales' => $representaciones_personales, 'productos' => $productos]);
@@ -112,13 +117,6 @@ class RepresentacionController extends Controller
     $localidades = AuxLocalidades::all();
     $municipios = AuxMunicipios::all();
     $zonas = AuxZonas::all();
-    /**
-     * barrio
-     * localidad
-     * municipio
-     * zona
-     * iva
-     */
 
     return view('representacion.edit', ['represento' => $represento, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
   }
@@ -137,12 +135,8 @@ class RepresentacionController extends Controller
    */
   public function destroy(Representacion $representacion)
   {
-    // $representacion->delete();
-    // return redirect()->route('representacion.index')
-    // ->with('danger', 'Cliente Eliminado');
-
     $representacion = Representacion::findOrFail($representacion->id);
-    $representacion->estado = 'C';
+    $representacion->status = 'C';
     $representacion->update();
     return redirect()->route('representacion.index')
       ->with('danger', 'Cliente Eliminado');

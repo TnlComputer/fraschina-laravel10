@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
   <div class="py-4 max-w-full mx-auto sm:px-6 lg:px-8">
-    <div class="bg-slate-200 overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="overflow-hidden shadow-sm sm:rounded-lg">
       <div class="p-2 text-white rounded-sm text-sm text-left">
         <table>
           <thead>
@@ -55,9 +55,9 @@
     </div>
   </div>
   <div class=" mx-auto sm:px-6 lg:px-8">
-    <div class=" bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
-      <div class="ocultar w-2/12 p-2 text-gray-900  text-sm float-left">
-        <a href="{{ route('representacion_producto.create') }}" class=" align-middle text-left">
+    <div class="overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="w-2/12 p-2 text-gray-900  text-sm float-left">
+        <a href="{{ route('representacion_personal.create') }}" class=" align-middle text-left">
           <button class="p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo Contacto</button></a>
       </div>
       <div class=" w-10/12 p-2 text-gray-900  text-sm float">
@@ -70,7 +70,7 @@
               <td></td>
               <td></td>
               <th>Nombre y Apellido</th>
-              <th>Tel Directo</th>
+              <th>Directo</th>
               <th>Int</th>
               <th>Celular</th>
               <th>Teléfono</th>
@@ -86,14 +86,17 @@
           <tr class=" text-gray-900 text-xs align-text-top ">
             <td class="ocultar">
               <a href="{{ route('representacion_personal.edit', $rp->id) }}">
-                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
+                <i class="fa-regular fa-pen-to-square fa-sm icon-edit"></i>
+
               </a>
             </td>
             <td>
               @if($rp->fuera === 1)
-              <i class="fas fa-circle fa-xs" style="color: #ff0000;"></i>
+              <i class="fas fa-circle icon-fuera"></i>
               @else
-              <i class="fas fa-circle fa-xs" style="color: #00ff33;"></i>
+              <i class="fas fa-circle icon-fuera1"></i>
+
+
               @endif
             </td>
             <td data-titulo="Nombre y Apellido"> {{ $rp->nombre }} {{ $rp->apellido }}</td>
@@ -110,7 +113,7 @@
               <form method="POST" action="{{ route('representacion_personal.destroy', $rp->id) }}">
                 @csrf
                 @method(' DELETE')
-                <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
+                <button type="submit"><i class='fa-solid fa-trash icon-delete'></i> </button>
               </form>
             </td>
           </tr>
@@ -136,16 +139,16 @@
       <div>
         <table>
           <thead>
-            <tr class=" bg-black text-white">
+            <tr class="bg-black text-white">
               <th colspan="2"></th>
               <th colspan="4">Alveográficas</th>
               <th colspan="5">Físico Químico</th>
-              <th colspan="5">Farinográfina</th>
+              <th colspan="4">Farinográfina</th>
               <th></th>
             </tr>
           </thead>
           <thead>
-            <tr>
+            <tr class="text-xs">
               <th></th>
               <th class="text-left ">Producto</th>
               <th class="">PL</th>
@@ -166,10 +169,9 @@
           </thead>
           @forelse($productos as $p)
           <tr class="text-gray-900 text-xs  align-text-top">
-
-            <td class="ocultar">
+            <td>
               <a href="{{ route('representacion_producto.edit', $p->id) }}">
-                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
+                <i class="fa-regular fa-pen-to-square icon-edit"></i>
               </a>
             </td>
             <td class=" text-left" data-titulo="Producto"> {{ $p->producto }}</td>
@@ -186,19 +188,17 @@
             <td class="" data-titulo="Absorción">{{ $p->absorcion }}</td>
             <td class="" data-titulo="Puntuaciones">{{ $p->puntuaciones }}</td>
             <td class="text-left" data-titulo="Particularidades">{{ $p->particularidades }}</td>
-            <td class="ocultar">
-
+            <td>
               <form method="POST" action="{{ route('representacion_producto.destroy', $p->id) }}">
                 @csrf
                 @method(' DELETE')
-                <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
+                <button type="submit"><i class='fa-solid fa-trash icon-delete'></i> </button>
               </form>
             </td>
           </tr>
           @empty
           <p>No hay Productos...</p>
           @endforelse
-          {{-- {{ $productos->links() }} --}}
         </table>
       </div>
     </div>

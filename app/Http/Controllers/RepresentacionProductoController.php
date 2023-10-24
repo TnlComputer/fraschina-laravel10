@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Representacion_Producto;
 use Illuminate\Http\Request;
+use App\Models\Representacion_Producto;
+use App\Models\AuxProductosRepresentacion;
 
 class RepresentacionProductoController extends Controller
 {
@@ -45,25 +46,35 @@ class RepresentacionProductoController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Request $request)
+  public function edit(string $id)
   {
-    //
-    return view("Representacion_Producto");
+    $producto = Representacion_Producto::find($id);
+    $repProd = AuxProductosRepresentacion::all();
+
+    return view("representacion.producto.edit", ['producto' => $producto, 'repProd' => $repProd]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request)
+  public function update(Request $request, Representacion_Producto $producto)
   {
-    //
+    $producto->update($request->all());
+    return redirect()->route(
+      'representacion.show',
+      ['representacion' => $producto->representacion_id]
+    )->with('success', 'Actualizado con exito');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Request $request)
+  public function destroy(Representacion_Producto $producto)
   {
-    //
+    $producto =
+      Representacion_Producto::findOrFail($producto->id);
+    $producto->status = 'C';
+    $producto->update();
+    return redirect()->route('representacion.show', ['representacion' => $producto->representacion_id])->with('danger', 'Producto del Cliente Representación Eliminado');
   }
 }

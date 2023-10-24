@@ -14,8 +14,8 @@
               @method('put')
               <div class="representacion__div">
                 <label class="representacion__label" for="razonsocial">Razón social</label>
-                <input class="representacion__input" type="text" value="{{ $represento->razonsocial }}" placeholder="" required>
-                <input type="hidden" name="id" value="{{ $represento->id }}">
+                <input class="representacion__input" type="text" name="razonsocial" id="razonsocial" value="{{ $represento->razonsocial }}" placeholder="" required>
+                <input type="hidden" name="id" id="id" value="{{ $represento->id }}">
               </div>
 
               <div class=" representacion__div">
@@ -50,7 +50,7 @@
               <div class="representacion__div">
 
                 <label class="representacion__label" for="barrio_id">Barrio</label>
-                <select name="barrio_id" id="barrio_id" class="representacion__input">
+                <select class="representacion__input" name="barrio_id" id="barrio_id">
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}" {{ $represento->barrio_id == $barrio->id ? 'selected' : '' }}>{{ $barrio->nombrebarrio  }}
                   </option>
@@ -60,7 +60,7 @@
 
               <div class="representacion__div">
                 <label class="representacion__label" for="localidad_id">Localidad</label>
-                <select name="localidad_id" id="localidad_id" class="representacion__input">
+                <select class="representacion__input" name="localidad_id" id="localidad_id">
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}" {{ $represento->localidad_id == $localidad->id ? 'selected' : '' }}>{{ $localidad->localidad  }}
                   </option>
@@ -71,7 +71,7 @@
               <div class="representacion__div">
 
                 <label class="representacion__label" for="municipio_id">Municipio</label>
-                <select name="municipio_id" id="municipio_id" class="representacion__input">
+                <select class="representacion__input" name="municipio_id" id="municipio_id">
                   @foreach ($municipios as $municipio)
                   <option value="{{ $municipio->id }}" {{ $represento->municipio_id == $municipio->id ? 'selected' : '' }}>{{ $municipio->ciudadmunicipio  }}
                   </option>
@@ -81,9 +81,7 @@
 
               <div class="representacion__div">
                 <label class="representacion__label" for="zona_id">Zona</label>
-                <select name="zona_id" id="zona_id" class="representacion__input">
-                  @foreach ($zonas as $zona)
-                  <option value="{{ $zona->id }}" {{ $represento->zona_id == $zona->id ? 'selected' : '' }}>{{ $zona->nombre  }}
+                <select class="representacion__input" name="zona_id" id="zona_id" @foreach ($zonas as $zona) <option value="{{ $zona->id }}" {{ $represento->zona_id == $zona->id ? 'selected' : '' }}>{{ $zona->nombre  }}
                   </option>
                   @endforeach
                 </select>
@@ -106,16 +104,29 @@
               <div class="representacion__div">
 
                 <label class="representacion__label" for="info">Información</label>
-                <textarea class="representacion__input" name="info" id="info" cols="60" rows="6">"{{ $represento->info }}"></textarea>
+                <textarea class="representacion__input" name="info" id="info" cols="60" rows="10">{{ $represento->info }}</textarea>
               </div>
 
-              <div class="personal_btn">
-                <input type="submit" class="btn__aceptar" value="Aceptar">
-                <a href="{{ URL::route('representacion.index'); }}" class="btn__cancelar">Cancelar</a>
+              <div class="personal__btn">
+                <div class="btn__aceptar">
+                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                </div>
+
+                <div class="btn__reset">
+                  <input class="btn__reset" type="reset" value="Restaurar">
+                </div>
+
+                <div class="btn__cancelar">
+                  <form action="{{ URL::route('representacion.index') }}">
+                    <input class=" btn__aceptar" type="submit" value="Cancelar">
+                  </form>
+                </div>
+                {{-- </div> --}}
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </x-app-layout>

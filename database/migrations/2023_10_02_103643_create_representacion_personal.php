@@ -27,6 +27,7 @@ return new class extends Migration
       $table->string('email')->nullable();
       $table->longText('observaciones')->nullable();
       $table->boolean('fuera')->nullable();
+      $table->string('status', 1)->nullable();
       $table->timestamps();
     });
   }

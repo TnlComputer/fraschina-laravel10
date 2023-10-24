@@ -8,15 +8,23 @@
     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-2 text-gray-900 text-left text-xs">
-          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
-            <a href="{{ route('distribucion.create') }}">
-              <button class="p-2 bg-gray-700 text-white sm:rounded-lg rounded-lg" type="button">Nuevo Distribución</button>
-            </a>
-            <form method="post" action="{{  route('distribucion.search') }}" class="px-6">
-              @csrf
-              <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
-              <button type="submit" class="p-2 bg-gray-700 text-white rounded-lg">Buscar</button>
-            </form>
+          <div class="barra__index">
+            <div class="div__nuevo">
+              <form action="{{  route('distribucion.create') }}">
+                <input class="btn__nuevo" type="submit" value="Nueva Distribución">
+              </form>
+            </div>
+            <div class="div__buscar">
+              <form method="get" action="{{  route('distribucion.index') }}" class="form__buscar">
+                @csrf
+                <span class="span__input-buscar">
+                  <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}" class="input__buscar">
+                </span>
+                <span class="span__btn-buscar">
+                  <input type="submit" value="Buscar" class="btn__buscar">
+                </span>
+              </form>
+            </div>
           </div>
           <table>
             {{-- <tr class=" bg-black text-white text-left"> --}}

@@ -5,7 +5,14 @@
   --table-par: #ddd;
   --color-borde: #0f362d;
   --color-input: #777;
-  --color-input-hover: #999;
+  --color-input-hover: #c2c0c0;
+  --color-icon-edit: #042461;
+  --color-icon-edit-hover: #fff;
+  --color-icon-view: #151616;
+  --color-icon-view-hover: #fff;
+  --color-icon-delete: #ff0000;
+  --color-icon-delete-hover: #fff;
+  --color-icon-fuera1: #246355;
 }
 
 body {
@@ -61,6 +68,31 @@ textarea {
   width: 100%;
 }
 
+.icon-edit {
+  color: var(--color-icon-edit);
+  font-size: 1rem;
+}
+
+.icon-delete {
+  color: var(--color-icon-delete);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.icon-view {
+  color: var(--color-icon-view);
+  font-size: 1rem;
+}
+
+.icon-fuera {
+  color: var(--color-icon-delete);
+  text-align: center;
+}
+.icon-fuera1 {
+  color: var(--color-icon-fuera1);
+  text-align: center;
+}
+
 .representacion__form,
 .personal__form {
   width: 100%;
@@ -70,15 +102,18 @@ textarea {
 .representacion__div,
 .personal__div {
   background-color: var(--table-titulo);
-  color: white;
+  /* color: white; */
   font-size: 1rem;
   padding: 4px 4px;
 }
 
 .representacion__label,
 .personal__label {
+  /* min-width: 100%; */
+  font-weight: bold;
   font-size: 1rem;
   padding-left: 4px;
+  /* border-bottom: solid 5px var(--color-borde); */
 }
 
 .representacion__input,
@@ -96,39 +131,145 @@ textarea {
   border-radius: 5px;
 }
 
+.icon-edit:hover {
+  color: var(--color-icon-edit-hover);
+}
+
+.icon-delete:hover {
+  color: var(--color-icon-delete-hover);
+}
+
+.icon-view:hover {
+  color: var(--color-icon-view-hover);
+}
+
 .representacion__input:hover,
 .personal__input:hover {
-  color: white;
+  /* color: white; */
   background-color: var(--color-input-hover);
 }
 
+/* Boton Nuevo y Buscar */
+.barra__index {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 340 px;
+
+  margin-bottom: 1em;
+}
+
+.div__nuevo {
+  width: 150px;
+  background-color: #444;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.div__nuevo input[type="submit"] {
+  text-align: center;
+}
+
+.div__buscar {
+  width: 300px;
+  border: 2px solid #000;
+  border-radius: 25px;
+  color: white;
+  /* text-align: center; */
+}
+
+.span__input-buscar {
+  width: 300px;
+  border: none;
+  border-radius: 25px 0 0 25px;
+}
+
+.span__input-buscar input[type="text"] {
+  /* width: 300px; */
+  border: none;
+  border-radius: 25px 0 0 25px;
+  color: #444;
+  cursor: pointer;
+}
+
+.span__btn-buscar {
+  width: 40px;
+  /* height: 100%; */
+  padding-left: 4px;
+  /* background-color: #000; */
+  /* background-color: #fff; */
+  border-radius: 0 25px 25px 0;
+  align-items: end;
+}
+
+.span__btn-buscar input[type="submit"] {
+  /* border-radius: 0 25px 25px 0; */
+  cursor: pointer;
+  color: #000;
+}
+
+/* Fin Boton Nuevo y Buscar */
+
+/* botones  edicion */
 .personal__btn {
-  /* display: block; */
-  width: 100%;
-  padding: 20px;
-  background-color: red;
+  width: 340px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.btn__aceptar,
+.btn__reset,
+.btn__cancelar {
+  margin: 0;
+  width: 85px;
+  border: transparent 1px #222;
+  border-radius: 7px;
+  cursor: pointer;
 }
 
 .btn__aceptar {
-  /* display: inline; */
-  /* width: 100px; */
-  margin: 10px auto;
-  padding: 15px 20px;
-  border: solid 1px #222;
-  border-radius: 7px;
-}
-.btn__cancelar {
-  /* display: inline; */
-  /* width: 100px; */
-  margin: 10px auto;
-  padding: 15px 20px;
-  border: solid 1px #222;
-  border-radius: 7px;
+  height: 30px;
+  background-color: green;
+  color: white;
 }
 
-.ocultar {
-  display: none;
+.btn__reset {
+  height: 30px;
+  background-color: yellow;
 }
+
+.btn__cancelar {
+  height: 30px;
+  background-color: red;
+  color: white;
+}
+
+.btn__aceptar:hover {
+  height: 30px;
+  background-color: #999;
+  color: rgb(1, 48, 1);
+}
+
+.btn__reset:hover {
+  height: 30px;
+  background-color: #444;
+  color: yellow;
+}
+
+.btn__cancelar:hover {
+  height: 30px;
+  background-color: #999;
+  color: red;
+}
+/* fin botones edicion */
 
 table {
   background-color: white;
@@ -187,6 +328,10 @@ tr:hover {
   .dist__p {
     font-size: 1rem;
   }
+
+  .personal__btn {
+    width: 460px;
+  }
 }
 
 @media screen and (min-width: 640px) {
@@ -205,19 +350,35 @@ tr:hover {
   .dist__title {
     color: red;
   }
+
+  .barra__index {
+    /* display: fllex; */
+    flex-direction: row;
+
+    /* align-items: center;
+    justify-content: space-between; */
+  }
+
+  /* .btn__nuevo {
+    display: flex;
+  } */
+
+  .personal__btn {
+    width: 500px;
+  }
 }
 @media screen and (min-width: 768px) {
   .dist__title {
     color: red;
   }
 
-  .ocultar {
-    display: inline-flex;
+  /* .personal__btn {
+    width: 750px;
   }
 
   .representacion__form {
     width: 768px;
-  }
+  } */
 }
 @media screen and (min-width: 1024px) {
   .dist__article-col1,
@@ -230,9 +391,9 @@ tr:hover {
     color: brown;
   }
 
-  .ocultar {
+  /* .ocultar {
     display: inline-flex;
-  }
+  } */
 }
 @media screen and (min-width: 1220px) {
   .dist__title {

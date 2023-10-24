@@ -11,40 +11,34 @@ class AgendaController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-    $agendas = Agenda::paginate(15);
-    return view('agenda.index', compact('agendas'));
-  }
-
-
-  /**
-   * Search a list of registered
-   */
-  public function search(Request $request)
-  {
-
-    $agendas = DB::table('agendas as ag')
-      ->select(
-        'ag.nombre',
-        'ag.apellido',
-        'ag.empresa_institucion',
-        'ag.profesion_especialidad_oficio',
-        'ag.cod_prof',
-        'ag.tel_particular',
-        'ag.tel_laboral',
-        'ag.interno',
-        'ag.celular',
-        'ag.mail',
-        'ag.direccion',
-        'ag.observaciones',
-      )
-      ->where('nombre', 'like', '%' . $request->name . '%')
-      ->orWhere('apellido', 'like', '%' . $request->name . '%')
-      ->orWhere('empresa_institucion', 'like', '%' . $request->name . '%')
-      ->orWhere('profesion_especialidad_oficio', 'like', '%' . $request->name . '%')
-      ->paginate(15);
-
+    $name = trim($request->get('name'));
+    if ($name) {
+      $agendas = DB::table('agendas as ag')
+        ->select(
+          'ag.nombre',
+          'ag.apellido',
+          'ag.empresa_institucion',
+          'ag.profesion_especialidad_oficio',
+          'ag.cod_prof',
+          'ag.tel_particular',
+          'ag.tel_laboral',
+          'ag.interno',
+          'ag.celular',
+          'ag.mail',
+          'ag.direccion',
+          'ag.observaciones',
+          'ag.id',
+        )
+        ->where('nombre', 'like', '%' . $request->name . '%')
+        ->orWhere('apellido', 'like', '%' . $request->name . '%')
+        ->orWhere('empresa_institucion', 'like', '%' . $request->name . '%')
+        ->orWhere('profesion_especialidad_oficio', 'like', '%' . $request->name . '%')
+        ->paginate(15);
+    } else {
+      $agendas = Agenda::paginate(15);
+    }
     return view('agenda.index', compact('agendas'));
   }
 

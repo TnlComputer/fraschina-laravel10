@@ -13,8 +13,8 @@ class ToolsController extends Controller
   public function index()
   {
     //
-    $tools = Tools::all();
-    return view('Tools');
+    // $tools = Tools::all();
+    return view('tools.index');
   }
 
   /**

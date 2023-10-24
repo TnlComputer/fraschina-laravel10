@@ -8,17 +8,29 @@
     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-2 text-gray-900 text-left text-xs">
-          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
-            <a class="ocultar" href="{{ route('molino.create') }}">
-              <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo Molino</button>
-            </a>
-            <form method="post" action="{{  route('molino.search') }}" class="px-6">
-              @csrf
-              <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}">
-              <button type="submit" class="p-2 bg-gray-700 text-white sm:rounded-lg">Buscar</button>
-            </form>
+          <div class="barra__index">
+
+            <div class="div__nuevo">
+              <form action="{{  route('molino.create') }}">
+                <input class="btn__nuevo" type="submit" value="Nueva Molino">
+              </form>
+            </div>
+
+            <div class="div__buscar">
+              <form method="get" action="{{  route('molino.index') }}" class="form__buscar">
+                @csrf
+                <span class="span__input-buscar">
+                  <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}" class="input__buscar">
+                </span>
+
+                <span class="span__btn-buscar">
+                  <input type="submit" value="Buscar" class="btn__buscar">
+                </span>
+              </form>
+            </div>
           </div>
           <table>
+
             <thead>
               <tr>
                 <th></th>

@@ -37,7 +37,7 @@ return new class extends Migration
       $table->datetime('fechagira')->nullable();
       $table->string('correo')->nullable();
       $table->string('dpto', 4)->nullable();
-      $table->string('estado', 1)->nullable();
+      $table->string('status', 1)->nullable();
       $table->timestamps();
     });
   }

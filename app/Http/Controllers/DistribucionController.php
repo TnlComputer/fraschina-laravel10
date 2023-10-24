@@ -24,40 +24,31 @@ class DistribucionController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-    // $distribuciones = Distribucion::orderBy('razonsocial', 'ASC')->paginate(15);
-
-    $distribuciones = DB::table('distribucions as d')
-      ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
-      ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
-      ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
-      ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
-      ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
-      ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
-      ->paginate(15);
-    return view('distribucion.index', compact('distribuciones'));
-  }
-
-  /**
-   * Search a list of registered
-   */
-  public function search(Request $request)
-  {
-    $distribuciones = DB::table('distribucions as d')
-      ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
-      ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
-      ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
-      ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
-      ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
-      ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
-      ->where('nomfantasia', 'like', '%' . $request->name . '%')
-      ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
-      ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
-      // ->orderBy('nomfantasia', 'asc')
-      // ->orderBy('nomfantasia', 'asc', 'razonSocial', 'asc',  'clisg', 'asc')
-      ->paginate(15);
-
+    $name = trim($request->get('name'));
+    if ($name) {
+      $distribuciones = DB::table('distribucions as d')
+        ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
+        ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
+        ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
+        ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
+        ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
+        ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+        ->where('nomfantasia', 'like', '%' . $request->name . '%')
+        ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
+        ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
+        ->paginate(15);
+    } else {
+      $distribuciones = DB::table('distribucions as d')
+        ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
+        ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
+        ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
+        ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
+        ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
+        ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+        ->paginate(15);
+    }
     return view('distribucion.index', compact('distribuciones'));
   }
 
@@ -174,7 +165,17 @@ class DistribucionController extends Controller
    */
   public function edit(Distribucion $distribucion)
   {
-    //
+
+    $distribucion = Distribucion::find($distribucion->id);
+    $barrios = AuxBarrios::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $zonas = AuxZonas::all();
+
+    return view('distribucion.edit', ['distribucion' => $distribucion, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
+
+    // $distribucion->update($request->all());
+    // return redirect()->route('distribucion.index');
   }
 
   /**
@@ -182,7 +183,9 @@ class DistribucionController extends Controller
    */
   public function update(Request $request, Distribucion $distribucion)
   {
-    //
+    $distribucion->update($request->all());
+    return redirect()->route('distribucion.index');
+
   }
 
   /**
@@ -190,6 +193,10 @@ class DistribucionController extends Controller
    */
   public function destroy(Distribucion $distribucion)
   {
-    //
+    $distribucion = Distribucion::findOrFail($distribucion->id);
+    $distribucion->status = 'C';
+    $distribucion->update();
+    return redirect()->route('distribucion.index')
+      ->with('danger', 'Cliente Distribucion Eliminado');
   }
 }
