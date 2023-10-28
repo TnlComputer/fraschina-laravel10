@@ -9,9 +9,15 @@
       <div class="p-2 ounded-sm text-sm text-left">
         <article class="dist__article">
           <div class="dist__article-col1">
+            <label class="dist__title">N. Fantasía</label>
+            <p class="dist__p"> {{ $distribucion->nomfantasia }}</p>
+          </div>
+
+          <div class="dist__article-col1">
             <label class="dist__title">Razón social</label>
             <p class="dist__p"> {{ $distribucion->razonsocial }}</p>
           </div>
+
           <div class="dist__article-col1">
             <label class="dist__title">Dirección</label>
             <p class="dist__p"> {{ $distribucion->dire_calle }} {{ $distribucion->dire_nro }} @if($distribucion->piso != '')
@@ -24,10 +30,6 @@
               - ({{ $distribucion->codpost }})
               @endif
             </p>
-          </div>
-          <div class="dist__article-col1">
-            <label class="dist__title">Teléfono</label>
-            <p class="dist__p">{{ $distribucion->telefono }} </p>
           </div>
           <div class="dist__article-col1">
             <label class="dist__title">Barrio</label>
@@ -46,6 +48,10 @@
             <p class="dist__p">{{ $distribucion->zona }} </p>
           </div>
           <div class="dist__article-col1">
+            <label class="dist__title">Teléfono</label>
+            <p class="dist__p">{{ $distribucion->telefono }} </p>
+          </div>
+          <div class="dist__article-col1">
             <label class="dist__title">Cuit</label>
             <p class="dist__p">{{ $distribucion->cuit }} </p>
           </div>
@@ -61,9 +67,7 @@
             <label class="dist__title">Contacto Inicial</label>
             <p class="dist__p">{{ $distribucion->contacto }} </p>
           </div>
-          {{-- </article>
 
-        <article class="dist__article2"> --}}
           <div class="dist__article-col2">
             <label class="dist__title">Automatizado</label>
             <p class="dist__p">{{ $distribucion->auto }} </p>
@@ -94,7 +98,7 @@
           </div>
           <div class="dist__article-col2">
             <label class="dist__title">Productos</label>
-            <p class="dist__p">{{ $distribucion->productCDA }} </p>
+            <p class="dist__p">{{ $distribucion->productoCDA }} </p>
           </div>
           <div class="dist__article-col2">
             <label class="dist__title">Lunes Cerrado</label>
@@ -135,55 +139,51 @@
     </div>
   </div>
 
-
   <div class=" mx-auto sm:px-6 lg:px-8">
-    <div class=" bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
-      <div class="ocultar p-2 text-gray-900  text-sm float-left">
-        <a href="{{ route('distribucion_producto.create') }}" class=" align-middle text-left">
-          <button class="ocultar p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo Contacto</button></a>
+    <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-2 text-gray-900  text-sm float-left">
+        <a href="{{ route('distribucion_personal.show', $distribucion->id) }}" class=" align-middle text-left">
+          <button class="p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo</button></a>
       </div>
-
-      <div class="p-2 text-gray-900  text-sm float">
-
-        <h3 class="dist__titulo">Contactos</h3>
+      {{-- </div> --}}
+      <div class=" p-2 text-gray-900  text-sm float">
+        <h3 class="text-2xl text-center">Contactos</h3>
       </div>
       <div class="p-2 text-gray-900  text-sm text-left ">
         <table>
           <thead>
-            <tr class="">
+            <tr>
               <td></td>
               <td></td>
-              <th class="w-2/12">Nombre y Apellido</th>
-              <td></td>
-              <th class="w-1/12">Tel Directo</th>
-              <th class="w-1/12">Int</th>
-              <th class="w-1/12">Celular</th>
-              <th class="w-1/12">Teléfono</th>
-              <th class="w-1/12">Email</th>
-              <th class="w-1/12">Profesión</th>
-              <th class="w-1/12">Area</th>
-              <th class="w-1/12">Cargo</th>
-              <th class="w-1/12">Información</th>
+              <th>Nombre y Apellido</th>
+              <th>Tel Directo</th>
+              <th>Int</th>
+              <th>Celular</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Profesión</th>
+              <th>Area</th>
+              <th>Cargo</th>
+              <th>Información</th>
               <td></td>
             </tr>
           </thead>
 
-          @forelse($distribuciones_personal as $distPer)
+          @forelse($personal as $distPer)
           <tr class="text-gray-900 text-xs align-text-top ">
             <td>
               <a href="{{ route('distribucion_personal.edit', $distPer->id) }}">
-                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
+                <i class="fa-regular fa-pen-to-square icon-edit"></i>
               </a>
             </td>
-            <td></td>
-            <td data-titulo="Nombre Apellido"> {{ $distPer->nombre }} {{ $distPer->apellido }}</td>
             <td>
               @if($distPer->fuera === 1)
-              <i class="fas fa-circle fa-xs" style="color: #ff0000;"></i>
+              <i class="fas fa-circle fa-xs icon-fuera1"></i>
               @else
-              <i class="fas fa-circle fa-xs" style="color: #00ff33;"></i>
+              <i class="fas fa-circle fa-xs icon-fuera"></i>
               @endif
             </td>
+            <td data-titulo="Nombre Apellido"> {{ $distPer->nombre }} {{ $distPer->apellido }}</td>
             <td data-titulo="Directo">{{ $distPer->teldirecto }}</td>
             <td data-titulo="Interno">{{ $distPer->interno }}</td>
             <td data-titulo="Celular">{{ $distPer->telcelular }}</td>
@@ -195,17 +195,17 @@
             <td data-titulo="Observaciones">{{ $distPer->observaciones }}</td>
 
             <td>
-              <form method=" POST" action="{{ route('distribucion_personal.destroy', $distPer->id) }}">
+              <form method="POST" action="{{ route('distribucion_personal.destroy', $distPer->id) }}">
                 @csrf
                 @method(' DELETE')
-                <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
+                <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
               </form>
             </td>
           </tr>
           @empty
           <p>No hay registros para mostrar...</p>
           @endforelse
-          {{ $distribuciones_personal->links() }}
+          {{ $personal->links() }}
         </table>
       </div>
     </div>
@@ -214,13 +214,10 @@
   <div class="py-4 mx-auto sm:px-6 lg:px-8">
     <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg">
       <div class="ocultar p-2 text-gray-900  text-sm">
-        <a href="{{ route('distribucion_producto.create') }}" class="align-middle text-left">
+        <a href="{{ route('distribucion_producto.show', $distribucion->id) }}" class="align-middle text-left">
           <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo Producto</button>
         </a>
       </div>
-      {{-- <div class=" w-10/12 p-2 text-gray-900  text-sm float">
-        <h3 class="text-2xl text-center">Especificaciones</h3>
-      </div> --}}
       <div class="p-2 text-gray-900  text-sm text-left">
         <table>
           <thead>
@@ -238,28 +235,26 @@
           <tr>
             <td>
               <a href="{{ route('distribucion_producto.edit', $p->id) }}">
-                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #0059ff;"></i>
+                <i class="fa-regular fa-pen-to-square icon-edit"></i>
               </a>
             </td>
             <td data-titulo="Producto"> {{ $p->nomproducto }}</td>
             <td data-titulo="Precio">{{ $p->precio }}</td>
             <td data-titulo="Fecha">{{ $p->fecha }}</td>
             <td data-titulo="Fecha Ult. Entrega">{{ $p->fechaUEnt }}</td>
-            <td class="ocultar">
+            <td>
               <form method="POST" action="{{ route('distribucion_producto.destroy', $p->id) }}">
                 @csrf
                 @method(' DELETE')
-                <button type="submit"><i class='fa-solid fa-trash fa-sm' style="color: #ff0000;"></i> </button>
+                <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
               </form>
             </td>
           </tr>
           @empty
           <p>No hay Productos...</p>
           @endforelse
-          {{-- {{ $productos->links() }} --}}
         </table>
       </div>
     </div>
-  </div>
   </div>
 </x-app-layout>

@@ -12,7 +12,7 @@
           <div class="barra__index">
             <div class="div__nuevo">
               <form action="{{  route('transporte.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nueva Transporte">
+                <input class="btn__nuevo" type="submit" value="Nuevo">
               </form>
             </div>
             <div class="div__buscar">
@@ -43,12 +43,14 @@
             <tr>
               <td>
                 <a href="{{ route('transporte.show', $transporte->id) }}" class="">
-                  <i class="fa-regular fa-eye fa-md"></i>
+                  <i class="fa-regular fa-eye icon-view"></i>
+
                 </a>
               </td>
               <td>
                 <a href="{{ route('transporte.edit', $transporte->id) }}" class="ocultar ">
-                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                  <i class="fa-regular fa-pen-to-square icon-edit"></i>
+
                 </a>
               </td>
               <td>{{ $transporte->razonsocial }}</td>

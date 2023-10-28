@@ -13,22 +13,24 @@ return new class extends Migration
   {
     Schema::create('representacion_personal', function (Blueprint $table) {
       $table->id();
-      $table->string('nombre')->nullable();
-      $table->string('apellido')->nullable();
+      $table->string('nombre', 150)->nullable();
+      $table->string('apellido', 150)->nullable();
       $table->unsignedBigInteger('representacion_id')->nullable();
       $table->unsignedBigInteger('area_id')->nullable();
       $table->unsignedBigInteger('cargo_id')->nullable();
       $table->unsignedBigInteger('categoriacargo_id')->nullable();
-      $table->string('teldirecto')->nullable();
-      $table->string('interno')->nullable();
-      $table->string('telcelular')->nullable();
+      $table->string('teldirecto', 50)->nullable();
+      $table->string('interno', 4)->nullable();
+      $table->string('telcelular', 50)->nullable();
       $table->unsignedBigInteger('profesion_id')->nullable();
-      $table->string('telparticular')->nullable();
-      $table->string('email')->nullable();
+      $table->string('telparticular', 50)->nullable();
+      $table->string('email', 150)->nullable();
       $table->longText('observaciones')->nullable();
-      $table->boolean('fuera')->nullable();
+      $table->boolean('fuera', 1)->nullable();
       $table->string('status', 1)->nullable();
       $table->timestamps();
+
+      // $table->foreign('representacion_id')->references('id')->on('representacions')->onDelete('cascade');
     });
   }
 

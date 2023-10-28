@@ -16,82 +16,84 @@
               <label>Razón social</label>
               <input type="text" value="{{ $represento->razonsocial }}" placeholder="" required>
             </div>
+
+            <div class="representacion__div">
+              <label>Dirección</label>
+              <input type="text" value="{{ $represento->empresa_institucion }}" placeholder="" required>
+            </div>
+
+            <div class="representacion__div">
+              <label>Dirección</label>
+              <input type="text" value="{{ $represento->profesion }}" placeholder="" required>
+            </div>
+
             <div class="representacion__div">
               <label>Dirección</label>
               <input type="text" value="{{ $represento->dire_calle }}" placeholder="" required>
             </div>
-            <div class="representacion__div">
 
-              <label for="">Numeración</label>
-              <input type="text" value="{{ $represento->dire_nro }}" placeholder="" required>
-            </div>
             <div class="representacion__div">
-
               <label for="">Altura</label>
               <input type="text" value="{{ $represento->dire_nro }}" placeholder="" required>
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label for="">Piso</label>
               <input type="text" value="{{ $represento->piso }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label for="">Dpto</label>
               <input type="text" value="{{ $represento->dpto }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Cod.Post</label>
               <input type="text" value="{{ $represento->codpost }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Telefono</label>
               <input type="text" value="{{ $represento->telefono }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Barrio</label>
               <input type="text" value="{{ $represento->barrio_id }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Localidad</label>
               <input type="text" value="{{ $represento->localidad_id }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Zona</label>
               <input type="text" value="{{ $represento->zona_id }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Cuit</label>
               <input type="text" value="{{ $represento->cuit }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Email</label>
               <input type="text" value="{{ $represento->email }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Marcas</label>
               <input type="text" value="{{ $represento->marcas }}">
             </div>
-            <div class="representacion__div">
 
+            <div class="representacion__div">
               <label>Información</label>
               <textarea name="" id="" cols="60" rows="5">"{{ $represento->info }}"></textarea>
             </div>
-            {{-- <div class="representacion__div">
-            <label>Comentarios</label>
-            <input type="text" value="{{ $represento->comentarios }}">
-        </div> --}}
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </x-app-layout>

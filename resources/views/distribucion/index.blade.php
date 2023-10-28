@@ -11,7 +11,7 @@
           <div class="barra__index">
             <div class="div__nuevo">
               <form action="{{  route('distribucion.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nueva Distribución">
+                <input class="btn__nuevo" type="submit" value="Nuevo">
               </form>
             </div>
             <div class="div__buscar">
@@ -50,12 +50,14 @@
             <tr>
               <td>
                 <a href="{{ route('distribucion.show', $distribucion->id) }}" class="">
-                  <i class="fa-regular fa-eye fa-md"></i>
+                  <i class="fa-regular fa-eye icon-view"></i>
+
                 </a>
               </td>
               <td>
                 <a href="{{ route('distribucion.edit', $distribucion->id) }}" class="ocultar ">
-                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                  <i class="fa-regular fa-pen-to-square icon-edit"></i>
+
                 </a>
               </td>
 
@@ -87,7 +89,8 @@
                 <form method="POST" action="{{ route('distribucion.destroy', $distribucion->id) }}" class="ocultar">
                   @csrf
                   @method(' DELETE')
-                  <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                  <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
+
                 </form>
               </td>
             </tr>

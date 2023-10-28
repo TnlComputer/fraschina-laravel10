@@ -56,14 +56,14 @@
   </div>
   <div class=" mx-auto sm:px-6 lg:px-8">
     <div class="overflow-hidden shadow-sm sm:rounded-lg">
-      <div class="w-2/12 p-2 text-gray-900  text-sm float-left">
-        <a href="{{ route('representacion_personal.create') }}" class=" align-middle text-left">
-          <button class="p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo Contacto</button></a>
+      <div class="p-2 text-gray-900  text-sm float-left">
+        <a href="{{ route('representacion_personal.show', $represento->id) }}" class=" align-middle text-left">
+          <button class="p-2 bg-gray-800 text-white sm:rounded-lg" type="button">Nuevo</button></a>
       </div>
-      <div class=" w-10/12 p-2 text-gray-900  text-sm float">
+      <div class="p-2 text-gray-900  text-sm float">
         <h3 class="text-2xl text-center">Contactos</h3>
       </div>
-      <div>
+      <div class="p-2 text-gray-900  text-sm text-left ">
         <table>
           <thead>
             <tr>
@@ -128,12 +128,12 @@
 
   <div class="py-4 mx-auto sm:px-6 lg:px-8">
     <div class=" overflow-hidden shadow-sm sm:rounded-lg">
-      <div class="ocultar w-2/12 p-2 text-gray-900  text-sm float-left">
-        <a href="{{ route('representacion_producto.create') }}" class=" align-middle text-left">
+      <div class="p-2 text-gray-900  text-sm float-left">
+        <a href="{{ route('representacion_producto.show', $represento->id) }}" class=" align-middle text-left">
           <button class="p-2 bg-gray-700 text-white sm:rounded-lg" type="button">Nuevo Producto</button>
         </a>
       </div>
-      <div class=" w-10/12 p-2 text-gray-900  text-sm float">
+      <div class="p-2 text-gray-900  text-sm float">
         <h3 class="text-2xl text-center">Especificaciones</h3>
       </div>
       <div>

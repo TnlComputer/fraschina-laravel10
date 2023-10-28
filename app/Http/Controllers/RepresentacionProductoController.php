@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Representacion;
 use App\Models\Representacion_Producto;
 use App\Models\AuxProductosRepresentacion;
 
@@ -13,11 +14,8 @@ class RepresentacionProductoController extends Controller
    */
   public function index()
   {
-    // $user = Auth::user();
-    // $repreProduto = Representacion_Producto::all();
-    // return view("Representacion_Produto.index", compact($repreProduto));
+    //
   }
-
 
   /**
    * Show the form for creating a new resource.
@@ -32,15 +30,19 @@ class RepresentacionProductoController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    Representacion_Producto::create($request->all());
+    return redirect()->route('representacion.show', ['representacion' => $request->representacion_id])->with('success', 'Alta realizada con exito');
   }
 
   /**
    * Display the specified resource.
    */
-  public function show(Request $request)
+  public function show(string $id)
   {
-    //
+    // $producto = Representacion_Producto::find($id)->first();
+    $repProd = AuxProductosRepresentacion::all();
+
+    return view("representacion.producto.create", ['producto' => $id, 'repProd' => $repProd]);
   }
 
   /**
@@ -50,7 +52,6 @@ class RepresentacionProductoController extends Controller
   {
     $producto = Representacion_Producto::find($id);
     $repProd = AuxProductosRepresentacion::all();
-
     return view("representacion.producto.edit", ['producto' => $producto, 'repProd' => $repProd]);
   }
 
@@ -71,10 +72,9 @@ class RepresentacionProductoController extends Controller
    */
   public function destroy(Representacion_Producto $producto)
   {
-    $producto =
-      Representacion_Producto::findOrFail($producto->id);
+    $producto = Representacion_Producto::findOrFail($producto->id);
     $producto->status = 'C';
     $producto->update();
-    return redirect()->route('representacion.show', ['representacion' => $producto->representacion_id])->with('danger', 'Producto del Cliente Representación Eliminado');
+    return redirect()->route('representacion.show', ['representacion' => $producto->representacion_id])->with('danger', 'Producto Eliminado');
   }
 }

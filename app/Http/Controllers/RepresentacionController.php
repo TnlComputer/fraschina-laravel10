@@ -70,7 +70,9 @@ class RepresentacionController extends Controller
    */
   public function store(Request $request)
   {
-    return ('store true');
+    Representacion::create($request->all());
+    return view('representacion.index')->with('success', 'Alta Representación realizada con exito');
+    // return redirect()->route('representacion.index')->with('success', 'Alta Representació realizada con exito');
   }
 
   /**
@@ -91,7 +93,7 @@ class RepresentacionController extends Controller
       ->join('AuxProfesiones as auxProf', 'rp.profesion_id', '=', 'auxProf.id')
       ->join('AuxAreas as auxA', 'rp.area_id', '=', 'auxA.id')
       ->join('AuxCargos as auxCar', 'rp.cargo_id', '=', 'auxCar.id')
-      ->select('rp.nombre', 'rp.apellido', 'rp.teldirecto', 'rp.interno', 'rp.telcelular', 'rp.telparticular', 'rp.email', 'rp.observaciones', 'rp.fuera', 'auxA.area as area', 'auxCar.cargo as cargo', 'auxProf.nombreprofesion as profesion', 'rp.id')
+      ->select('rp.nombre', 'rp.apellido', 'rp.teldirecto', 'rp.interno', 'rp.telcelular', 'rp.telparticular', 'rp.email', 'rp.observaciones', 'rp.fuera', 'auxA.area as area', 'auxCar.cargo as cargo', 'auxProf.nombreprofesion as profesion', 'rp.id', 'rp.representacion_id')
       ->where('rp.representacion_id', '=', $representacion->id)
       ->where('rp.status', '=', 'A')
 
@@ -99,7 +101,7 @@ class RepresentacionController extends Controller
 
     $productos =  DB::table('representacion_productos as rpr')
       ->join('AuxProductosRepresentacion as auxProd', 'rpr.producto_id', '=', 'auxProd.id')
-      ->select('auxProd.nombre as producto', 'rpr.pl', 'rpr.p', 'rpr.l', 'rpr.w', 'rpr.glutenhumedo', 'rpr.glutenseco', 'rpr.cenizas', 'rpr.fn', 'rpr.humedad', 'rpr.estabilidad', 'rpr.absorcion', 'rpr.puntuaciones', 'rpr.particularidades', 'rpr.id')
+      ->select('auxProd.nombre as producto', 'rpr.pl', 'rpr.p', 'rpr.l', 'rpr.w', 'rpr.glutenhumedo', 'rpr.glutenseco', 'rpr.cenizas', 'rpr.fn', 'rpr.humedad', 'rpr.estabilidad', 'rpr.absorcion', 'rpr.puntuaciones', 'rpr.particularidades', 'rpr.id', 'rpr.representacion_id')
       ->where('rpr.representacion_id', '=', $representacion->id)
       ->where('rpr.status', '=', 'A')
       ->get();

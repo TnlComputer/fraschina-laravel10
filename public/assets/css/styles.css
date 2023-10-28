@@ -12,7 +12,8 @@
   --color-icon-view-hover: #fff;
   --color-icon-delete: #ff0000;
   --color-icon-delete-hover: #fff;
-  --color-icon-fuera1: #246355;
+  --color-icon-fuera: #246355;
+  --color-icon-fuera1: #ff0000;
 }
 
 body {
@@ -85,21 +86,22 @@ textarea {
 }
 
 .icon-fuera {
-  color: var(--color-icon-delete);
+  color: var(--color-icon-fuera);
   text-align: center;
 }
+
 .icon-fuera1 {
   color: var(--color-icon-fuera1);
   text-align: center;
 }
 
-.representacion__form,
+.card__form,
 .personal__form {
   width: 100%;
   border-radius: 7px;
 }
 
-.representacion__div,
+.card__div,
 .personal__div {
   background-color: var(--table-titulo);
   /* color: white; */
@@ -107,7 +109,7 @@ textarea {
   padding: 4px 4px;
 }
 
-.representacion__label,
+.card__label,
 .personal__label {
   /* min-width: 100%; */
   font-weight: bold;
@@ -116,9 +118,9 @@ textarea {
   /* border-bottom: solid 5px var(--color-borde); */
 }
 
-.representacion__input,
-.representacion__input input[type="email"],
-.representacion__input input[type="text"],
+.card__input,
+.card__input input[type="email"],
+.card__input input[type="text"],
 .personal__input,
 .personal__input input[type="email"],
 .personal__input input[type="text"] {
@@ -160,7 +162,7 @@ textarea {
 }
 
 .div__nuevo {
-  width: 150px;
+  width: 55px;
   background-color: #444;
   margin-bottom: 10px;
   padding: 10px;

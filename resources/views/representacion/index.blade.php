@@ -11,7 +11,7 @@
           <div class="barra__index">
             <div class="div__nuevo">
               <form action="{{  route('representacion.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nueva Representación">
+                <input class="btn__nuevo" type="submit" value="Nuevo">
               </form>
             </div>
             <div class="div__buscar">
@@ -48,7 +48,8 @@
             <tr>
               <td>
                 <a href="{{ route('representacion.show', $representacion->id) }}" class="">
-                  <i class="fa-regular fa-eye fa-md"></i>
+                  <i class="fa-regular fa-eye icon-view"></i>
+
                 </a>
               </td>
               <td>
@@ -87,7 +88,8 @@
                 {{-- <form method="POST" action="{{ route('representacion.destroy', $representacion->id) }}" class="ocultar">
                 @csrf
                 @method(' DELETE')
-                <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
+
                 </form> --}}
               </td>
             </tr>
@@ -101,37 +103,37 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modal-{{ $representacion->id }}" tabindex="-1" aria-labelledby="representacionModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="modal-{{ $representacion->id }}" tabindex="-1" aria-labelledby="representacionModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
-      <form action="{{ route('representacion.destroy', $representacion->id) }}" method="post">
-        @csrf
-        @method('DELETE')
-        <div class="modal-content bg-danger">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="representacionModalLabel">Eliminar cliente</h1>
+  <div class="modal-dialog">
+    <form action="{{ route('representacion.destroy', $representacion->id) }}" method="post">
+      @csrf
+      @method('DELETE')
+      <div class="modal-content bg-danger">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="representacionModalLabel">Eliminar cliente</h1>
 
 
-            {{-- <h4 class="modal-title">Eliminar cliente</h4> --}}
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Desea eliminar el cliente {{ $representacion->id }} - {{ $representacion->razonsocial }}</p>
-
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-
-          {{-- <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button> --}}
-          <button type="submit" class="btn btn-outline-light">Eliminar</button>
+          <h4 class="modal-title">Eliminar cliente</h4>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-    </div>
-    </form>
+        <div class="modal-body">
+          <p>Desea eliminar el cliente {{ $representacion->id }} - {{ $representacion->razonsocial }}</p>
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-outline-light">Eliminar</button>
+      </div>
   </div>
+  </form>
   </div>
+  </div> --}}
 
 
 </x-app-layout>

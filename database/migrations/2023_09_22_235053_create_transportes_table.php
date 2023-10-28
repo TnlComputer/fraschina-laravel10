@@ -27,9 +27,9 @@ return new class extends Migration
       $table->string('excenciones', 50)->nullable();
       $table->unsignedBigInteger('barrio_id')->nullable();
       $table->longText('info')->nullable();
-      $table->string('correo')->nullable();
+      $table->string('correo', 150)->nullable();
       $table->unsignedBigInteger('municipio_id')->nullable();
-      $table->string('marcas', 255)->nullable();
+      $table->string('marcas', 200)->nullable();
       $table->string('status', 1)->nullable();
       $table->timestamps();
     });

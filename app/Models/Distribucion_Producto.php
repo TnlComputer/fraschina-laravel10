@@ -9,5 +9,7 @@ class Distribucion_Producto extends Model
 {
   use HasFactory;
 
+  protected $table = 'distribucion_productos';
+
   protected $guarded = [];
 }

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuxVeraz extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
+  use HasFactory;
 
+  protected $table = 'auxveraz';
+  protected $guarded = [];
 }

@@ -12,7 +12,7 @@
           <div class="barra__index">
             <div class="div__nuevo">
               <form action="{{  route('agro.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nueva Agro">
+                <input class="btn__nuevo" type="submit" value="Nuevo">
               </form>
             </div>
             <div class="div__buscar">
@@ -35,19 +35,23 @@
                 <th>Razón social</th>
                 <th colspan="4">Dirección</th>
                 <th>Cod.Post</th>
+                <th>Barrio</th>
+                <th>Municipio</th>
+                <th>Localidad</th>
                 <th>Telefono</th>
+                <th></th>
               </tr>
             </thead>
             @forelse($agros as $agro)
             <tr>
               <td>
                 <a href="{{ route('agro.show', $agro->id) }}" class="">
-                  <i class="fa-regular fa-eye fa-md"></i>
+                  <i class="fa-regular fa-eye icon-view"></i>
                 </a>
               </td>
               <td>
                 <a href="{{ route('agro.edit', $agro->id) }}" class="ocultar ">
-                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                  <i class="fa-regular fa-pen-to-square icon-edit"></i>
                 </a>
               </td>
               <td>{{ $agro->razonsocial }}</td>
@@ -56,12 +60,16 @@
               <td>{{ $agro->piso }}</td>
               <td>{{ $agro->dpto }}</td>
               <td>{{ $agro->codpost }}</td>
+              <td>{{ $agro->barrio }}</td>
+              <td>{{ $agro->municipio }}</td>
+              <td>{{ $agro->localidad }}</td>
               <td>{{ $agro->telefono }}</td>
+
               <td>
                 <form method="POST" action="{{ route('agro.destroy', $agro->id) }}" class="ocultar">
                   @csrf
                   @method(' DELETE')
-                  <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                  <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
                 </form>
               </td>
             </tr>

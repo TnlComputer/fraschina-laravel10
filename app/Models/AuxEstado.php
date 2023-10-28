@@ -9,5 +9,7 @@ class AuxEstado extends Model
 {
   use HasFactory;
 
+  protected $table = 'auxestado';
+
   protected $guarded = [];
 }

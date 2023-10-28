@@ -33,7 +33,11 @@ class RepresentacionPersonalController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    Representacion_Personal::create($request->all());
+    return redirect()->route(
+      'representacion.show',
+      ['representacion' => $request->representacion_id]
+    )->with('success', 'Alta de Personal realizada con exito');
   }
 
   /**
@@ -41,7 +45,12 @@ class RepresentacionPersonalController extends Controller
    */
   public function show(string $id)
   {
-    //
+    $represento = Representacion::find($id);
+    $areas = AuxAreas::all();
+    $cargos = AuxCargos::all();
+    $profesiones = AuxProfesion::all();
+
+    return view('representacion.personal.create',  ['representacion' => $represento, 'areas' => $areas, 'profesiones' => $profesiones, 'cargos' => $cargos]);
   }
 
   /**
@@ -74,10 +83,9 @@ class RepresentacionPersonalController extends Controller
    */
   public function destroy(Representacion_Personal $personal)
   {
-    $producto =
-      Representacion_Personal::findOrFail($personal->id);
-    $personal->status = 'C';
-    $personal->update();
-    return redirect()->route('representacion.show', ['representacion' => $personal->representacion_id])->with('danger', 'Producto del Cliente Representación Eliminado');
+    $rp = Representacion_Personal::findOrFail($personal->id);
+    $rp->status = 'C';
+    $rp->update();
+    return redirect()->route('representacion.show', ['representacion' => $rp->representacion_id])->with('danger', 'Contacto Eliminado');
   }
 }

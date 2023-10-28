@@ -53,7 +53,7 @@ return new class extends Migration
       $table->time('desde1')->nullable();
       $table->time('hasta1')->nullable();
       $table->string('auto', 2)->nullable();
-      $table->string('productCDA', 200)->nullable();
+      $table->string('productoCDA', 200)->nullable();
       $table->unsignedBigInteger('cobro_id')->nullable();
       $table->unsignedBigInteger('tcobro_id')->nullable();
       $table->unsignedBigInteger('cobrar_id')->nullable();

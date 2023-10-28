@@ -9,5 +9,7 @@ class AuxCalles extends Model
 {
   use HasFactory;
 
+  protected $table = 'auxcalles';
+
   protected $guarded = [];
 }

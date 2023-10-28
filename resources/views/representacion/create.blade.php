@@ -9,50 +9,47 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-2 text-gray-900 text-left ">
           <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
-            <form action="{{ route('representacion.store') }}" method="post" class="representacion__form" enctype="multipart/form-data">
-
-
-              {{-- <form action="" method="post" class="representacion__form"> --}}
+            <form action="{{ route('representacion.store') }}" method="post" class="card__form" enctype="multipart/form-data">
               @csrf
-              <div class="representacion__div">
-                <label class="representacion__label" for="razonsocial">Razón social</label>
-                <input class="representacion__input" type="text" value="" placeholder="" required>
+              <div class="card__div">
+                <label class="card__label" for="razonsocial">Razón social</label>
+                <input class="card__input" type="text" name="name" id="name" value="" placeholder="" required>
                 <input type="hidden" name="id">
               </div>
 
-              <div class=" representacion__div">
-                <label class="representacion__label" for="dire_calle">Dirección</label>
-                <input class="representacion__input" type="text" name="dire_calle" id="dire_calle" value="" placeholder="" required>
+              <div class="card__div">
+                <label class="card__label" for="dire_calle">Dirección</label>
+                <input class="card__input" type="text" name="dire_calle" id="dire_calle" value="" placeholder="" required>
               </div>
 
-              <div class="representacion__div">
-                <label class="representacion__label" for="dire_nro">Altura</label>
-                <input class="representacion__input" type="number" name="dire_nro" id="dire_nro" value="" placeholder="" required>
+              <div class="card__div">
+                <label class="card__label" for="dire_nro">Altura</label>
+                <input class="card__input" type="number" name="dire_nro" id="dire_nro" value="" placeholder="" required>
               </div>
 
-              <div class="representacion__div">
-                <label class="representacion__label" for="piso">Piso</label>
-                <input class="representacion__input" type="text" name="piso" id="piso" value="">
+              <div class="card__div">
+                <label class="card__label" for="piso">Piso</label>
+                <input class="card__input" type="text" name="piso" id="piso" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="dpto">Dpto</label>
-                <input class="representacion__input" type="text" name="dpto" id="dpto" value="">
+              <div class="card__div">
+                <label class="card__label" for="dpto">Dpto</label>
+                <input class="card__input" type="text" name="dpto" id="dpto" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="codpost">Cod.Post</label>
-                <input class="representacion__input" type="text" name="codpost" id="codpost" value="">
+              <div class="card__div">
+                <label class="card__label" for="codpost">Cod.Post</label>
+                <input class="card__input" type="text" name="codpost" id="codpost" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="telefono">Telefono</label>
-                <input class="representacion__input" type="text" name="telefono" id="telefono" value="">
+              <div class="card__div">
+                <label class="card__label" for="telefono">Telefono</label>
+                <input class="card__input" type="text" name="telefono" id="telefono" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="barrio_id">Barrio</label>
-                <select name="barrio_id" id="barrio_id" class="representacion__input">
+              <div class="card__div">
+                <label class="card__label" for="barrio_id">Barrio</label>
+                <select name="barrio_id" id="barrio_id" class="card__input">
                   <option value="144">Seleccione un barrio</option>
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}">{{ $barrio->nombrebarrio  }}
@@ -61,9 +58,9 @@
                 </select>
               </div>
 
-              <div class="representacion__div">
-                <label class="representacion__label" for="localidad_id">Localidad</label>
-                <select name="localidad_id" id="localidad_id" class="representacion__input">
+              <div class="card__div">
+                <label class="card__label" for="localidad_id">Localidad</label>
+                <select name="localidad_id" id="localidad_id" class="card__input">
                   <option value="111">Seleccione una localidad</option>
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}">{{ $localidad->localidad  }}
@@ -72,10 +69,9 @@
                 </select>
               </div>
 
-              <div class="representacion__div">
-
-                <label class="representacion__label" for="municipio_id">Municipio</label>
-                <select name="municipio_id" id="municipio_id" class="representacion__input">
+              <div class="card__div">
+                <label class="card__label" for="municipio_id">Municipio</label>
+                <select name="municipio_id" id="municipio_id" class="card__input">
                   <option value="23">Seleccione una ciudad o municipio</option>
                   @foreach ($municipios as $municipio)
                   <option value="{{ $municipio->id }}">{{ $municipio->ciudadmunicipio  }}
@@ -84,9 +80,9 @@
                 </select>
               </div>
 
-              <div class="representacion__div">
-                <label class="representacion__label" for="zona_id">Zona</label>
-                <select name="zona_id" id="zona_id" class="representacion__input" required>
+              <div class="card__div">
+                <label class="card__label" for="zona_id">Zona</label>
+                <select name="zona_id" id="zona_id" class="card__input" required>
                   <option value="6">Seleccione una zona</option>
                   @foreach ($zonas as $zona)
                   <option value="{{ $zona->id }}">{{ $zona->nombre  }}
@@ -94,25 +90,25 @@
                   @endforeach
                 </select>
               </div>
-              <div class="representacion__div">
+              <div class="card__div">
 
-                <label class="representacion__label" for="cuit">Cuit</label>
-                <input class="representacion__input" type="text" name="cuit" id="cuit" value="">
+                <label class="card__label" for="cuit">Cuit</label>
+                <input class="card__input" type="text" name="cuit" id="cuit" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="correo">Email</label>
-                <input class="representacion__input" type="email" name="correo" id="correo" value="">
+              <div class="card__div">
+                <label class="card__label" for="correo">Email</label>
+                <input class="card__input" type="email" name="correo" id="correo" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="marcas">Marcas</label>
-                <input class="representacion__input" type="text" name="marcas" id="marcas" value="">
+              <div class="card__div">
+                <label class="card__label" for="marcas">Marcas</label>
+                <input class="card__input" type="text" name="marcas" id="marcas" value="">
               </div>
-              <div class="representacion__div">
 
-                <label class="representacion__label" for="info">Información</label>
-                <textarea class="representacion__input" name="info" id="info" cols="60" rows="10"></textarea>
+              <div class="card__div">
+                <label class="card__label" for="info">Información</label>
+                <textarea class="card__input" name="info" id="info" cols="60" rows="10"></textarea>
               </div>
 
               <div class="personal__btn">

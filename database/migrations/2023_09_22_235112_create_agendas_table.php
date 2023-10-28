@@ -13,12 +13,12 @@ return new class extends Migration
   {
     Schema::create('agendas', function (Blueprint $table) {
       $table->id();
-      $table->string('nombre')->nullable();
-      $table->string('apellido')->nullable();
-      $table->string('nomApe')->nullable();
+      $table->string('nombre', 100)->nullable();
+      $table->string('apellido', 100)->nullable();
+      $table->string('nomApe', 200)->nullable();
       $table->string('empresa_institucion')->nullable();
       $table->string('profesion_especialidad_oficio')->nullable();
-      $table->string('cod_prof', 4)->nullable();
+      $table->unsignedBigInteger('cod_prof')->nullable();
       $table->string('tel_particular', 100)->nullable();
       $table->string('tel_laboral', 100)->nullable();
       $table->string('interno', 20)->nullable();

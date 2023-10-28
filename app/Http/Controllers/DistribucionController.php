@@ -35,6 +35,7 @@ class DistribucionController extends Controller
         ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
         ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+        ->where('d.status', '=', 'A')
         ->where('nomfantasia', 'like', '%' . $request->name . '%')
         ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
         ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
@@ -47,6 +48,7 @@ class DistribucionController extends Controller
         ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
         ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+        ->where('d.status', '=', 'A')
         ->paginate(15);
     }
     return view('distribucion.index', compact('distribuciones'));
@@ -57,7 +59,19 @@ class DistribucionController extends Controller
    */
   public function create()
   {
-    //
+    $barrios = AuxBarrios::all();
+    $calles = AuxCalles::all();
+    $contactos = AuxContacto::all();
+    $cobrar = AuxCobrar::all();
+    $conpagos = AuxPagos::all();
+    $tipopagos = AuxTipoPagos::all();
+    $estados = AuxEstado::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $veraz = AuxVeraz::all();
+    $zonas = AuxZonas::all();
+
+    return view('distribucion.create', ['calles' => $calles, 'estados' => $estados, 'contactos' => $contactos, 'cobrar' => $cobrar, 'conpagos' => $conpagos, 'tipopagos' => $tipopagos, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'veraz' => $veraz,  'zonas' => $zonas]);
   }
 
   /**
@@ -65,7 +79,19 @@ class DistribucionController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    Distribucion::create($request->all());
+
+    $distribuciones = DB::table('distribucions as d')
+      ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
+      ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
+      ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
+      ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
+      ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
+      ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+      ->where('d.status', '=', 'A')
+      ->paginate(15);
+
+    return view('distribucion.index', compact('distribuciones'))->with('success', 'Alta Distribución realizada con exito');
   }
 
   /**
@@ -105,7 +131,7 @@ class DistribucionController extends Controller
         'd.auto',
         'd.desde',
         'd.hasta',
-        'd.productCDA',
+        'd.productoCDA',
         'd.lunes',
         'd.sabado',
         'd.fac_imp',
@@ -124,6 +150,7 @@ class DistribucionController extends Controller
         'auxPag.nombre as condpago',
         'auxTPag.nombre as tipopago'
       )
+      ->where('d.status', '=', 'A')
       ->where('d.id', '=', $distribucion->id)
       ->orderBy('nomfantasia', 'asc')
       ->first();
@@ -148,16 +175,18 @@ class DistribucionController extends Controller
         'auxCar.cargo as cargo',
         'auxProf.nombreprofesion as profesion'
       )
+      ->where('dp.status', '=', 'A')
       ->where('dp.distribucion_id', '=', $distribucion->id)
       ->paginate(10);
 
     $productos =  DB::table('distribucion_productos as dpr')
-      ->join('AuxProductosdistribucion as auxProd', 'dpr.producto_id', '=', 'auxProd.id')
-      ->select('dpr.precio', 'dpr.fecha', 'dpr.nomproducto', 'dpr.fechaUEnt', 'dpr.id')
+      ->join('productos_c_d_a as PrCDA', 'dpr.producto_id', '=', 'PrCDA.id')
+      ->select('dpr.precio', 'dpr.fecha', 'PrCDA.productoCDA as nomproducto', 'dpr.fechaUEnt', 'dpr.id')
+      ->where('dpr.status', '=', 'A')
       ->where('dpr.distribucion_id', '=', $distribucion->id)
       ->get();
 
-    return view('distribucion.show', ['distribucion' => $distribucion, 'distribuciones_personal' => $distribuciones_personal, 'productos' => $productos]);
+    return view('distribucion.show', ['distribucion' => $distribucion, 'personal' => $distribuciones_personal, 'productos' => $productos]);
   }
 
   /**
@@ -165,17 +194,20 @@ class DistribucionController extends Controller
    */
   public function edit(Distribucion $distribucion)
   {
-
     $distribucion = Distribucion::find($distribucion->id);
     $barrios = AuxBarrios::all();
+    $calles = AuxCalles::all();
+    $contactos = AuxContacto::all();
+    $cobrar = AuxCobrar::all();
+    $conpagos = AuxPagos::all();
+    $tipopagos = AuxTipoPagos::all();
+    $estados = AuxEstado::all();
     $localidades = AuxLocalidades::all();
     $municipios = AuxMunicipios::all();
+    $veraz = AuxVeraz::all();
     $zonas = AuxZonas::all();
 
-    return view('distribucion.edit', ['distribucion' => $distribucion, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
-
-    // $distribucion->update($request->all());
-    // return redirect()->route('distribucion.index');
+    return view('distribucion.edit', ['distribucion' => $distribucion, 'calles' => $calles, 'estados' => $estados, 'contactos' => $contactos, 'cobrar' => $cobrar, 'conpagos' => $conpagos, 'tipopagos' => $tipopagos, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'veraz' => $veraz,  'zonas' => $zonas]);
   }
 
   /**
@@ -185,7 +217,6 @@ class DistribucionController extends Controller
   {
     $distribucion->update($request->all());
     return redirect()->route('distribucion.index');
-
   }
 
   /**

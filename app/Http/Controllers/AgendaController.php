@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\AuxProfesion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,11 +17,12 @@ class AgendaController extends Controller
     $name = trim($request->get('name'));
     if ($name) {
       $agendas = DB::table('agendas as ag')
+        ->join('AuxProfesiones as auxProf', 'ag.cod_prof', '=', 'auxProf.id')
         ->select(
           'ag.nombre',
           'ag.apellido',
           'ag.empresa_institucion',
-          'ag.profesion_especialidad_oficio',
+          // 'ag.profesion_especialidad_oficio',
           'ag.cod_prof',
           'ag.tel_particular',
           'ag.tel_laboral',
@@ -30,14 +32,17 @@ class AgendaController extends Controller
           'ag.direccion',
           'ag.observaciones',
           'ag.id',
+          'auxProf.nomprefesion as profesion_especialidad_oficio'
         )
-        ->where('nombre', 'like', '%' . $request->name . '%')
-        ->orWhere('apellido', 'like', '%' . $request->name . '%')
-        ->orWhere('empresa_institucion', 'like', '%' . $request->name . '%')
-        ->orWhere('profesion_especialidad_oficio', 'like', '%' . $request->name . '%')
+        ->where('ag.status', '=', 'A')
+        ->where('auxProf.agendas|=', 'SI')
+        ->where('ag.nombre', 'like', '%' . $request->name . '%')
+        ->orWhere('ag.apellido', 'like', '%' . $request->name . '%')
+        ->orWhere('ag.empresa_institucion', 'like', '%' . $request->name . '%')
+        ->orWhere('auxProf.nomprefesion', 'like', '%' . $request->name . '%')
         ->paginate(15);
     } else {
-      $agendas = Agenda::paginate(15);
+      $agendas = Agenda::where('status', '=', 'A')->paginate(15);
     }
     return view('agenda.index', compact('agendas'));
   }
@@ -47,7 +52,11 @@ class AgendaController extends Controller
    */
   public function create()
   {
-    //
+    $profesiones = DB::table('auxprofesiones as auxProf')
+      ->where('auxProf.agendas', '=', 'SI')
+      ->get();
+    // $profesiones = AuxProfesion::all();
+    return view('agenda.create', ['profesiones' => $profesiones]);
   }
 
   /**
@@ -87,6 +96,10 @@ class AgendaController extends Controller
    */
   public function destroy(Agenda $agenda)
   {
-    //
+    $agenda = Agenda::findOrFail($agenda->id);
+    $agenda->status = 'C';
+    $agenda->update();
+    return redirect()->route('agenda.index')
+      ->with('danger', 'Contacto Eliminado');
   }
 }

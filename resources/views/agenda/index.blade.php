@@ -11,7 +11,7 @@
           <div class="barra__index">
             <div class="div__nuevo">
               <form action="{{  route('agenda.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nuevo Contacot">
+                <input class="btn__nuevo" type="submit" value="Nuevo">
               </form>
             </div>
             <div class="div__buscar">
@@ -26,7 +26,6 @@
               </form>
             </div>
           </div>
-
           <table>
             <thead>
               <tr>
@@ -48,7 +47,7 @@
             <tr class=" text-xs">
               <td>
                 <a href="{{ route('agenda.edit', $agenda->id) }}" class="ocultar ">
-                  <i class="fa-regular fa-pen-to-square fa-md" style="color: #13b60d;"></i>
+                  <i class="fa-regular fa-pen-to-square icon-edit"></i>
                 </a>
               </td>
               <td data-titulo="Nombre Apellido">{{ $agenda->nombre }} {{ $agenda->apellido }}</td>
@@ -65,7 +64,7 @@
                 <form method="POST" action="{{ route('agenda.destroy', $agenda->id) }}" class="ocultar">
                   @csrf
                   @method(' DELETE')
-                  <button type="submit"><i class='fa-solid fa-trash fa-md' style="color: #ff0000;"></i> </button>
+                  <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
                 </form>
               </td>
             </tr>

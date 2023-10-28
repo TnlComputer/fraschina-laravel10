@@ -9,5 +9,7 @@ class Transporte extends Model
 {
   use HasFactory;
 
+  protected $table = 'transportes';
+
   protected $guarded = [];
 }
