@@ -23,9 +23,15 @@ class RepresentacionPersonalController extends Controller
   /**
    * Show the form for creating a new resource.
    */
+  // public function create(string $id)
   public function create()
   {
-    //
+    // $personal = Representacion_Personal::find($id);
+    // $areas = AuxAreas::all();
+    // $cargos = AuxCargos::all();
+    // $profesiones = AuxProfesion::all();
+
+    // return view('representacion.personal.create',  ['personal' => $personal, 'areas' => $areas, 'profesiones' => $profesiones, 'cargos' => $cargos]);
   }
 
   /**
@@ -45,12 +51,12 @@ class RepresentacionPersonalController extends Controller
    */
   public function show(string $id)
   {
-    $represento = Representacion::find($id);
+    $representacion = Representacion::find($id);
     $areas = AuxAreas::all();
     $cargos = AuxCargos::all();
     $profesiones = AuxProfesion::all();
 
-    return view('representacion.personal.create',  ['representacion' => $represento, 'areas' => $areas, 'profesiones' => $profesiones, 'cargos' => $cargos]);
+    return view('representacion.personal.create',  ['representacion' => $representacion, 'areas' => $areas, 'profesiones' => $profesiones, 'cargos' => $cargos]);
   }
 
   /**

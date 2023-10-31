@@ -9,5 +9,7 @@ class Molino extends Model
 {
   use HasFactory;
 
+  protected $table = 'molinos';
+
   protected $guarded = [];
 }

@@ -1,7 +1,8 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Distribución Producto') }} Nueno
+      {{ __('Nuevo Producto Distribución') }} - {{ $distribucion->id }}
+
     </h2>
   </x-slot>
   <div class="py-4">
@@ -29,7 +30,6 @@
                 <input type="hidden" name="distribucion_id" id="distribucion_id" value="{{ $distribucion->id }}">
 
                 <input type="hidden" name="status" id="status" value="A">
-
               </div>
 
               <div class="personal__div">
@@ -44,25 +44,20 @@
               </div>
               <div class="personal__btn">
                 <div class="btn__aceptar">
-                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                  <input class="" type="submit" value="Aceptar">
                 </div>
 
                 <div class="btn__reset">
-                  <input class="btn__reset" type="reset" value="Restaurar">
+                  <input class="" type="reset" value="Restaurar">
                 </div>
 
                 <div class="btn__cancelar">
-                  <form action="{{ URL::route('distribucion.show', ['distribucion' => $distribucion->id]) }}">
-                    <input class="btn__cancelar" type="submit" value="Cancelar">
-
-                  </form>
+                  <a class="btn__acancelar" href="{{ route('distribucion.show', ['distribucion' => $distribucion->id]) }}">Cancelar</a>
                 </div>
-
               </div>
+            </form>
           </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
 </x-app-layout>

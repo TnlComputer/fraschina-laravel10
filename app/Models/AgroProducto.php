@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AgroProducto extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $table = 'agro_productos';
+
+  protected $guarded = [];
 }

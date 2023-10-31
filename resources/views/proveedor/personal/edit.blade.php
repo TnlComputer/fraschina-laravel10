@@ -1,0 +1,118 @@
+<x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      {{ __('Edición Contacto Proveedor') }} - {{ $personal->proveedor_id }}
+    </h2>
+  </x-slot>
+  <div class="py-4">
+    <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-2 text-gray-900 text-left ">
+          <div class="sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
+            <form action="{{ route('proveedor_personal.update', $personal) }}" method="POST" class="personal__form">
+              @csrf
+              @method('put')
+
+              <div class="personal__div">
+                <label class="personal__label" for="nombre">Nombre</label>
+                <input class="personal__input" type="text" name="nombre" id="nombre" value="{{ $personal->nombre }}" placeholder="Ingrese el nombre" required>
+                <input type="hidden" name="proveedor_id" id="proveedor_id" value="{{ $personal->proveedor_id }}">
+                <input type="hidden" name="id" id="id" value="{{ $personal->id }}">
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="apellido">Apellido</label>
+                <input class="personal__input" type="text" name="apellido" id="apellido" value="{{ $personal->apellido }}" placeholder="Ingrese el apellido" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="area_id">Area</label>
+                <select class="form-select" name="area_id" id="single-select-field" data-placeholder="Seleccione una Area" required>
+                  <option></option>
+                  @foreach ($areas as $area)
+                  <option value="{{ $area->id }}" {{ $personal->area_id == $area->id ? 'selected' : '' }}>{{ $area->area  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="cargo_id">Cargo</label>
+                <select class="form-select" name="cargo_id" id="single-select-field-1" data-placeholder="Seleccione una Cargo" required>
+                  <option></option>
+                  @foreach ($cargos as $cargo)
+                  <option value="{{ $cargo->id }}" {{ $personal->cargo_id == $cargo->id ? 'selected' : '' }}>{{ $cargo->cargo  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="teldirecto">Tel Directo</label>
+                <input class="personal__input" type="text" name="teldirecto" id="teldirecto" value="{{ $personal->teldirecto }}" placeholder="Ingrese el teléfono directo" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="interno">Interno</label>
+                <input class="personal__input" type="text" name="interno" id="interno" value="{{ $personal->interno }}" placeholder="Ingrese el interno" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="telcelular">Tel Celular</label>
+                <input class="personal__input" type="text" name="telcelular" id="telcelular" value="{{ $personal->telcelular }}" placeholder="Escriba el número de Celular" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="telparticular">Tel Particular</label>
+                <input class="personal__input" type="text" name="telparticular" id="telparticular" value="{{ $personal->telparticular }}" placeholder="Ingrese su teléfono particular" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="email">Email</label>
+                <input class="personal__input" type="email" name="email" id="email" value="{{ $personal->email }}" placeholder="Escrila el correo electrónico" />
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="profesion_id">Profesión</label>
+                <select class="form-select" name="profesion_id" id="single-select-field-2" data-placeholder="Seleccione una Profesión" required>
+                  <option></option>
+                  @foreach ($profesiones as $profesion)
+                  <option value="{{ $profesion->id }}" {{ $personal->profesion_id == $profesion->id ? 'selected' : '' }}>{{ $profesion->nombreprofesion  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="observaciones">Información</label>
+                <textarea name="observaciones" id="observaciones" cols="30" rows="3" class="personal__input">{{ $personal->observaciones }}</textarea>
+              </div>
+
+              <div class="personal__div">
+                <label class="personal__label" for="fuera">Fuera</label>
+                <select name="fuera" id="fuera" class="personal__input">
+                  <option value="0" {{ $personal->fuera == 0 ? 'selected' : '' }}>NO</option>
+                  <option value="1" {{ $personal->fuera == 1 ? 'selected' : '' }}>SI</option>
+                </select>
+              </div>
+
+              <div class="personal__btn">
+                <div class="btn__aceptar">
+                  <input class="" type="submit" value="Aceptar">
+                </div>
+
+                <div class="btn__reset">
+                  <input class="" type="reset" value="Restaurar">
+                </div>
+
+                <div class="btn__cancelar">
+                  <a class="btn__acancelar" href="{{ route('proveedor.show', ['proveedor' => $personal->proveedor_id]) }}">Cancelar</a>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</x-app-layout>

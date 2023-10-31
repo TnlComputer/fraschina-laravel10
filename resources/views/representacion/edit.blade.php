@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }} Edit
+      {{ __('Edición Representación') }}
     </h2>
   </x-slot>
   <div class="py-4">
@@ -50,7 +50,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="barrio_id">Barrio</label>
-                <select class="card__input" name="barrio_id" id="barrio_id">
+                <select class="form-select" name="barrio_id" id="single-select-field" data-placeholder="Seleccione un Barrio">
+                  <option></option>
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}" {{ $represento->barrio_id == $barrio->id ? 'selected' : '' }}>{{ $barrio->nombrebarrio  }}
                   </option>
@@ -60,7 +61,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="localidad_id">Localidad</label>
-                <select class="card__input" name="localidad_id" id="localidad_id">
+                <select class="form-select card__input" name="localidad_id" id="single-select-field-1" data-placeholder="Seleccione una Localidad">
+                  <option></option>
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}" {{ $represento->localidad_id == $localidad->id ? 'selected' : '' }}>{{ $localidad->localidad  }}
                   </option>
@@ -70,7 +72,7 @@
 
               <div class="card__div">
                 <label class="card__label" for="municipio_id">Municipio</label>
-                <select class="card__input" name="municipio_id" id="municipio_id">
+                <select class="card__input" name="municipio_id" id="single-select-field-2" data-placeholder="Seleccione una opcion">
                   @foreach ($municipios as $municipio)
                   <option value="{{ $municipio->id }}" {{ $represento->municipio_id == $municipio->id ? 'selected' : '' }}>{{ $municipio->ciudadmunicipio  }}
                   </option>
@@ -80,7 +82,9 @@
 
               <div class="card__div">
                 <label class="card__label" for="zona_id">Zona</label>
-                <select class="card__input" name="zona_id" id="zona_id" @foreach ($zonas as $zona) <option value="{{ $zona->id }}" {{ $represento->zona_id == $zona->id ? 'selected' : '' }}>{{ $zona->nombre  }}
+                <select class="form-select" name="zona_id" id="single-select-field-3" data-placeholder="Seleccione una opcion">
+                  <option></option>
+                  @foreach ($zonas as $zona) <option value="{{ $zona->id }}" {{ $represento->zona_id == $zona->id ? 'selected' : '' }}>{{ $zona->nombre  }}
                   </option>
                   @endforeach
                 </select>
@@ -108,19 +112,17 @@
 
               <div class="personal__btn">
                 <div class="btn__aceptar">
-                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                  <input class="" type="submit" value="Aceptar">
                 </div>
 
                 <div class="btn__reset">
-                  <input class="btn__reset" type="reset" value="Restaurar">
+                  <input class="" type="reset" value="Restaurar">
                 </div>
 
                 <div class="btn__cancelar">
-                  <form action="{{ URL::route('representacion.index') }}">
-                    <input class=" btn__aceptar" type="submit" value="Cancelar">
-                  </form>
+                  <a class="btn__acancelar" href="{{ route('representacion.index') }}">Cancelar</a>
+
                 </div>
-                {{-- </div> --}}
               </div>
             </form>
           </div>

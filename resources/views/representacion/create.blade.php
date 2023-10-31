@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }} Nuevo
+      {{ __('Nueva Representación') }}
     </h2>
   </x-slot>
   <div class="py-4">
@@ -13,8 +13,8 @@
               @csrf
               <div class="card__div">
                 <label class="card__label" for="razonsocial">Razón social</label>
-                <input class="card__input" type="text" name="name" id="name" value="" placeholder="" required>
-                <input type="hidden" name="id">
+                <input class="card__input" type="text" name="razonsocial" id="razonsocial" value="" placeholder="" required>
+                <input type="hidden" name="status" id="status" value="A">
               </div>
 
               <div class="card__div">
@@ -44,13 +44,13 @@
 
               <div class="card__div">
                 <label class="card__label" for="telefono">Telefono</label>
-                <input class="card__input" type="text" name="telefono" id="telefono" value="">
+                <input class="card__input" type="text" name="telefono" id="telefono" value="" required>
               </div>
 
               <div class="card__div">
                 <label class="card__label" for="barrio_id">Barrio</label>
-                <select name="barrio_id" id="barrio_id" class="card__input">
-                  <option value="144">Seleccione un barrio</option>
+                <select name="barrio_id" id="single-select-field" class="form-select  card__input" data-placeholder="Seleccione un Barrio">
+                  <option></option>
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}">{{ $barrio->nombrebarrio  }}
                   </option>
@@ -60,8 +60,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="localidad_id">Localidad</label>
-                <select name="localidad_id" id="localidad_id" class="card__input">
-                  <option value="111">Seleccione una localidad</option>
+                <select name="localidad_id" id="single-select-field-1" class="form-select card__input" data-placeholder="Seleccione una Localidad" required>
+                  <option></option>
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}">{{ $localidad->localidad  }}
                   </option>
@@ -71,22 +71,20 @@
 
               <div class="card__div">
                 <label class="card__label" for="municipio_id">Municipio</label>
-                <select name="municipio_id" id="municipio_id" class="card__input">
-                  <option value="23">Seleccione una ciudad o municipio</option>
+                <select name="municipio_id" id="single-select-field-2" class="form-select card__input" data-placeholder="Seleccione un Municipio o Ciudad">
+                  <option></option>
                   @foreach ($municipios as $municipio)
-                  <option value="{{ $municipio->id }}">{{ $municipio->ciudadmunicipio  }}
-                  </option>
+                  <option value="{{ $municipio->id }}">{{ $municipio->ciudadmunicipio  }} </option>
                   @endforeach
                 </select>
               </div>
 
               <div class="card__div">
                 <label class="card__label" for="zona_id">Zona</label>
-                <select name="zona_id" id="zona_id" class="card__input" required>
-                  <option value="6">Seleccione una zona</option>
+                <select name="zona_id" id="single-select-field-3" class="form-select card__input" data-placeholder="Seleccione una Zona">
+                  <option></option>
                   @foreach ($zonas as $zona)
-                  <option value="{{ $zona->id }}">{{ $zona->nombre  }}
-                  </option>
+                  <option value="{{ $zona->id }}">{{ $zona->nombre  }}</option>
                   @endforeach
                 </select>
               </div>
@@ -98,7 +96,7 @@
 
               <div class="card__div">
                 <label class="card__label" for="correo">Email</label>
-                <input class="card__input" type="email" name="correo" id="correo" value="">
+                <input class="card__input" type="email" name="correo" id="correo" value="" required>
               </div>
 
               <div class="card__div">
@@ -108,29 +106,28 @@
 
               <div class="card__div">
                 <label class="card__label" for="info">Información</label>
-                <textarea class="card__input" name="info" id="info" cols="60" rows="10"></textarea>
+                <textarea class="card__input" name="info" id="info" cols="60" rows="5"></textarea>
               </div>
 
               <div class="personal__btn">
                 <div class="btn__aceptar">
-                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                  <input class="" type="submit" value="Aceptar">
                 </div>
 
                 <div class="btn__reset">
-                  <input class="btn__reset" type="reset" value="Restaurar">
+                  <input class="" type="reset" value="Restaurar">
                 </div>
 
                 <div class="btn__cancelar">
-                  <form action="{{ URL::route('representacion.index') }}">
-                    <input class=" btn__aceptar" type="submit" value="Cancelar">
-                  </form>
+                  <a class="btn__acancelar" href="{{ route('representacion.index') }}">Cancelar</a>
+
                 </div>
-                {{-- </div> --}}
               </div>
-            </form>
           </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </x-app-layout>

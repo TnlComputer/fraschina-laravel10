@@ -230,11 +230,13 @@ textarea {
 .btn__aceptar,
 .btn__reset,
 .btn__cancelar {
-  margin: 0;
+  margin: 0 auto;
   width: 85px;
-  border: transparent 1px #222;
-  border-radius: 7px;
+  /* border: transparent 1px #222; */
+  border-radius: 8px;
   cursor: pointer;
+  text-align: center;
+  padding-top: 3px;
 }
 
 .btn__aceptar {
@@ -245,31 +247,24 @@ textarea {
 
 .btn__reset {
   height: 30px;
-  background-color: yellow;
+  background-color: #444;
+  color: white;
 }
 
 .btn__cancelar {
   height: 30px;
-  background-color: red;
+  background-color: rgb(156, 5, 5);
   color: white;
+  /* padding-top: 3px;
+  text-align: center; */
 }
 
-.btn__aceptar:hover {
+.btn__aceptar:hover,
+.btn__reset:hover,
+.btn__acancelar:hover,
+.btn__acancelar:hover {
   height: 30px;
-  background-color: #999;
-  color: rgb(1, 48, 1);
-}
-
-.btn__reset:hover {
-  height: 30px;
-  background-color: #444;
-  color: yellow;
-}
-
-.btn__cancelar:hover {
-  height: 30px;
-  background-color: #999;
-  color: red;
+  color: black;
 }
 /* fin botones edicion */
 
@@ -332,7 +327,8 @@ tr:hover {
   }
 
   .personal__btn {
-    width: 460px;
+    width: 100%;
+    /* width: 460px; */
   }
 }
 

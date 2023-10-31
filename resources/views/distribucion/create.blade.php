@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Distribucion') }} Edit
+      {{ __('Nueva Distribucion') }}
     </h2>
   </x-slot>
   <div class="py-4">
@@ -14,6 +14,7 @@
               <div class="card__div">
                 <label class="card__label">Sistema</label>
                 <input class="card__input" type="text" name="clisg_id" id="clisg_id" value="" placeholder="Nro Sistema Gestión">
+                <input type="hidden" name="status" id="status" value="A">
               </div>
 
               <div class="card__div">
@@ -28,8 +29,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="dire_calle_id">Dirección</label>
-                <select class="card__input" name="dire_calle_id" id="dire_calle_id" required>
-                  <option value="2149"></option>
+                <select class="form-select" name="dire_calle_id" id="single-select-field" required data-placeholder="Seleccione una Calle">
+                  <option></option>
                   @foreach ($calles as $calle)
                   <option value="{{ $calle->id }}">{{ $calle->calle  }} </option>
                   @endforeach
@@ -58,8 +59,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="barrio_id">Barrio</label>
-                <select class="card__input" name="barrio_id" id="barrio_id">
-                  <option value="144"></option>
+                <select class="form-select" name="barrio_id" id="single-select-field-1" required data-placeholder="Seleccione una Barrio">
+                  <option></option>
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}">{{ $barrio->nombrebarrio  }}
                   </option>
@@ -69,8 +70,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="localidad_id">Localidad</label>
-                <select class="card__input" name="localidad_id" id="localidad_id">
-                  <option value="111"></option>
+                <select class="form-select" name="localidad_id" id="single-select-field-2" required data-placeholder="Seleccione una Localidad">
+                  <option></option>
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}">{{ $localidad->localidad  }}
                   </option>
@@ -80,8 +81,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="municipio_id">Municipio</label>
-                <select class="card__input" name="municipio_id" id="municipio_id">
-                  <option value="23"></option>
+                <select class="form-select" name="municipio_id" id="single-select-field-3" required data-placeholder="Seleccione una Municipio o Ciudad">
+                  <option></option>
                   @foreach ($municipios as $municipio)
                   <option value="{{ $municipio->id }}">{{ $municipio->ciudadmunicipio  }}
                   </option>
@@ -91,8 +92,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="zona_id">Zona</label>
-                <select class="card__input" name="zona_id" id="zona_id">
-                  <option value="6"></option>
+                <select class="form-select" name="zona_id" id="single-select-field-4" required data-placeholder="Seleccione una Zona">
+                  <option></option>
                   @foreach ($zonas as $zona)
                   <option value="{{ $zona->id }}">{{ $zona->nombre  }}
                   </option>
@@ -126,8 +127,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="contacto_id">Contacto</label>
-                <select class="card__input" name="contacto_id" id="contacto_id">
-                  <option value="1"></option>
+                <select class="form-select" name="contacto_id" id="single-select-field-5" required data-placeholder="Seleccione una Contacto">
+                  <option></option>
                   @foreach ($contactos as $contacto)
                   <option value="{{ $contacto->id }}">{{ $contacto->contacto  }}
                   </option>
@@ -275,17 +276,16 @@
 
           <div class="personal__btn">
             <div class="btn__aceptar">
-              <input class="btn__aceptar" type="submit" value="Aceptar">
+              <input class="" type="submit" value="Aceptar">
             </div>
 
             <div class="btn__reset">
-              <input class="btn__reset" type="reset" value="Restaurar">
+              <input class="" type="reset" value="Restaurar">
             </div>
 
             <div class="btn__cancelar">
-              <form action="{{ URL::route('distribucion.index') }}">
-                <input class=" btn__aceptar" type="submit" value="Cancelar">
-              </form>
+              <a class="btn__acancelar" href="{{ route('distribucion.index') }}">Cancelar</a>
+
             </div>
 
 

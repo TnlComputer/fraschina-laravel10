@@ -39,10 +39,10 @@ class RepresentacionProductoController extends Controller
    */
   public function show(string $id)
   {
-    // $producto = Representacion_Producto::find($id)->first();
+    $representacion = Representacion::find($id);
     $repProd = AuxProductosRepresentacion::all();
 
-    return view("representacion.producto.create", ['producto' => $id, 'repProd' => $repProd]);
+    return view("representacion.producto.create", ['representacion' => $representacion, 'repProd' => $repProd]);
   }
 
   /**

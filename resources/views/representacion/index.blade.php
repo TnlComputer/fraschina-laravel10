@@ -79,7 +79,8 @@
               <td data-titulo="Cuit">{{ $representacion->cuit }}</td>
               <td data-titulo="Marcas">{{ $representacion->marcas }}</td>
               <td>
-                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-{{ $representacion->id }}">
+                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-var="{{ $representacion->id }}">
+
 
                   <i class="fas fa-trash-alt"></i>
                 </button>
@@ -103,37 +104,31 @@
     </div>
   </div>
 
-  {{-- <div class="modal fade" id="modal-{{ $representacion->id }}" tabindex="-1" aria-labelledby="representacionModalLabel" aria-hidden="true">
 
-  <div class="modal-dialog">
-    <form action="{{ route('representacion.destroy', $representacion->id) }}" method="post">
-      @csrf
-      @method('DELETE')
-      <div class="modal-content bg-danger">
+  {{-- Modal delete --}}
+  <div class="modal fade" id="modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="eliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="representacionModalLabel">Eliminar cliente</h1>
-
-
-          <h4 class="modal-title">Eliminar cliente</h4>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="eliminar">Representación </h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Desea eliminar el cliente {{ $representacion->id }} - {{ $representacion->razonsocial }}</p>
+          <p>Está seguro que desea eliminar a la empresa {{ $representacion->razonsocial }}</p>
 
         </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-danger">Confirmar Eliminación</button>
 
-        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-outline-light">Eliminar</button>
+        </div>
       </div>
+    </div>
   </div>
-  </form>
+
+  <div class="modal-dialog modal-dialog-centered">
+    ...
   </div>
-  </div> --}}
 
 
 </x-app-layout>
@@ -156,8 +151,8 @@
       </div>
     </div>
   </div>
-</div> --}}
-
+</div>
+ --}}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 

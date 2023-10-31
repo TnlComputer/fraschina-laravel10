@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Nuevo Producto') }}
+      {{ __('Nuevo Producto') }} - {{ $representacion->id }}
     </h2>
   </x-slot>
   <div class="py-4">
@@ -11,12 +11,10 @@
           <div class="sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
             <form action="{{ route('representacion_producto.store') }}" method="POST" class="personal__form">
               @csrf
-              {{-- @method('put') --}}
-
               <div class="personal__div">
                 <label class="personal__label" for="producto_id">Producto</label>
-                <select name="producto_id" id="producto_id" class="personal__input">
-                  <option value="53">Seleccione un producto</option>
+                <select class="form-select" name="producto_id" id="single-select-field" data-placeholder="Seleccione una Producto">
+                  <option></option>
                   @foreach ($repProd as $rpr)
                   <option value="{{ $rpr->id }}">{{ $rpr->nombre  }}
                   </option>
@@ -27,7 +25,7 @@
               <div class="personal__div">
                 <label class="personal__label" for="pl">PL</label>
                 <input class="personal__input" type="text" name="pl" id="pl" value="" placeholder="Ingrese el PL" />
-                <input type="hidden" name="representacion_id" id="representacion_id" value="{{ $producto }}">
+                <input type="hidden" name="representacion_id" id="representacion_id" value="{{ $representacion->id }}">
                 <input type="hidden" name="status" id="status" value="A">
               </div>
 
@@ -49,14 +47,11 @@
               <div class="personal__div">
                 <label class="personal__label" for="glutenhumedo">Gluten Húmedo</label>
                 <input class="personal__input" type="text" name="glutenhumedo" id="glutenhumedo" value="" placeholder="Ingrese el Gluten Húmedo">
-
               </div>
 
               <div class="personal__div">
                 <label class="personal__label" for="glutenseco">Gluten Seco</label>
-
                 <input class="personal__input" type="text" name="glutenseco" id="glutenseco" value="" placeholder="Ingrese el Gluten Seco">
-
               </div>
 
               <div class="personal__div">
@@ -86,24 +81,21 @@
 
               <div class="personal__btn">
                 <div class="btn__aceptar">
-                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                  <input class="" type="submit" value="Aceptar">
                 </div>
 
                 <div class="btn__reset">
-                  <input class="btn__reset" type="reset" value="Restaurar">
+                  <input class="" type="reset" value="Restaurar">
                 </div>
 
                 <div class="btn__cancelar">
-                  <form action="{{ URL::route('representacion.show',  ['representacion' => $producto]) }}">
-                    <input class=" btn__aceptar" type="submit" value="Cancelar">
-                  </form>
-                </div>
+                  <a class="btn__acancelar" href="{{ route('representacion.show',  ['representacion' => $representacion->id]) }}">Cancelar</a>
 
+                </div>
               </div>
+            </form>
           </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
 </x-app-layout>

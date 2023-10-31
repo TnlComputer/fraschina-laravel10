@@ -22,7 +22,6 @@ class AgendaController extends Controller
           'ag.nombre',
           'ag.apellido',
           'ag.empresa_institucion',
-          // 'ag.profesion_especialidad_oficio',
           'ag.cod_prof',
           'ag.tel_particular',
           'ag.tel_laboral',
@@ -32,14 +31,13 @@ class AgendaController extends Controller
           'ag.direccion',
           'ag.observaciones',
           'ag.id',
-          'auxProf.nomprefesion as profesion_especialidad_oficio'
+          'auxProf.nombreprofesion as profesion_especialidad_oficio',
         )
-        ->where('ag.status', '=', 'A')
-        ->where('auxProf.agendas|=', 'SI')
-        ->where('ag.nombre', 'like', '%' . $request->name . '%')
-        ->orWhere('ag.apellido', 'like', '%' . $request->name . '%')
-        ->orWhere('ag.empresa_institucion', 'like', '%' . $request->name . '%')
-        ->orWhere('auxProf.nomprefesion', 'like', '%' . $request->name . '%')
+        ->where('status', '=', 'A')
+        ->where('nombre', 'like', '%' . $request->name . '%')
+        ->orWhere('apellido', 'like', '%' . $request->name . '%')
+        ->orWhere('empresa_institucion', 'like', '%' . $request->name . '%')
+        // ->orWhere('profesion_especialidad_oficio', 'like', '%' . $request->name . '%')
         ->paginate(15);
     } else {
       $agendas = Agenda::where('status', '=', 'A')->paginate(15);
@@ -54,6 +52,7 @@ class AgendaController extends Controller
   {
     $profesiones = DB::table('auxprofesiones as auxProf')
       ->where('auxProf.agendas', '=', 'SI')
+      ->orderBy('nombreprofesion', 'asc')
       ->get();
     // $profesiones = AuxProfesion::all();
     return view('agenda.create', ['profesiones' => $profesiones]);
@@ -62,9 +61,13 @@ class AgendaController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(Request $request, Agenda $agenda)
   {
-    //
+    $agenda->create($request->all());
+    return redirect()->route(
+      'agenda.index',
+      ['agenda' => $agenda->id]
+    )->with('success', 'Actualizado con exito');
   }
 
   /**
@@ -78,9 +81,15 @@ class AgendaController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Agenda $agenda)
+  public function edit(string $id)
   {
-    //
+    $personal = Agenda::find($id);
+    $profesiones = DB::table('auxprofesiones as auxProf')
+      ->where('auxProf.agendas', '=', 'SI')
+      ->orderBy('nombreprofesion', 'asc')
+      ->get();
+    // $profesiones = AuxProfesion::all();
+    return view('agenda.edit', ['personal' => $personal, 'profesiones' => $profesiones]);
   }
 
   /**
@@ -88,7 +97,11 @@ class AgendaController extends Controller
    */
   public function update(Request $request, Agenda $agenda)
   {
-    //
+    $agenda->update($request->all());
+    return redirect()->route(
+      'agenda.index',
+      ['agenda' => $agenda->id]
+    )->with('success', 'Actualizado con exito');
   }
 
   /**

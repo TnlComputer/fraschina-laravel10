@@ -49,24 +49,23 @@ Route::middleware('auth')->group(function () {
   // AGRO
   Route::resource('/agro', AgroController::class)->names('agro');
   Route::resource('/agro/personal', AgroPersonalController::class)->names('agro_personal');
-  Route::resource('/agro/producto/', AgroProductoController::class)->names('agro_producto');
+  Route::resource('/agro/producto', AgroProductoController::class)->names('agro_producto');
 
 
   // MOLINOS
   Route::resource('/molino', MolinoController::class)->names('molino');
   Route::resource('/molino/personal', MolinoPersonalController::class)->names('molino_personal');
-  Route::resource('/molino/producto/', MolinoProductoController::class)->names('molino_producto');
 
 
   // PROVEEDORES
   Route::resource('/proveedor', ProveedorController::class)->names('proveedor');
   Route::resource('/proveedor/personal', ProveedorPersonalController::class)->names('proveedor_personal');
-  Route::resource('/proveedor/producto/', ProveedorProductoController::class)->names('proveedor_producto');
+  Route::resource('/proveedor/producto', ProveedorProductoController::class)->names('proveedor_producto');
 
   // TRANSPORTE
   Route::resource('/transporte', TransporteController::class)->names('transporte');
   Route::resource('/transporte/personal', TransportePersonalController::class)->names('transporte_personal');
-  Route::resource('/transporte/producto/', TransporteProductoController::class)->names('transporte_producto');
+  // Route::resource('/transporte/producto/', TransporteProductoController::class)->names('transporte_producto');
 
   // EXPÉDICION
   Route::resource('/expedicion', ExpedicionController::class);

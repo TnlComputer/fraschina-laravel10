@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuxProductosAgros extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
+  use HasFactory;
 
+  protected $table = 'auxproductosagro';
+
+  protected $guarded = [];
 }

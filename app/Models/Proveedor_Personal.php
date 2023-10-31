@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MolinoProducto extends Model
+class Proveedor_Personal extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $table = 'proveedor_personal';
+
+  protected $guarded = [];
 }

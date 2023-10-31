@@ -17,7 +17,6 @@
                 <label class="personal__label" for="nombre">Nombre</label>
                 <input class="personal__input" type="text" name="nombre" id="nombre" value="" placeholder="Ingrese el nombre">
                 <input type="hidden" name="status" id="status" value="A">
-
               </div>
 
               <div class="personal__div">
@@ -31,24 +30,23 @@
               </div>
 
               <div class="personal__div">
-                <label class="personal__label" for="cargo_id">Profesión</label>
-                <select name="profesion_id" id="profesion_id" class="personal__input select2">
-
+                <label class="personal__label" for="cod_prof">Profesión</label>
+                <select class="form-select personal__input" name="cod_prof" id="single-select-field" data-placeholder="Seleccione una opcion">
+                  <option></option>
                   @foreach ($profesiones as $profesion)
-                  {{-- <option value="{{ $profesion->id }}" {{ 132 == $profesion->id ? 'selected' : '' }}>{{ $profesion->nombreprofesion  }} --}}
-                  <option value="{{ $profesion->id }}">{{ $profesion->nombreprofesion  }} </option>
-                  @endforeach
+                  <option value="{{ $profesion->id }}" {{ 132 == $profesion->id ? 'selected' : '' }}>{{ $profesion->nombreprofesion  }}
+                    @endforeach
                 </select>
               </div>
 
               <div class="personal__div">
-                <label class="personal__label" for="telparticular">Tel Particular</label>
-                <input class="personal__input" type="text" name="telparticular" id="telparticular" value="" placeholder="Ingrese su teléfono particular" />
+                <label class="personal__label" for="tel_particular">Tel Particular</label>
+                <input class="personal__input" type="text" name="tel_particular" id="tel_particular" value="" placeholder="Ingrese su teléfono particular" />
               </div>
 
               <div class="personal__div">
-                <label class="personal__label" for="teldirecto">Tel Laboral</label>
-                <input class="personal__input" type="text" name="teldirecto" id="teldirecto" value="" placeholder="Ingrese el teléfono directo" />
+                <label class="personal__label" for="tel_laboral">Tel Laboral</label>
+                <input class="personal__input" type="text" name="tel_laboral" id="tel_laboral" value="" placeholder="Ingrese el teléfono laboral" />
               </div>
 
               <div class="personal__div">
@@ -58,23 +56,18 @@
 
               <div class="personal__div">
                 <label class="personal__label" for="telcelular">Celular</label>
-                <input class="personal__input" type=" text" name="telcelular" id="telcelular" value="" placeholder="Escriba el número de Celular" />
+                <input class="personal__input" type="text" name="celular" id="celular" value="" placeholder="Ingrese el número de Celular" />
               </div>
 
 
               <div class="personal__div">
-                <label class="personal__label" for="email">Email</label>
-                <input class="personal__input" type="email" name="email" id="email" value="" placeholder="Escrila el correo electrónico" />
+                <label class="personal__label" for="mail">Email</label>
+                <input class="personal__input" type="email" name="mail" id="email" value="" placeholder="Ingrese el correo electrónico" />
               </div>
 
               <div class="personal__div">
-                <label class="personal__label" for="profesion_id">Dirección</label>
-                <select name="profesion_id" id="profesion_id" class="personal__input">
-                  {{-- @foreach ($profesiones as $profesion)
-                  <option value="{{ $profesion->id }}" {{ 132 == $profesion->id ? 'selected' : '' }}>{{ $profesion->nombreprofesion  }}
-                  </option>
-                  @endforeach --}}
-                </select>
+                <label class="personal__label" for="direccion">Dirección</label>
+                <input class="personal__input" type="text" name="direccion" id="direccion" value="" placeholder="Ingrese la dirección" />
               </div>
 
               <div class="personal__div">
@@ -91,7 +84,8 @@
                 </div>
                 <div class="btn__cancelar">
                   <form action="{{ URL::route('agenda.index') }}">
-                    <input class=" btn__aceptar" type="submit" value="Cancelar">
+                    <input class=" btn__acancelar" type="submit" value="Cancelar">
+
                   </form>
                 </div>
               </div>

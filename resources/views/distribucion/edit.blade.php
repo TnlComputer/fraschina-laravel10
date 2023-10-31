@@ -30,7 +30,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="dire_calle_id">Dirección</label>
-                <select class="card__input" name="dire_calle_id" id="dire_calle_id">
+                <select class="form-select" name="dire_calle_id" id="single-select-field" data-placeholder="Seleccione una Calle">
+                  <option></option>
                   @foreach ($calles as $calle)
                   <option value="{{ $calle->id }}" {{ $distribucion->dire_calle_id == $calle->id ? 'selected' : '' }}>{{ $calle->calle  }}
                   </option>
@@ -60,7 +61,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="barrio_id">Barrio</label>
-                <select class="card__input" name="barrio_id" id="barrio_id">
+                <select class="form-select" name="barrio_id" id="single-select-field-1" data-placeholder="Seleccione un Barrio">
+                  <option></option>
                   @foreach ($barrios as $barrio)
                   <option value="{{ $barrio->id }}" {{ $distribucion->barrio_id == $barrio->id ? 'selected' : '' }}>{{ $barrio->nombrebarrio  }}
                   </option>
@@ -70,7 +72,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="localidad_id">Localidad</label>
-                <select class="card__input" name="localidad_id" id="localidad_id">
+                <select class="form-select" name="localidad_id" id="single-select-field-2" data-placeholder="Seleccione una Localidad">
+                  <option></option>
                   @foreach ($localidades as $localidad)
                   <option value="{{ $localidad->id }}" {{ $distribucion->localidad_id == $localidad->id ? 'selected' : '' }}>{{ $localidad->localidad  }}
                   </option>
@@ -80,7 +83,8 @@
 
               <div class="card__div">
                 <label class="card__label" for="municipio_id">Municipio</label>
-                <select class="card__input" name="municipio_id" id="municipio_id">
+                <select class="form-select" name="municipio_id" id="single-select-field-3" data-placeholder="Seleccione un Municipio o Ciudad">
+                  <option></option>
                   @foreach ($municipios as $municipio)
                   <option value="{{ $municipio->id }}" {{ $distribucion->municipio_id == $municipio->id ? 'selected' : '' }}>{{ $municipio->ciudadmunicipio  }}
                   </option>
@@ -90,7 +94,9 @@
 
               <div class="card__div">
                 <label class="card__label" for="zona_id">Zona</label>
-                <select class="card__input" name="zona_id" id="zona_id">
+                <select class="form-select" name="zona_id" id="single-select-field-4" data-placeholder="Seleccione una Zona">
+                  <option></option>
+
                   @foreach ($zonas as $zona)
                   <option value="{{ $zona->id }}" {{ $distribucion->zona_id == $zona->id ? 'selected' : '' }}>{{ $zona->nombre  }}
                   </option>
@@ -121,7 +127,9 @@
 
               <div class="card__div">
                 <label class="card__label" for="contacto_id">Contacto</label>
-                <select class="card__input" name="contacto_id" id="contacto_id">
+                <select class="form-select" name="contacto_id" id="single-select-field-5" data-placeholder="Seleccione un Contacto">
+                  <option></option>
+
                   @foreach ($contactos as $contacto)
                   <option value="{{ $contacto->id }}" {{ $distribucion->contacto_id == $contacto->id ? 'selected' : '' }}>{{ $contacto->contacto  }}
                   </option>
@@ -186,97 +194,90 @@
                 <input class="card__input" type="text" name="productoCDA" id="productoCDA" value="{{ $distribucion->productoCDA }}">
               </div>
 
-              {{-- <div class="card__div">
-                <label class="card__label" for="productos_id">Producto id</label>
-                <input class="card__input" type="text" name="productos_id" id="productos_id" value="{{ $distribucion->productos_id }}">
-          </div> --}}
+              <div class="card__div">
+                <label class="card__label" for="lunes">Lunes</label>
+                <select class="card__input" name="lunes" id="lunes">
+                  <option value="NO" {{ $distribucion->lunes == 'NO' ? 'selected' : '' }}>NO
+                  </option>
+                  <option value="SI" {{ $distribucion->lunes == 'SI' ? 'selected' : '' }}>SI
+                  </option>
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="lunes">Lunes</label>
-            <select class="card__input" name="lunes" id="lunes">
-              <option value="NO" {{ $distribucion->lunes == 'NO' ? 'selected' : '' }}>NO
-              </option>
-              <option value="SI" {{ $distribucion->lunes == 'SI' ? 'selected' : '' }}>SI
-              </option>
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="sabado">Sabado</label>
+                <select class="card__input" name="sabado" id="sabado">
+                  <option value="NO" {{ $distribucion->sabado == 'NO' ? 'selected' : '' }}>NO
+                  </option>
+                  <option value="SI" {{ $distribucion->sabado == 'SI' ? 'selected' : '' }}>SI
+                  </option>
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="sabado">Sabado</label>
-            <select class="card__input" name="sabado" id="sabado">
-              <option value="NO" {{ $distribucion->sabado == 'NO' ? 'selected' : '' }}>NO
-              </option>
-              <option value="SI" {{ $distribucion->sabado == 'SI' ? 'selected' : '' }}>SI
-              </option>
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="fac_imp">Factura Impresa</label>
+                <select class="card__input" name="fac_imp" id="fac_imp">
+                  <option value="NO" {{ $distribucion->fac_imp == 'NO' ? 'selected' : '' }}>NO
+                  </option>
+                  <option value="SI" {{ $distribucion->fac_imp == 'SI' ? 'selected' : '' }}>SI
+                  </option>
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="fac_imp">Factura Impresa</label>
-            <select class="card__input" name="fac_imp" id="fac_imp">
-              <option value="NO" {{ $distribucion->fac_imp == 'NO' ? 'selected' : '' }}>NO
-              </option>
-              <option value="SI" {{ $distribucion->fac_imp == 'SI' ? 'selected' : '' }}>SI
-              </option>
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="obsrecep">Observaciones Recepción</label>
+                <input class="card__input" type="text" name="obsrecep" id="obsrecep" value="{{ $distribucion->obsrecep }}">
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="obsrecep">Observaciones Recepción</label>
-            <input class="card__input" type="text" name="obsrecep" id="obsrecep" value="{{ $distribucion->obsrecep }}">
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="cobrar_id">cobrar</label>
+                <select class="card__input" name="cobrar_id" id="cobrar_id">
+                  @foreach ($cobrar as $cobrar)
+                  <option value="{{ $cobrar->id }}" {{ $distribucion->cobrar_id == $cobrar->id ? 'selected' : '' }}>{{ $cobrar->accion  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="cobrar_id">cobrar</label>
-            <select class="card__input" name="cobrar_id" id="cobrar_id">
-              @foreach ($cobrar as $cobrar)
-              <option value="{{ $cobrar->id }}" {{ $distribucion->cobrar_id == $cobrar->id ? 'selected' : '' }}>{{ $cobrar->accion  }}
-              </option>
-              @endforeach
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="cobro_id">Condición de Pago</label>
+                <select class="card__input" name="cobro_id" id="cobro_id">
+                  @foreach ($conpagos as $conpago)
+                  <option value="{{ $conpago->id }}" {{ $distribucion->cobro_id == $conpago->id ? 'selected' : '' }}>{{ $conpago->nombre  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="cobro_id">Condición de Pago</label>
-            <select class="card__input" name="cobro_id" id="cobro_id">
-              @foreach ($conpagos as $conpago)
-              <option value="{{ $conpago->id }}" {{ $distribucion->cobro_id == $conpago->id ? 'selected' : '' }}>{{ $conpago->nombre  }}
-              </option>
-              @endforeach
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="tcobro_id">Forma de Pago</label>
+                <select class="card__input" name="tcobro_id" id="tcobro_id">
+                  @foreach ($tipopagos as $tipopago)
+                  <option value="{{ $tipopago->id }}" {{ $distribucion->tcobro_id == $tipopago->id ? 'selected' : '' }}>{{ $tipopago->nombre }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="tcobro_id">Forma de Pago</label>
-            <select class="card__input" name="tcobro_id" id="tcobro_id">
-              @foreach ($tipopagos as $tipopago)
-              <option value="{{ $tipopago->id }}" {{ $distribucion->tcobro_id == $tipopago->id ? 'selected' : '' }}>{{ $tipopago->nombre }}
-              </option>
-              @endforeach
-            </select>
-          </div>
+              <div class="card__div">
+                <label class="card__label" for="info">Información</label>
+                <textarea class="card__input" name="info" id="info" cols="60" rows="5">{{ $distribucion->info }}</textarea>
+              </div>
 
-          <div class="card__div">
-            <label class="card__label" for="info">Información</label>
-            <textarea class="card__input" name="info" id="info" cols="60" rows="5">{{ $distribucion->info }}</textarea>
-          </div>
+              <div class="personal__btn">
+                <div class="btn__aceptar">
+                  <input class="" type="submit" value="Aceptar">
+                </div>
 
-          <div class="personal__btn">
-            <div class="btn__aceptar">
-              <input class="btn__aceptar" type="submit" value="Aceptar">
-            </div>
+                <div class="btn__reset">
+                  <input class="" type="reset" value="Restaurar">
+                </div>
 
-            <div class="btn__reset">
-              <input class="btn__reset" type="reset" value="Restaurar">
-            </div>
+                <div class="btn__cancelar">
+                  <a class="btn__acancelar" href="{{ route('distribucion.index') }}">Cancelar</a>
 
-            <div class="btn__cancelar">
-              <form action="{{ URL::route('distribucion.index') }}">
-                <input class=" btn__aceptar" type="submit" value="Cancelar">
-              </form>
-            </div>
-
-
+                </div>
+              </div>
             </form>
           </div>
         </div>

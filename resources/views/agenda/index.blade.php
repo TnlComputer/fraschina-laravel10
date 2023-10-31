@@ -46,7 +46,7 @@
             @forelse($agendas as $agenda)
             <tr class=" text-xs">
               <td>
-                <a href="{{ route('agenda.edit', $agenda->id) }}" class="ocultar ">
+                <a href="{{ route('agenda.edit', $agenda->id) }}" class=" ">
                   <i class="fa-regular fa-pen-to-square icon-edit"></i>
                 </a>
               </td>

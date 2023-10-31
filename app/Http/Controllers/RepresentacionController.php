@@ -35,8 +35,9 @@ class RepresentacionController extends Controller
         ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
         ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
-        ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
-        ->orWhere('marcas', 'like', '%' . $request->name . '%')
+        ->where('r.status', '=', 'A')
+        ->orWhere('r.razonsocial', 'like', '%' . $request->name . '%')
+        ->orWhere('r.marcas', 'like', '%' . $request->name . '%')
         ->paginate(15);
     } else {
       $representaciones = DB::table('representacions as r')
@@ -96,7 +97,6 @@ class RepresentacionController extends Controller
       ->select('rp.nombre', 'rp.apellido', 'rp.teldirecto', 'rp.interno', 'rp.telcelular', 'rp.telparticular', 'rp.email', 'rp.observaciones', 'rp.fuera', 'auxA.area as area', 'auxCar.cargo as cargo', 'auxProf.nombreprofesion as profesion', 'rp.id', 'rp.representacion_id')
       ->where('rp.representacion_id', '=', $representacion->id)
       ->where('rp.status', '=', 'A')
-
       ->paginate(10);
 
     $productos =  DB::table('representacion_productos as rpr')

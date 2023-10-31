@@ -1,97 +1,136 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Representacion') }} Edit
+      {{ __('Edición Molino') }} - {{ $molino->id }}
     </h2>
   </x-slot>
-
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+  <div class="py-4">
+    <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-500  text-md">
-          <form action="" method="post">
-            @csrf
-            @method('put')
-            <div class="representacion__div">
-              <label>Razón social</label>
-              <input type="text" value="{{ $represento->razonsocial }}" placeholder="" required>
-            </div>
-            <div class="representacion__div">
-              <label>Dirección</label>
-              <input type="text" value="{{ $represento->dire_calle }}" placeholder="" required>
-            </div>
-            <div class="representacion__div">
+        <div class="p-2 text-gray-900 text-left ">
+          <div class=" sm:flex-1 sm:flex sm:items-center sm:justify-stretch">
+            <form action="{{ route('molino.store') }}" method="post" class="card__form" enctype="multipart/form-data">
+              @csrf
+              <div class="card__div">
+                <label class="card__label" for="razonsocial">Razón social</label>
+                <input class="card__input" type="text" name="razonsocial" id="razonsocial" value="{{ $molino->razonsocial }}" placeholder="Ingrese la razón social">
+              </div>
 
-              <label for="">Numeración</label>
-              <input type="text" value="{{ $represento->dire_nro }}" placeholder="" required>
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="dire_calle">Dirección</label>
+                <input class="card__input" type="text" name="dire_calle" id="dire_calle" value="{{ $molino->dire_calle }}" placeholder="Ingrese la dirección">
 
-              <label for="">Altura</label>
-              <input type="text" value="{{ $represento->dire_nro }}" placeholder="" required>
-            </div>
-            <div class="representacion__div">
+              </div>
 
-              <label for="">Piso</label>
-              <input type="text" value="{{ $represento->piso }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="dire_nro">Altura</label>
+                <input class="card__input" type="number" name="dire_nro" id="dire_nro" value="{{ $molino->dire_nro }}" placeholder="Ingrese la altura ">
 
-              <label for="">Dpto</label>
-              <input type="text" value="{{ $represento->dpto }}">
-            </div>
-            <div class="representacion__div">
+              </div>
 
-              <label>Cod.Post</label>
-              <input type="text" value="{{ $represento->codpost }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="piso">Piso</label>
+                <input class="card__input" type="text" name="piso" id="piso" value="{{ $molino->piso }}">
 
-              <label>Telefono</label>
-              <input type="text" value="{{ $represento->telefono }}">
-            </div>
-            <div class="representacion__div">
+              </div>
 
-              <label>Barrio</label>
-              <input type="text" value="{{ $represento->barrio_id }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="dpto">Dpto</label>
+                <input class="card__input" type="text" name="dpto" id="dpto" value="{{ $molino->dpto }}">
 
-              <label>Localidad</label>
-              <input type="text" value="{{ $represento->localidad_id }}">
-            </div>
-            <div class="representacion__div">
+              </div>
 
-              <label>Zona</label>
-              <input type="text" value="{{ $represento->zona_id }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="codpost">Cod.Post</label>
+                <input class="card__input" type="text" name="codpost" id="codpost" value="{{ $molino->codpost }}">
 
-              <label>Cuit</label>
-              <input type="text" value="{{ $represento->cuit }}">
-            </div>
-            <div class="representacion__div">
+              </div>
 
-              <label>Email</label>
-              <input type="text" value="{{ $represento->email }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="barrio_id">Barrio</label>
+                <select class="form-select personal__input" name="barrio_id" id="single-select-field-1" data-placeholder="Seleccione una opcion">
+                  <option></option>
+                  @foreach ($barrios as $barrio)
+                  <option value="{{ $barrio->id }}" {{ $molino->barrio_id == $barrio->id ? 'selected' : '' }}>{{ $barrio->nombrebarrio  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
 
-              <label>Marcas</label>
-              <input type="text" value="{{ $represento->marcas }}">
-            </div>
-            <div class="representacion__div">
+              <div class="card__div">
+                <label class="card__label" for="localidad_id">Localidad</label>
+                <select class="form-select personal__input" name="localidad_id" id="single-select-field-2" data-placeholder="Seleccione una opcion">
+                  <option></option>
+                  @foreach ($localidades as $localidad)
+                  <option value="{{ $localidad->id }}" {{ $molino->localidad_id == $localidad->id ? 'selected' : '' }}>{{ $localidad->localidad  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
 
-              <label>Información</label>
-              <textarea name="" id="" cols="60" rows="5">"{{ $represento->info }}"></textarea>
-            </div>
-            {{-- <div class="representacion__div">
-            <label>Comentarios</label>
-            <input type="text" value="{{ $represento->comentarios }}">
-        </div> --}}
-        </form>
+              <div class="card__div">
+                <label class="card__label" for="municipio_id">Municipio</label>
+                <select class="form-select personal__input" name="municipio_id" id="single-select-field-3" data-placeholder="Seleccione una opcion">
+                  <option></option>
+                  @foreach ($municipios as $municipio)
+                  <option value="{{ $municipio->id }}" {{ $molino->municipio_id == $municipio->id ? 'selected' : '' }}>{{ $municipio->ciudadmunicipio  }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="telefono">Telefono</label>
+                <input class="card__input" type="text" name="telefono" id="telefono" value="{{ $molino->telefono }}">
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="fax">Fax</label>
+                <input class="card__input" type="text" name="fax" id="fax" value="{{ $molino->fax }}">
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="cuit">Cuit</label>
+                <input class="card__input" type="text" name="cuit" id="cuit" value="{{ $molino->cuit }}">
+
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="correo">Email</label>
+                <input class="card__input" type="email" name="correo" id="correo" value="{{ $molino->correo }}">
+
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="marcas">Marcas</label>
+                <input class="card__input" type="text" name="marcas" id="marcas" value="{{ $molino->marcas }}">
+
+              </div>
+
+              <div class="card__div">
+                <label class="card__label" for="info">Información</label>
+                <textarea class="card__input" name="info" id="info" cols="60" rows="5">{{ $molino->info }}</textarea>
+
+              </div>
+
+              <div class="personal__btn">
+                <div class="btn__aceptar">
+                  <input class="" type="submit" value="Aceptar">
+                </div>
+
+                <div class="btn__reset">
+                  <input class="" type="reset" value="Restaurar">
+                </div>
+
+                <div class="btn__cancelar">
+                  <a class="btn__acancelar" href="{{ route('molino.index') }}">Cancelar</a>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </x-app-layout>

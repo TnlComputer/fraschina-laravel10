@@ -1,7 +1,9 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Distribución Producto') }} Edición
+      {{ __('Edición Producto Distribución') }} - {{ $producto->distribucion_id }}
+
+
     </h2>
   </x-slot>
   <div class="py-4">
@@ -15,7 +17,8 @@
 
               <div class="personal__div">
                 <label class="personal__label" for="producto">Producto</label>
-                <select name="producto_id" id="producto_id" class="personal__input">
+                <select class="form-select" name="producto_id" id="single-select-field" data-placeholder="Seleccione un Producto">
+                  <option></option>
                   @foreach ($disProd as $disprod)
                   <option value="{{ $disprod->id }}" {{ $producto->producto_id == $disprod->id ? 'selected' : '' }}>{{ $disprod->productoCDA}}
                   </option>
@@ -43,25 +46,20 @@
               </div>
               <div class="personal__btn">
                 <div class="btn__aceptar">
-                  <input class="btn__aceptar" type="submit" value="Aceptar">
+                  <input class="" type="submit" value="Aceptar">
                 </div>
 
                 <div class="btn__reset">
-                  <input class="btn__reset" type="reset" value="Restaurar">
+                  <input class="" type="reset" value="Restaurar">
                 </div>
 
                 <div class="btn__cancelar">
-                  <form action="{{ URL::route('distribucion.show', ['distribucion' => $producto->distribucion_id]) }}">
-                    <input class=" btn__cancelar" type="submit" value="Cancelar">
-
-                  </form>
+                  <a class="btn__acancelar" href="{{ route('distribucion.show', ['distribucion' => $producto->distribucion_id]) }}">Cancelar</a>
                 </div>
-
               </div>
+            </form>
           </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
 </x-app-layout>
