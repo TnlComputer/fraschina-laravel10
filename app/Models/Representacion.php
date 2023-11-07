@@ -10,6 +10,7 @@ class Representacion extends Model
 {
   use HasFactory;
 
-  protected $guarded = [];
+  protected $table = 'representacion';
 
+  protected $guarded = [];
 }

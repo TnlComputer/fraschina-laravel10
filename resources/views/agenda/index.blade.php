@@ -18,7 +18,7 @@
               <form method="get" action="{{  route('agenda.index') }}" class="form__buscar">
                 @csrf
                 <span class="span__input-buscar">
-                  <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}" class="input__buscar">
+                  <input type="text" placeholder="Type to search" name="name" value="{{ $name }}" class="input__buscar">
                 </span>
                 <span class="span__btn-buscar">
                   <input type="submit" value="Buscar" class="btn__buscar">

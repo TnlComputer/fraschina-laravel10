@@ -10,17 +10,14 @@
         <div class="p-2 text-gray-900 text-left text-xs">
           <div class="barra__index">
             <div class="div__nuevo">
-              <form action="{{  route('representacion.create') }}">
-                <input class="btn__nuevo" type="submit" value="Nuevo">
-              </form>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#altaModal" aria-labelledby=" altaModalLabel" role="dialog">Nuevo</button>
             </div>
             <div class="div__buscar">
               <form method="get" action="{{  route('representacion.index') }}" class="form__buscar">
                 @csrf
                 <span class="span__input-buscar">
-                  <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}" class="input__buscar">
+                  <input type="text" placeholder="Type to search" name="name" value="{{ $name }}" class="input__buscar">
                 </span>
-
                 <span class="span__btn-buscar">
                   <input type="submit" value="Buscar" class="btn__buscar">
                 </span>
@@ -49,7 +46,6 @@
               <td>
                 <a href="{{ route('representacion.show', $representacion->id) }}" class="">
                   <i class="fa-regular fa-eye icon-view"></i>
-
                 </a>
               </td>
               <td>
@@ -79,23 +75,16 @@
               <td data-titulo="Cuit">{{ $representacion->cuit }}</td>
               <td data-titulo="Marcas">{{ $representacion->marcas }}</td>
               <td>
-                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-var="{{ $representacion->id }}">
-
-
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $representacion->id }}" data-bs-razonsocial="{{ $representacion->razonsocial }}" aria-labelledby="deleteModalLabel" role="dialog">
                   <i class="fas fa-trash-alt"></i>
                 </button>
-
-
-                {{-- <form method="POST" action="{{ route('representacion.destroy', $representacion->id) }}" class="ocultar">
-                @csrf
-                @method(' DELETE')
-                <button type="submit"><i class="fa-solid fa-trash icon-delete"></i> </button>
-
-                </form> --}}
               </td>
             </tr>
             @empty
-            <p>No hay registros para mostrar...</p>
+            <td style="widch:100%">
+
+              <p>No hay registros para mostrar...</p>
+            </td>
             @endforelse
             {{ $representaciones->links() }}
           </table>
@@ -104,61 +93,34 @@
     </div>
   </div>
 
+  @include('representacion.modal-alta')
 
-  {{-- Modal delete --}}
-  <div class="modal fade" id="modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="eliminar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="eliminar">Representación </h5>
-          <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Está seguro que desea eliminar a la empresa {{ $representacion->razonsocial }}</p>
+  {{-- @include('representacion.modal-edit'); --}}
 
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-danger">Confirmar Eliminación</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-dialog modal-dialog-centered">
-    ...
-  </div>
-
-
+  @include('representacion.modal-delete')
 </x-app-layout>
-
-
-
-{{-- <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
- --}}
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-
-
 </body>
+
+<script>
+  $('#deleteModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('bs-id') // Extract info from data-* attributes
+    var razonsocial = button.data('bs-razonsocial') // Extract info from data-* attributes
+
+    action = $('#formDelete').attr('data-action').slice(0, -1);
+    action += id;
+
+    $('#formDelete').attr('action', action);
+
+    // console.log(id);
+    // console.log(razonsocial);
+    // console.log(action);
+
+    var modal = $(this)
+    modal.find('.modal-body').text('Desea eliminar a ' + razonsocial)
+    modal.find('.modal-body value').val(id)
+    // modal.find('.modal-form valor').text(id)
+  });
+
+</script>
 </html>

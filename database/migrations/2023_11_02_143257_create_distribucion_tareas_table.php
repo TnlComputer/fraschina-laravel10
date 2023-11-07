@@ -11,11 +11,9 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('auxacciones', function (Blueprint $table) {
+    Schema::create('distribucion_tareas', function (Blueprint $table) {
       $table->id();
-      $table->string('accion');
-      $table->string('colorAcc')->nullable();
-      $table->string('colorCod')->nullable();
+      $table->string('tarea', 100)->nullable();
       $table->string('status', 1)->nullable();
       $table->timestamps();
     });
@@ -26,6 +24,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('auxaccion');
+    Schema::dropIfExists('distribucion_tareas');
   }
 };

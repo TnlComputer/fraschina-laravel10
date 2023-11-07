@@ -42,7 +42,7 @@ class AgendaController extends Controller
     } else {
       $agendas = Agenda::where('status', '=', 'A')->paginate(15);
     }
-    return view('agenda.index', compact('agendas'));
+    return view('agenda.index', compact('agendas', 'name'));
   }
 
   /**

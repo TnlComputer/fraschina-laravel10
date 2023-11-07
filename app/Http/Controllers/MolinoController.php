@@ -79,7 +79,7 @@ class MolinoController extends Controller
         ->paginate(15);
     }
     // $molinos = Molino::orderBy('razonsocial', 'ASC')->paginate(15);
-    return view('molino.index', compact('molinos'));
+    return view('molino.index', compact('molinos', 'name'));
   }
 
 

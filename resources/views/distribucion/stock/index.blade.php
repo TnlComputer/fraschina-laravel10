@@ -18,7 +18,7 @@
               <form method="get" action="{{  route('distribucion.index') }}" class="form__buscar">
                 @csrf
                 <span class="span__input-buscar">
-                  <input type="text" placeholder="Type to search" name="name" value="{{ $name }}" class="input__buscar">
+                  <input type="text" placeholder="Type to search" name="name" value="{{ old('name') }}" class="input__buscar">
                 </span>
                 <span class="span__btn-buscar">
                   <input type="submit" value="Buscar" class="btn__buscar">
@@ -27,6 +27,7 @@
             </div>
           </div>
           <table>
+            {{-- <tr class=" bg-black text-white text-left"> --}}
             <thead>
               <tr>
                 <th></th>
@@ -44,16 +45,19 @@
                 <th></th>
               </tr>
             </thead>
+
             @forelse($distribuciones as $distribucion)
             <tr>
               <td>
                 <a href="{{ route('distribucion.show', $distribucion->id) }}" class="">
                   <i class="fa-regular fa-eye icon-view"></i>
+
                 </a>
               </td>
               <td>
                 <a href="{{ route('distribucion.edit', $distribucion->id) }}" class="ocultar ">
                   <i class="fa-regular fa-pen-to-square icon-edit"></i>
+
                 </a>
               </td>
 

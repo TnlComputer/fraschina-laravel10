@@ -28,7 +28,7 @@ class DistribucionController extends Controller
   {
     $name = trim($request->get('name'));
     if ($name) {
-      $distribuciones = DB::table('distribucions as d')
+      $distribuciones = DB::table('distribucion as d')
         ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
         ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
         ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
@@ -36,12 +36,12 @@ class DistribucionController extends Controller
         ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
         ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
         ->where('d.status', '=', 'A')
-        ->where('nomfantasia', 'like', '%' . $request->name . '%')
-        ->orWhere('razonsocial', 'like', '%' . $request->name . '%')
-        ->orWhere('clisg_id', 'like', '%' . $request->name . '%')
+        ->where('nomfantasia', 'like', '%' . $name . '%')
+        ->orWhere('razonsocial', 'like', '%' . $name . '%')
+        ->orWhere('clisg_id', 'like', '%' . $name . '%')
         ->paginate(15);
     } else {
-      $distribuciones = DB::table('distribucions as d')
+      $distribuciones = DB::table('distribucion as d')
         ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
         ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
         ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
@@ -51,7 +51,7 @@ class DistribucionController extends Controller
         ->where('d.status', '=', 'A')
         ->paginate(15);
     }
-    return view('distribucion.index', compact('distribuciones'));
+    return view('distribucion.index', compact('distribuciones', 'name'));
   }
 
   /**
@@ -81,7 +81,7 @@ class DistribucionController extends Controller
   {
     Distribucion::create($request->all());
 
-    $distribuciones = DB::table('distribucions as d')
+    $distribuciones = DB::table('distribucion as d')
       ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
       ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
       ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
@@ -99,7 +99,7 @@ class DistribucionController extends Controller
    */
   public function show(Distribucion $distribucion)
   {
-    $distribucion = DB::table('distribucions as d')
+    $distribucion = DB::table('distribucion as d')
       ->join('AuxCalles as auxCalle', 'd.dire_calle_id', '=', 'auxCalle.id')
       ->join('AuxBarrios as auxB', 'd.barrio_id', '=', 'auxB.id')
       ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')

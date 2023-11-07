@@ -257,7 +257,6 @@
               @endforeach
             </select>
           </div>
-
           <div class="card__div">
             <label class="card__label" for="tcobro_id">Forma de Pago</label>
             <select class="card__input" name="tcobro_id" id="tcobro_id" required>
@@ -267,28 +266,21 @@
               @endforeach
             </select>
           </div>
-
           <div class="card__div">
             <label class="card__label" for="info">Información</label>
             <textarea class="card__input" name="info" id="info" cols="60" rows="5" placeholder="Ingrese la información"></textarea>
             <input type="hidden" name="status" value="A">
           </div>
-
           <div class="personal__btn">
             <div class="btn__aceptar">
               <input class="" type="submit" value="Aceptar">
             </div>
-
             <div class="btn__reset">
               <input class="" type="reset" value="Restaurar">
             </div>
-
             <div class="btn__cancelar">
               <a class="btn__acancelar" href="{{ route('distribucion.index') }}">Cancelar</a>
-
             </div>
-
-
             </form>
           </div>
         </div>

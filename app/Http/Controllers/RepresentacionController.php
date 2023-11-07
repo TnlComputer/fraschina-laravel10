@@ -25,31 +25,79 @@ class RepresentacionController extends Controller
    */
   public function index(Request $request)
   {
-    // $user = Auth::user();
-
     $name = trim($request->get('name'));
     if ($name) {
-      $representaciones = DB::table('representacions as r')
+      $paso = 'Buscando';
+      $representaciones = DB::table('representacion as r')
         ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
         ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
         ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
-        ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
-        ->where('r.status', '=', 'A')
-        ->orWhere('r.razonsocial', 'like', '%' . $request->name . '%')
-        ->orWhere('r.marcas', 'like', '%' . $request->name . '%')
+        ->select(
+          'auxb.nombrebarrio as barrio',
+          'auxLoc.localidad as localidad',
+          'auxMun.ciudadmunicipio as municipio',
+          'auxZon.nombre as zona',
+          'r.razonsocial',
+          'r.dire_calle',
+          'r.dire_nro',
+          'r.piso',
+          'r.codpost',
+          'r.dire_obs',
+          'r.telefono',
+          'r.fax',
+          'r.cuit',
+          'r.correo',
+          'r.dpto',
+          'r.marcas',
+          'r.info',
+          'r.id',
+          'r.correo'
+        )
+        // ->where('r.status', '=', 'A')
+        ->orWhere('r.razonsocial', 'like', '%' . $name . '%')
+        ->orWhere('r.marcas', 'like', '%' . $name . '%')
         ->paginate(15);
     } else {
-      $representaciones = DB::table('representacions as r')
+      $paso = 'NO';
+      $representaciones = DB::table('representacion as r')
         ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
         ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
         ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
-        ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
+        ->select(
+          'auxb.nombrebarrio as barrio',
+          'auxLoc.localidad as localidad',
+          'auxMun.ciudadmunicipio as municipio',
+          'auxZon.nombre as zona',
+          'r.razonsocial',
+          'r.dire_calle',
+          'r.dire_nro',
+          'r.piso',
+          'r.codpost',
+          'r.dire_obs',
+          'r.telefono',
+          'r.fax',
+          'r.cuit',
+          'r.correo',
+          'r.dpto',
+          'r.marcas',
+          'r.info',
+          'r.id',
+          'r.correo'
+        )
         ->where('r.status', '=', 'A')
         ->paginate(15);
     }
-    return view('representacion.index', compact('representaciones'));
+    $barrios = AuxBarrios::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $zonas = AuxZonas::all();
+
+    return view(
+      'representacion.index',
+      ['representaciones' => $representaciones, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas, 'name' => $name, 'paso' => $paso]
+    );
   }
 
   /**
@@ -63,7 +111,6 @@ class RepresentacionController extends Controller
     $zonas = AuxZonas::all();
 
     return view('representacion.create', ['barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]);
-    //
   }
 
   /**
@@ -72,7 +119,27 @@ class RepresentacionController extends Controller
   public function store(Request $request)
   {
     Representacion::create($request->all());
-    return view('representacion.index')->with('success', 'Alta Representación realizada con exito');
+
+    $barrios = AuxBarrios::all();
+    $localidades = AuxLocalidades::all();
+    $municipios = AuxMunicipios::all();
+    $zonas = AuxZonas::all();
+
+    $representaciones = DB::table('representacion as r')
+      ->join('AuxBarrios as auxb', 'r.barrio_id', '=', 'auxb.id')
+      ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
+      ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
+      ->join('AuxZonas as auxZon', 'r.zona_id', '=', 'auxZon.id')
+      ->select('auxb.nombrebarrio as barrio', 'auxLoc.localidad', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'r.razonsocial', 'r.dire_calle', 'r.dire_nro', 'r.piso', 'r.codpost', 'r.dire_obs', 'r.telefono', 'r.fax', 'r.cuit', 'r.correo', 'r.dpto', 'r.marcas', 'r.info', 'r.id', 'r.correo')
+      ->where('r.status', '=', 'A')
+      ->paginate(15);
+
+    return redirect()->route(
+      'representacion.index',
+      ['representaciones' => $representaciones, 'barrios' => $barrios, 'localidades' => $localidades, 'municipios' => $municipios, 'zonas' => $zonas]
+    )->with('success', 'Alta exitosa');
+
+    // return view('representacion.index')->with('success', 'Alta Representación realizada con exito');
     // return redirect()->route('representacion.index')->with('success', 'Alta Representació realizada con exito');
   }
 
@@ -81,7 +148,7 @@ class RepresentacionController extends Controller
    */
   public function show(Representacion $representacion)
   {
-    $represento = DB::table('representacions as r')
+    $represento = DB::table('representacion as r')
       ->join('AuxBarrios as auxB', 'r.barrio_id', '=', 'auxB.id')
       ->join('AuxLocalidades as auxLoc', 'r.localidad_id', '=', 'auxLoc.id')
       ->join('AuxMunicipios as auxMun', 'r.municipio_id', '=', 'auxMun.id')
@@ -135,9 +202,9 @@ class RepresentacionController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Representacion $representacion)
+  public function destroy(string $id)
   {
-    $representacion = Representacion::findOrFail($representacion->id);
+    $representacion = Representacion::findOrFail($id);
     $representacion->status = 'C';
     $representacion->update();
     return redirect()->route('representacion.index')

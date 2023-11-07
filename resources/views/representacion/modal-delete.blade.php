@@ -1,24 +1,24 @@
-<div class="modal fade" id="modal-delete-{{ $representacion->representacion_id }}">
-
-  <div class="modal-dialog">
-    <form action="{{ route('representacion.destroy', $representacion->id) }}" method="post">
-      @csrf
-      @method('DELETE')
-      <div class="modal-content bg-danger">
-        <div class="modal-header">
-          <h4 class="modal-title">Eliminar cliente</h4>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Desea eliminar el cliente {{ $representacion->razonsocial }}</p>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-outline-light">Eliminar</button>
-        </div>
+  <div class="modal fade" id="deleteModal" tabindex="-1" data-bs-backdrop="static" role="document">
+    <div class=" modal-dialog modal-dialog-centered"">
+    <div class=" modal-content">
+      <div class="modal-header">
+        <div class="modal-title fs-5">Eliminación Cliente Distribución</div>
+        <h5 class="modal-title fs-5" aria-labelledby="deleteModalLabel"></h5>
+        <button class="btn-close btn-secundary" data-bs-dismiss="modal" aria-label="Close">
+        </button>
       </div>
-    </form>
+      <form id="formDelete" action="{{ route('representacion.destroy', '1' ) }}" data-action="{{ route('representacion.destroy', '1' ) }}" method="POST" enctype="multipart/form-data">
+
+        @csrf
+        @method(' DELETE')
+        <div class="modal-body">
+          {{-- <input type="hidden" name="id" id="id"> --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary bg-gray-600" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger bg-red-400">Eliminar</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+  </div>
