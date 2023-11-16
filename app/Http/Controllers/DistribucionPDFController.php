@@ -3,42 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuxPagos;
+use App\Models\AuxZonas;
+use App\Models\AuxCalles;
 use App\Models\AuxCobrar;
+use App\Models\AuxBarrios;
 use App\Models\AuxTipoPagos;
 use App\Models\Distribucion;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-
+use App\Models\AuxMunicipios;
+use App\Models\AuxLocalidades;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use App\Models\DistribucionReparto;
-use function Laravel\Prompts\select;
-use App\Models\DistribucionLineaTareas;
-use App\Models\DistribucionLineaPedidos;
+use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
-class DistribucionRepartoController extends Controller
+class DistribucionPDFController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
-  public function index(Request $request)
+  public function index()
   {
-    $bFecha =  Carbon::now()->format('Y-m-d');
+    // return view('welcome');
 
+  }
+  public function control(Request $request)
+  {
+    $control = $request->bFecha;
+    $pdf = Pdf::loadView('distribucion.pdf.control', ['data' => $control]);
+    // return   $pdf->download('my_example.pdf'); // sale por pantalla y lo descarga
+    return $pdf->stream('Control.pdf'); // sale por pantalla
+  }
+  public function reparto(Request $request)
+  {
     $bFecha = trim($request->get('bFecha'));
-
-    if ($request->fecha == 'ayer') {
-      $bFecha = Carbon::yesterday()->format('Y-m-d');
-    } else if ($request->fecha == 'manana') {
-      $bFecha = Carbon::tomorrow()->format('Y-m-d');
-    } else if ($request->fecha == 'hoy') {
-      $bFecha =  Carbon::now()->format('Y-m-d');
-    }
-
-    $bAyer = Carbon::yesterday()->format('d-m-Y');
-    $bHoy =  Carbon::now()->format('d-m-Y');
-    $bManana = Carbon::tomorrow()->format('d-m-Y');
-
-    $pedidos = DB::table('distribucion_linea_pedidos as dlp')
+    $reparto = DB::table('distribucion_linea_pedidos as dlp')
       ->join('Distribucion as dis', 'dlp.distribucion_id', '=', 'dis.id')
       ->join('AuxCalles as auxCalle', 'dis.dire_calle_id', '=', 'auxCalle.id')
       ->join('AuxBarrios as auxB', 'dis.barrio_id', '=', 'auxB.id')
@@ -94,56 +89,17 @@ class DistribucionRepartoController extends Controller
       ->orderBy('dlp.fechaEntrega', 'asc')
       ->orderBy('dlp.orden', 'asc')
       ->orderBy('dlp.pedido', 'desc')
-      ->paginate(20);
-
-    return view('distribucion.reparto.index', compact('pedidos', 'bFecha', 'bHoy', 'bAyer', 'bManana', 'bFecha'));
+      ->get();
+    // $data = $request->bFecha;
+    $pdf = Pdf::loadView('distribucion.pdf.control', ['data' => $reparto]);
+    // return   $pdf->download('my_example.pdf'); // sale por pantalla y lo descarga
+    return $pdf->stream('Reparto.pdf'); // sale por pantalla
   }
-
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
+  public function recibo(Request $request)
   {
-    //
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function store(Request $request)
-  {
-    //
-  }
-
-  /**
-   * Display the specified resource.
-   */
-  public function show(DistribucionReparto $distribucionReparto)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(DistribucionReparto $distribucionReparto)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, DistribucionReparto $distribucionReparto)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(DistribucionReparto $distribucionReparto)
-  {
-    //
+    $recibo = $request->pedido;
+    $pdf = Pdf::loadView('distribucion.pdf.control', ['data' => $recibo]);
+    // return $pdf->download('my_example.pdf'); // sale por pantalla y lo descarga
+    return $pdf->stream('Recibo.pdf'); // sale por pantalla
   }
 }

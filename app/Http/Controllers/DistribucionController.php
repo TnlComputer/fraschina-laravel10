@@ -34,7 +34,29 @@ class DistribucionController extends Controller
         ->join('AuxLocalidades as auxLoc', 'd.localidad_id', '=', 'auxLoc.id')
         ->join('AuxMunicipios as auxMun', 'd.municipio_id', '=', 'auxMun.id')
         ->join('AuxZonas as auxZon', 'd.zona_id', '=', 'auxZon.id')
-        ->select('d.clisg_id', 'd.razonsocial', 'd.nomfantasia', 'd.dire_nro', 'd.piso', 'd.codpost', 'd.dire_obs', 'd.telefono', 'd.fax', 'd.cuit', 'd.correo', 'd.dpto', 'd.marcas', 'd.info', 'd.id', 'd.correo', 'auxB.nombrebarrio as barrio', 'auxMun.ciudadmunicipio as municipio', 'auxZon.nombre as zona', 'auxLoc.localidad as localidad', 'auxCalle.calle as dire_calle')
+        ->select(
+          'd.clisg_id',
+          'd.razonsocial',
+          'd.nomfantasia',
+          'd.dire_nro',
+          'd.piso',
+          'd.codpost',
+          'd.dire_obs',
+          'd.telefono',
+          'd.fax',
+          'd.cuit',
+          'd.correo',
+          'd.dpto',
+          'd.marcas',
+          'd.info',
+          'd.id',
+          'd.correo',
+          'auxB.nombrebarrio as barrio',
+          'auxMun.ciudadmunicipio as municipio',
+          'auxZon.nombre as zona',
+          'auxLoc.localidad as localidad',
+          'auxCalle.calle as dire_calle'
+        )
         ->where('d.status', '=', 'A')
         ->where('nomfantasia', 'like', '%' . $name . '%')
         ->orWhere('razonsocial', 'like', '%' . $name . '%')

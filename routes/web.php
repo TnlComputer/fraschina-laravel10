@@ -1,29 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AgroController;
-use App\Http\Controllers\AgroPersonalController;
-use App\Http\Controllers\AgroProductoController;
-use App\Http\Controllers\DistribucionController;
-use App\Http\Controllers\DistribucionAgendaController;
-use App\Http\Controllers\DistribucionPersonalController;
-use App\Http\Controllers\DistribucionProductoController;
-use App\Http\Controllers\DistribucionRepartoController;
-use App\Http\Controllers\DistribucionStockController;
-use App\Http\Controllers\DistribucionUltAltasController;
-use App\Http\Controllers\ExpedicionController;
-use App\Http\Controllers\MolinoPersonalController;
+use App\Http\Controllers\ToolsController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\MolinoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ExpedicionController;
+use App\Http\Controllers\TransporteController;
+use App\Http\Controllers\AgroPersonalController;
+use App\Http\Controllers\AgroProductoController;
+use App\Http\Controllers\DistribucionController;
+use App\Http\Controllers\MolinoPersonalController;
+use App\Http\Controllers\RepresentacionController;
+use App\Http\Controllers\DistribucionPDFController;
+use App\Http\Controllers\DistribucionStockController;
 use App\Http\Controllers\ProveedorPersonalController;
 use App\Http\Controllers\ProveedorProductoController;
-use App\Http\Controllers\RepresentacionController;
+use App\Http\Controllers\DistribucionAgendaController;
+use App\Http\Controllers\TransportePersonalController;
+use App\Http\Controllers\DistribucionRepartoController;
+use App\Http\Controllers\DistribucionPersonalController;
+use App\Http\Controllers\DistribucionProductoController;
+use App\Http\Controllers\DistribucionUltAltasController;
 use App\Http\Controllers\RepresentacionPersonalController;
 use App\Http\Controllers\RepresentacionProductoController;
-use App\Http\Controllers\ToolsController;
-use App\Http\Controllers\TransporteController;
 // use App\Http\Controllers\TransportePersonalController;
 
 Route::get('/', function () {
@@ -52,6 +54,9 @@ Route::middleware('auth')->group(function () {
   Route::resource('/distribucion', DistribucionController::class)->names('distribucion');
   Route::resource('/distribucion/personal', DistribucionPersonalController::class)->names('distribucion_personal');
   Route::resource('/distribucion/producto', DistribucionProductoController::class)->names('distribucion_producto');
+  Route::get('/control/{control}', [DistribucionPDFController::class, 'control'])->name('control');
+  Route::get('/reparto/{reparto}', [DistribucionPDFController::class, 'reparto'])->name('reparto');
+  Route::get('/recibo/{recibo}', [DistribucionPDFController::class, 'recibo'])->name('recibo');
 
   // AGRO
   Route::resource('/agro', AgroController::class)->names('agro');

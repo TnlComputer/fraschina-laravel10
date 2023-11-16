@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expedicion extends Model
+class distribucion_PDF extends Model
 {
-  use HasFactory;
-
-  protected $guarded = [];
+    use HasFactory;
 }

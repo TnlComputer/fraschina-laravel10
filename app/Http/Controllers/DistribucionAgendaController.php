@@ -79,7 +79,7 @@ class DistribucionAgendaController extends Controller
           'auxVez.estado as veraz',
           'auxVez.color as colorVeraz',
           'auxEst.nomEstado',
-          'auxAcc.accion',
+          'auxAcc.accion as accion',
           'auxAcc.colorAcc as colorAccion',
           'dag.temas',
         )

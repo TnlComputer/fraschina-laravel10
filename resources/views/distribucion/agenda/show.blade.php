@@ -45,29 +45,33 @@
 
           @forelse($pedidos as $pedido)
           <tr>
-
-
+            @if ($pedido->linea == 1)
             <td>
-              {{-- <a href="{{ route('distribucion_agenda.show', $agenda->id) }}" class="">
-              <i class="fa-regular fa-eye icon-view"></i>
-
-              </a> --}}
+              {{-- <a href="{{ route('distribucion_agenda.show', $agenda->id) }}" class=""> --}}
+              <a href="#" class=" ">
+                <i class="fa-regular fa-add icon-view"></i>
+              </a>
             </td>
-
             <td>
-              {{-- <a href="{{ route('distribucion_agenda.show', $agenda->id) }}" class="">
-              <i class="fa-regular fa-eye icon-view"></i>
-
-              </a> --}}
+              {{-- <a href="{{ route('distribucion_agenda.edit', $agenda->id) }}" class=""> --}}
+              <a href="#" class=" ">
+                <i class="fa-regular fa-calendar-days icon-edit"></i>
+              </a>
             </td>
-
             <td>
-              {{-- <a href="{{ route('distribucion_agenda.edit', $agenda->id) }}" class="ocultar ">
-              <i class="fa-regular fa-pen-to-square icon-edit"></i>
-
-              </a> --}}
+              {{-- <a href="{{ route('distribucion_agenda.edit', $agenda->id) }}" class=""> --}}
+              <a href="#" class=" ">
+                <i class="fa-regular fa-pen-to-square icon-edit"></i>
+              </a>
             </td>
+            {{-- @if ($pedido->linea == 1) --}}
             <td data-titulo="Pedido">{{ $pedido->pedido }}</td>
+            @else
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            @endif
             <td data-titulo="Fecha"> {{ $pedido->fecha}}
             <td data-titulo="Entrega"> {{ $pedido->fechaEntrega}}
             <td data-titulo="Cantidad">{{ $pedido->cantidad }}</td>
